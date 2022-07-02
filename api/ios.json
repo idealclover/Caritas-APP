@@ -1,0 +1,10 @@
+{
+  "version": 10,
+  "title": "测试更新弹窗",
+  "content": "测试更新文案",
+  "isForce": false,
+  "confirm_text": "立刻更新",
+  "cancel_text": "下次再说",
+  "url": "https://idealclover.top",
+  "coolDownTime": 60
+}

@@ -1,0 +1,38 @@
+{
+  "@@locale": "en",
+  "app_name" : "Foundation",
+
+  "ok": "OK",
+  "cancel": "Cancel",
+
+  "home_title": "首页",
+
+  "settings_title": "Settings",
+  "change_theme_mode_title": "Mode Change",
+  "change_theme_mode_subtitle": "Follow system theme?",
+  "theme_mode_follow_system": "Follow System",
+  "theme_mode_always_light": "Always Light",
+  "theme_mode_always_dark": "Always Dark",
+  "theme_mode_customize": "Customize",
+  "share_title": "Share",
+  "share_subtitle": "Share this app to more friends!",
+  "share_message": "This is share message.",
+  "report_title": "Report",
+  "report_subtitle": "Any bugs? Talk to us on Tencent QQ!\nTap to open QQ，long press to copy number.",
+  "report_copy_message": "QQ number copied!",
+  "donate_title": "Donate",
+  "donate_subtitle": "Buy me a cup of coffee!",
+
+  "about_title": "About",
+  "version": "v{version}",
+  "check_update_button": "Check update",
+  "already_newest_version_toast": "Already newest version~",
+  "check_privacy_button": "Privacy Policy",
+  "now_version": "Now version v{version}",
+  "github_open_source": "GitHub OpenSource",
+  "developer": "Developer: idealclover",
+  "introduction": "Blog:：https://idealclover.top\nEmail：idealclover@163.com",
+  "open_source_library_title": "OpenSource Libraries",
+  "open_source_library_content": "fluttertoast: ^8.0.9\nflutter_native_splash: ^2.2.3+1\nget: ^4.6.5\nget_storage: ^2.0.3\npackage_info_plus: ^1.4.2\nshare_plus: ^4.0.10\nurl_launcher: ^6.1.4",
+  "easter_egg": "This is easter egg."
+}

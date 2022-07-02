@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_application_1">
+    package="top.idealclover.foundation">
    <application
-        android:label="Caritas"
+        android:label="Foundation APP"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
