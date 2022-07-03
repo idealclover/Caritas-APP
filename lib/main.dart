@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'Utils/ThemeUtil.dart';
 import 'generated/l10n.dart';
 
+import './Models/Db/DbHelper.dart';
 import './Pages/HomePage/HomePageView.dart';
-import './Providers/SettingsProvider.dart';
+import './Pages/Settings/SettingsProvider.dart';
 import './Resources/Constant.dart';
-import 'Utils/InitUtil.dart';
+import './Utils/InitUtil.dart';
+import './Utils/ThemeUtil.dart';
+
 
 void main() async {
+  // var database = MyDatabase();
   await InitUtil.initBeforeStart();
   runApp(const MyApp());
 }

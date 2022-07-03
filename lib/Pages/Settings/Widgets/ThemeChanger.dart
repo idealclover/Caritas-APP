@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../generated/l10n.dart';
 
-import '../../../Providers/SettingsProvider.dart';
+import '../SettingsProvider.dart';
 import '../../../Resources/Themes.dart';
 import '../../../Utils/UmengUtil.dart';
 import './ThemeCustomDialog.dart';

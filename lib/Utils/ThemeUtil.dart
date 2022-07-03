@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Providers/SettingsProvider.dart';
+import '../Pages/Settings/SettingsProvider.dart';
 import '../Resources/Themes.dart';
 
 class ThemeUtil {

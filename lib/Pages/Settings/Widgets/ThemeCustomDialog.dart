@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 // import '../../../generated/l10n.dart';
 import 'package:flutter/material.dart';
 import '../../../Components/Dialog.dart';
-import '../../../Providers/SettingsProvider.dart';
+import '../SettingsProvider.dart';
 import '../../../Utils/ThemeUtil.dart';
 import '../../../Utils/UmengUtil.dart';
 

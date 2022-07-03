@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:foundation/Pages/Article/ArticleView.dart';
+import 'package:get/get.dart';
+
 import '../../Components/Drawer.dart';
+import '../../Models/HomeCategoryModel.dart';
+import 'HomeCategoryProvider.dart';
 import '../../Utils/InitUtil.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -12,34 +17,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List data = [
-    {
-      "id": 0,
-      "title": "致读者",
-      "contents": [
-        {
-          "id": 0,
-          "title": "致读者-0",
-          "intro": "关于 Caritas APP",
-          "update_time": "4个月前"
-        },
-        {
-          "id": 1,
-          "title": "致读者-1",
-          "intro": "你有哪些话想对知乎上关注的人说？",
-          "update_time": "4个月前"
-        }
-      ]
-    },
-    {
-      "id": 1,
-      "title": "家族答集",
-      "contents": [
-        {"id": 2, "title": "门当户对", "intro": "什么才是门当户对", "update_time": "4个月前"}
-      ]
-    }
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -52,25 +29,36 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    HomeCategoryProvider hp = HomeCategoryProvider();
+    List<HomeCategory> dataList = hp.getHomeCategory();
     return DefaultTabController(
-        length: data.length,
+        length: dataList.length,
         child: Scaffold(
           appBar: AppBar(
             bottom: TabBar(tabs: [
-              for (var item in data)
-                Tab(
-                  text: item['title'],
-                ),
+              for (var category in dataList) Tab(text: category.title),
             ]),
             title: Text(widget.title),
           ),
           drawer: const MDrawer(),
           body: TabBarView(
             children: [
-              for (var item in data)
-                Tab(
-                  text: item['title'],
-                ),
+              for (var category in dataList)
+                SingleChildScrollView(
+                  child: Column(
+                      children: ListTile.divideTiles(context: context, tiles: [
+                    for (var item in category.itemList)
+                      ListTile(
+                        title: Text(item.title),
+                        subtitle: Text(item.intro),
+                        trailing: Text(item.updateTime),
+                        onTap: () {
+                          Get.to(() => ArticleView(item.id));
+                        },
+                      )
+                  ]).toList()),
+                )
+              // Tab(text: item.title),
             ],
           ),
           // Center(

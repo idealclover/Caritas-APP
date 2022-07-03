@@ -33,13 +33,18 @@ dependencies:
     sdk: flutter
 
   dio: ^4.0.6
+  drift: ^1.7.1
+  flutter_markdown: ^0.6.10+2
   fluttertoast: ^8.0.9
   flutter_html: ^3.0.0-alpha.5
   flutter_native_splash: ^2.2.3+1
   get: ^4.6.5
   get_storage: ^2.0.3
   package_info_plus: ^1.4.2
+  path_provider: ^2.0.0
+  path: ^1.8.1
   share_plus: ^4.0.10
+  sqlite3_flutter_libs: ^0.5.0
   umeng_common_sdk:
     path: ./lib/Libs/umeng_common_sdk
   url_launcher: ^6.1.4
@@ -49,6 +54,8 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
+  drift_dev: ^1.7.0
+  build_runner: ^2.1.11
   flutter_test:
     sdk: flutter
 

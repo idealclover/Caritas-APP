@@ -1,8 +1,8 @@
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
-import '../Resources/Constant.dart';
-import '../Resources/Themes.dart';
+import '../../Resources/Constant.dart';
+import '../../Resources/Themes.dart';
 
 class SettingsProvider {
   final _box = GetStorage();

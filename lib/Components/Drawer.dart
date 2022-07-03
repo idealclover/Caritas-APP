@@ -37,36 +37,36 @@ class MDrawer extends StatelessWidget {
             trailing: const Icon(Icons.settings),
             onTap: () => Get.to(() => const SettingsView()),
           ),
-          ListTile(
-            title: Text(S.of(context).share_title),
-            trailing: const Icon(Icons.share),
-            onTap: () async => await SettingsUtil.shareUtil(context),
-          ),
-          ListTile(
-              title: Text(S.of(context).report_title),
-              trailing: const Icon(Icons.message),
-              onTap: () async => await SettingsUtil.qqTapUtil(context),
-              onLongPress: () async =>
-                  await SettingsUtil.qqLongPressUtil(context)),
-          ListTile(
-            title: Text(S.of(context).donate_title),
-            trailing: const Icon(Icons.attach_money),
-            onTap: () async => await SettingsUtil.donateUtil(context),
-          ),
-          ListTile(
-            title: Text(S.of(context).about_title),
-            trailing: FutureBuilder<String>(
-                future: VersionUtil.getVersion(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<String> snapshot) {
-                  if (!snapshot.hasData) {
-                    return Container(width: 0);
-                  } else {
-                    return Text(S.of(context).version(snapshot.data!));
-                  }
-                }),
-            onTap: () => Get.to(() => const AboutView()),
-          ),
+          // ListTile(
+          //   title: Text(S.of(context).share_title),
+          //   trailing: const Icon(Icons.share),
+          //   onTap: () async => await SettingsUtil.shareUtil(context),
+          // ),
+          // ListTile(
+          //     title: Text(S.of(context).report_title),
+          //     trailing: const Icon(Icons.message),
+          //     onTap: () async => await SettingsUtil.qqTapUtil(context),
+          //     onLongPress: () async =>
+          //         await SettingsUtil.qqLongPressUtil(context)),
+          // ListTile(
+          //   title: Text(S.of(context).donate_title),
+          //   trailing: const Icon(Icons.attach_money),
+          //   onTap: () async => await SettingsUtil.donateUtil(context),
+          // ),
+          // ListTile(
+          //   title: Text(S.of(context).about_title),
+          //   trailing: FutureBuilder<String>(
+          //       future: VersionUtil.getVersion(),
+          //       builder:
+          //           (BuildContext context, AsyncSnapshot<String> snapshot) {
+          //         if (!snapshot.hasData) {
+          //           return Container(width: 0);
+          //         } else {
+          //           return Text(S.of(context).version(snapshot.data!));
+          //         }
+          //       }),
+          //   onTap: () => Get.to(() => const AboutView()),
+          // ),
         ],
       ),
     );

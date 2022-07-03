@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import './Widgets/ThemeChanger.dart';
 import '../About/AboutView.dart';
-import '../../Providers/SettingsProvider.dart';
+import 'SettingsProvider.dart';
 import '../../Utils/SettingsUtil.dart';
 import '../../Utils/VersionUtil.dart';
 

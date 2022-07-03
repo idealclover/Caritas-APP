@@ -6,7 +6,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../generated/l10n.dart';
 
-import '../Providers/SettingsProvider.dart';
+import '../Pages/Settings/SettingsProvider.dart';
 import '../Components/Dialog.dart';
 import '../Components/Toast.dart';
 import '../Components/TransBgTextButton.dart';
