@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeUtil.getNowTheme()['light'],
       darkTheme: ThemeUtil.getNowTheme()['dark'],
       themeMode: Constant.themeModeList[SettingsProvider().getThemeMode()],
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Caritas'),
     );
   }
 }
