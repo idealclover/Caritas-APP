@@ -30,43 +30,53 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     HomeCategoryProvider hp = HomeCategoryProvider();
-    List<HomeCategory> dataList = hp.getHomeCategory();
-    return DefaultTabController(
-        length: dataList.length,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(tabs: [
-              for (var category in dataList) Tab(text: category.title),
-            ]),
-            title: Text(widget.title),
-          ),
-          drawer: const MDrawer(),
-          body: TabBarView(
-            children: [
-              for (var category in dataList)
-                SingleChildScrollView(
-                  child: Column(
-                      children: ListTile.divideTiles(context: context, tiles: [
-                    for (var item in category.itemList)
-                      ListTile(
-                        title: Text(item.title),
-                        subtitle: Text(item.intro),
-                        trailing: Text(item.updateTime),
-                        onTap: () {
-                          Get.to(() => ArticleView(item.id));
-                        },
-                      )
-                  ]).toList()),
-                )
-              // Tab(text: item.title),
-            ],
-          ),
-          // Center(
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: <Widget>[],
-          //   ),
-          // ),
-        ));
+    // List<HomeCategory> dataList = hp.getHomeCategory();
+    return FutureBuilder<List<HomeCategory>>(
+        future: hp.getHomeCategory(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<HomeCategory>> snapshot) {
+          return snapshot.hasData
+              ? DefaultTabController(
+                  length: snapshot.data!.length,
+                  child: Scaffold(
+                    appBar: AppBar(
+                      bottom: TabBar(tabs: [
+                        for (var category in snapshot.data!)
+                          Tab(text: category.title),
+                      ]),
+                      title: Text(widget.title),
+                    ),
+                    drawer: const MDrawer(),
+                    body: TabBarView(
+                      children: [
+                        for (var category in snapshot.data!)
+                          SingleChildScrollView(
+                            child: Column(
+                                children: ListTile.divideTiles(
+                                    context: context,
+                                    tiles: [
+                                  for (var item in category.itemList)
+                                    ListTile(
+                                      title: Text(item.title),
+                                      subtitle: Text(item.intro),
+                                      trailing: Text(item.updateTime),
+                                      onTap: () {
+                                        Get.to(() => ArticleView(item.id));
+                                      },
+                                    )
+                                ]).toList()),
+                          )
+                        // Tab(text: item.title),
+                      ],
+                    ),
+                    // Center(
+                    //   child: Column(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: <Widget>[],
+                    //   ),
+                    // ),
+                  ))
+              : Container();
+        });
   }
 }

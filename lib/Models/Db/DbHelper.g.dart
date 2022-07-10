@@ -10,23 +10,23 @@ part of 'DbHelper.dart';
 class Article extends DataClass implements Insertable<Article> {
   final int id;
   final String title;
-  final String path;
+  final String? path;
   final String question;
   final String zhihuLink;
   final String author;
-  final String tags;
-  final String links;
+  final String? tags;
+  final String? links;
   final String lastUpdate;
   final String content;
   Article(
       {required this.id,
       required this.title,
-      required this.path,
+      this.path,
       required this.question,
       required this.zhihuLink,
       required this.author,
-      required this.tags,
-      required this.links,
+      this.tags,
+      this.links,
       required this.lastUpdate,
       required this.content});
   factory Article.fromData(Map<String, dynamic> data, {String? prefix}) {
@@ -37,7 +37,7 @@ class Article extends DataClass implements Insertable<Article> {
       title: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}title'])!,
       path: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}path'])!,
+          .mapFromDatabaseResponse(data['${effectivePrefix}path']),
       question: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}question'])!,
       zhihuLink: const StringType()
@@ -45,9 +45,9 @@ class Article extends DataClass implements Insertable<Article> {
       author: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}author'])!,
       tags: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}tags'])!,
+          .mapFromDatabaseResponse(data['${effectivePrefix}tags']),
       links: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}links'])!,
+          .mapFromDatabaseResponse(data['${effectivePrefix}links']),
       lastUpdate: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}last_update'])!,
       content: const StringType()
@@ -59,12 +59,18 @@ class Article extends DataClass implements Insertable<Article> {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['title'] = Variable<String>(title);
-    map['path'] = Variable<String>(path);
+    if (!nullToAbsent || path != null) {
+      map['path'] = Variable<String?>(path);
+    }
     map['question'] = Variable<String>(question);
     map['zhihu_link'] = Variable<String>(zhihuLink);
     map['author'] = Variable<String>(author);
-    map['tags'] = Variable<String>(tags);
-    map['links'] = Variable<String>(links);
+    if (!nullToAbsent || tags != null) {
+      map['tags'] = Variable<String?>(tags);
+    }
+    if (!nullToAbsent || links != null) {
+      map['links'] = Variable<String?>(links);
+    }
     map['last_update'] = Variable<String>(lastUpdate);
     map['content'] = Variable<String>(content);
     return map;
@@ -74,12 +80,13 @@ class Article extends DataClass implements Insertable<Article> {
     return ArticlesCompanion(
       id: Value(id),
       title: Value(title),
-      path: Value(path),
+      path: path == null && nullToAbsent ? const Value.absent() : Value(path),
       question: Value(question),
       zhihuLink: Value(zhihuLink),
       author: Value(author),
-      tags: Value(tags),
-      links: Value(links),
+      tags: tags == null && nullToAbsent ? const Value.absent() : Value(tags),
+      links:
+          links == null && nullToAbsent ? const Value.absent() : Value(links),
       lastUpdate: Value(lastUpdate),
       content: Value(content),
     );
@@ -91,12 +98,12 @@ class Article extends DataClass implements Insertable<Article> {
     return Article(
       id: serializer.fromJson<int>(json['id']),
       title: serializer.fromJson<String>(json['title']),
-      path: serializer.fromJson<String>(json['path']),
+      path: serializer.fromJson<String?>(json['path']),
       question: serializer.fromJson<String>(json['question']),
       zhihuLink: serializer.fromJson<String>(json['zhihuLink']),
       author: serializer.fromJson<String>(json['author']),
-      tags: serializer.fromJson<String>(json['tags']),
-      links: serializer.fromJson<String>(json['links']),
+      tags: serializer.fromJson<String?>(json['tags']),
+      links: serializer.fromJson<String?>(json['links']),
       lastUpdate: serializer.fromJson<String>(json['lastUpdate']),
       content: serializer.fromJson<String>(json['content']),
     );
@@ -107,12 +114,12 @@ class Article extends DataClass implements Insertable<Article> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'title': serializer.toJson<String>(title),
-      'path': serializer.toJson<String>(path),
+      'path': serializer.toJson<String?>(path),
       'question': serializer.toJson<String>(question),
       'zhihuLink': serializer.toJson<String>(zhihuLink),
       'author': serializer.toJson<String>(author),
-      'tags': serializer.toJson<String>(tags),
-      'links': serializer.toJson<String>(links),
+      'tags': serializer.toJson<String?>(tags),
+      'links': serializer.toJson<String?>(links),
       'lastUpdate': serializer.toJson<String>(lastUpdate),
       'content': serializer.toJson<String>(content),
     };
@@ -180,12 +187,12 @@ class Article extends DataClass implements Insertable<Article> {
 class ArticlesCompanion extends UpdateCompanion<Article> {
   final Value<int> id;
   final Value<String> title;
-  final Value<String> path;
+  final Value<String?> path;
   final Value<String> question;
   final Value<String> zhihuLink;
   final Value<String> author;
-  final Value<String> tags;
-  final Value<String> links;
+  final Value<String?> tags;
+  final Value<String?> links;
   final Value<String> lastUpdate;
   final Value<String> content;
   const ArticlesCompanion({
@@ -203,32 +210,29 @@ class ArticlesCompanion extends UpdateCompanion<Article> {
   ArticlesCompanion.insert({
     this.id = const Value.absent(),
     required String title,
-    required String path,
+    this.path = const Value.absent(),
     required String question,
     required String zhihuLink,
     required String author,
-    required String tags,
-    required String links,
+    this.tags = const Value.absent(),
+    this.links = const Value.absent(),
     required String lastUpdate,
     required String content,
   })  : title = Value(title),
-        path = Value(path),
         question = Value(question),
         zhihuLink = Value(zhihuLink),
         author = Value(author),
-        tags = Value(tags),
-        links = Value(links),
         lastUpdate = Value(lastUpdate),
         content = Value(content);
   static Insertable<Article> custom({
     Expression<int>? id,
     Expression<String>? title,
-    Expression<String>? path,
+    Expression<String?>? path,
     Expression<String>? question,
     Expression<String>? zhihuLink,
     Expression<String>? author,
-    Expression<String>? tags,
-    Expression<String>? links,
+    Expression<String?>? tags,
+    Expression<String?>? links,
     Expression<String>? lastUpdate,
     Expression<String>? content,
   }) {
@@ -249,12 +253,12 @@ class ArticlesCompanion extends UpdateCompanion<Article> {
   ArticlesCompanion copyWith(
       {Value<int>? id,
       Value<String>? title,
-      Value<String>? path,
+      Value<String?>? path,
       Value<String>? question,
       Value<String>? zhihuLink,
       Value<String>? author,
-      Value<String>? tags,
-      Value<String>? links,
+      Value<String?>? tags,
+      Value<String?>? links,
       Value<String>? lastUpdate,
       Value<String>? content}) {
     return ArticlesCompanion(
@@ -281,7 +285,7 @@ class ArticlesCompanion extends UpdateCompanion<Article> {
       map['title'] = Variable<String>(title.value);
     }
     if (path.present) {
-      map['path'] = Variable<String>(path.value);
+      map['path'] = Variable<String?>(path.value);
     }
     if (question.present) {
       map['question'] = Variable<String>(question.value);
@@ -293,10 +297,10 @@ class ArticlesCompanion extends UpdateCompanion<Article> {
       map['author'] = Variable<String>(author.value);
     }
     if (tags.present) {
-      map['tags'] = Variable<String>(tags.value);
+      map['tags'] = Variable<String?>(tags.value);
     }
     if (links.present) {
-      map['links'] = Variable<String>(links.value);
+      map['links'] = Variable<String?>(links.value);
     }
     if (lastUpdate.present) {
       map['last_update'] = Variable<String>(lastUpdate.value);
@@ -345,8 +349,8 @@ class $ArticlesTable extends Articles with TableInfo<$ArticlesTable, Article> {
   final VerificationMeta _pathMeta = const VerificationMeta('path');
   @override
   late final GeneratedColumn<String?> path = GeneratedColumn<String?>(
-      'path', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
+      'path', aliasedName, true,
+      type: const StringType(), requiredDuringInsert: false);
   final VerificationMeta _questionMeta = const VerificationMeta('question');
   @override
   late final GeneratedColumn<String?> question = GeneratedColumn<String?>(
@@ -365,13 +369,13 @@ class $ArticlesTable extends Articles with TableInfo<$ArticlesTable, Article> {
   final VerificationMeta _tagsMeta = const VerificationMeta('tags');
   @override
   late final GeneratedColumn<String?> tags = GeneratedColumn<String?>(
-      'tags', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
+      'tags', aliasedName, true,
+      type: const StringType(), requiredDuringInsert: false);
   final VerificationMeta _linksMeta = const VerificationMeta('links');
   @override
   late final GeneratedColumn<String?> links = GeneratedColumn<String?>(
-      'links', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
+      'links', aliasedName, true,
+      type: const StringType(), requiredDuringInsert: false);
   final VerificationMeta _lastUpdateMeta = const VerificationMeta('lastUpdate');
   @override
   late final GeneratedColumn<String?> lastUpdate = GeneratedColumn<String?>(
@@ -416,8 +420,6 @@ class $ArticlesTable extends Articles with TableInfo<$ArticlesTable, Article> {
     if (data.containsKey('path')) {
       context.handle(
           _pathMeta, path.isAcceptableOrUnknown(data['path']!, _pathMeta));
-    } else if (isInserting) {
-      context.missing(_pathMeta);
     }
     if (data.containsKey('question')) {
       context.handle(_questionMeta,
@@ -440,14 +442,10 @@ class $ArticlesTable extends Articles with TableInfo<$ArticlesTable, Article> {
     if (data.containsKey('tags')) {
       context.handle(
           _tagsMeta, tags.isAcceptableOrUnknown(data['tags']!, _tagsMeta));
-    } else if (isInserting) {
-      context.missing(_tagsMeta);
     }
     if (data.containsKey('links')) {
       context.handle(
           _linksMeta, links.isAcceptableOrUnknown(data['links']!, _linksMeta));
-    } else if (isInserting) {
-      context.missing(_linksMeta);
     }
     if (data.containsKey('last_update')) {
       context.handle(

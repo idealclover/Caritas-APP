@@ -1,7 +1,8 @@
 import '../../Models/HomeCategoryModel.dart';
 
 class HomeCategoryProvider {
-  List<HomeCategory> getHomeCategory() {
+  Future<List<HomeCategory>> getHomeCategory() async {
+    // TODO: to be implemented 获取文章分类
     List data = [
       {
         "id": 0,
