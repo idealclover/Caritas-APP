@@ -1,6 +1,29 @@
+import 'package:hive_flutter/hive_flutter.dart';
+
 import '../../Models/HomeCategoryModel.dart';
+import '../../Models/Db/DbHelper.dart';
 
 class HomeCategoryProvider {
+  Future<List<HCategory>> getCategorieList() async {
+    Box cbox = Hive.box('categories');
+    var values = cbox.values;
+    // print(values);
+    List<HCategory> result = [];
+    Box aBox = Hive.box("articles");
+    print(aBox.values);
+    for (Category category in values) {
+      result.add(HCategory(
+          category.title,
+          aBox.values
+              .where((article) => article.tags.contains(category.title))
+              .toList()
+              .cast()));
+    }
+    print(result);
+    return result;
+    // return [Category(title: 'qwq')];
+  }
+
   Future<List<HomeCategory>> getHomeCategory() async {
     // TODO: to be implemented 获取文章分类
     List data = [

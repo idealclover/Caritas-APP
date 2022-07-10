@@ -1,3 +1,5 @@
+import './Db/DbHelper.dart';
+
 class HomeCategory {
   int id;
   String title;
@@ -15,4 +17,11 @@ class HomeCategoryItem {
 
   HomeCategoryItem(this.id, this.title, this.intro, this.updateTime,
       {this.zhihuId});
+}
+
+class HCategory {
+  String title;
+  List<Article> articles;
+
+  HCategory(this.title, this.articles);
 }

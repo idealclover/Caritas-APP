@@ -3,6 +3,7 @@ import 'package:foundation/Pages/Article/ArticleView.dart';
 import 'package:get/get.dart';
 
 import '../../Components/Drawer.dart';
+import '../../Models/Db/DbHelper.dart';
 import '../../Models/HomeCategoryModel.dart';
 import 'HomeCategoryProvider.dart';
 import '../../Utils/InitUtil.dart';
@@ -30,11 +31,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     HomeCategoryProvider hp = HomeCategoryProvider();
+    // var categoryList = hp.getCategorieList();
     // List<HomeCategory> dataList = hp.getHomeCategory();
-    return FutureBuilder<List<HomeCategory>>(
-        future: hp.getHomeCategory(),
+    return FutureBuilder<List<HCategory>>(
+        future: hp.getCategorieList(),
         builder:
-            (BuildContext context, AsyncSnapshot<List<HomeCategory>> snapshot) {
+            (BuildContext context, AsyncSnapshot<List<HCategory>> snapshot) {
           return snapshot.hasData
               ? DefaultTabController(
                   length: snapshot.data!.length,
@@ -55,13 +57,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: ListTile.divideTiles(
                                     context: context,
                                     tiles: [
-                                  for (var item in category.itemList)
+                                  for (var item in category.articles)
                                     ListTile(
                                       title: Text(item.title),
-                                      subtitle: Text(item.intro),
-                                      trailing: Text(item.updateTime),
+                                      subtitle: Text(item.question),
+                                      trailing: Text(item.lastUpdate),
                                       onTap: () {
-                                        Get.to(() => ArticleView(item.id));
+                                        Get.to(() => ArticleView(item));
                                       },
                                     )
                                 ]).toList()),
