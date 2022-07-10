@@ -33,10 +33,10 @@ class _MyHomePageState extends State<MyHomePage> {
     HomeCategoryProvider hp = HomeCategoryProvider();
     // var categoryList = hp.getCategorieList();
     // List<HomeCategory> dataList = hp.getHomeCategory();
-    return FutureBuilder<List<HCategory>>(
+    return FutureBuilder<List<HomeCategory>>(
         future: hp.getCategorieList(),
         builder:
-            (BuildContext context, AsyncSnapshot<List<HCategory>> snapshot) {
+            (BuildContext context, AsyncSnapshot<List<HomeCategory>> snapshot) {
           return snapshot.hasData
               ? DefaultTabController(
                   length: snapshot.data!.length,

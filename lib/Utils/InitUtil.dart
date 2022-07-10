@@ -12,6 +12,19 @@ class InitUtil {
     Hive.registerAdapter(ArticleAdapter());
     Hive.registerAdapter(CategoryAdapter());
     await Hive.initFlutter();
+    await initBox();
+    UmengUtil.init();
+  }
+
+  static initAfterStart(context) async {
+    await PrivacyUtil().checkPrivacy(context, false);
+    await UpdateUtil().checkUpdate(context, false);
+  }
+
+  static initBox() async {
+    bool exists = await Hive.boxExists('categories');
+    print(exists);
+    if (exists) return;
 
     const Map totalData = {
       "categories": [
@@ -119,12 +132,5 @@ class InitUtil {
       );
       aBox.add(article);
     }
-
-    UmengUtil.init();
-  }
-
-  static initAfterStart(context) async {
-    await PrivacyUtil().checkPrivacy(context, false);
-    await UpdateUtil().checkUpdate(context, false);
   }
 }
