@@ -42,6 +42,9 @@ dependencies:
   flutter_html: ^3.0.0-alpha.5
   # flutter 开屏图片，用来适配暗黑模式
   flutter_native_splash: ^2.2.3+1
+  # flutter 搜索栏
+  flutter_search_bar:
+    path: ./lib/Libs/flutter-search-bar
   # 本地持久化库，用来持久化一些基本设置（主题、暗黑模式等）
   get: ^4.6.5
   get_storage: ^2.0.3
