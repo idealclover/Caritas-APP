@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Pages/About/AboutView.dart';
+// import '../Pages/About/AboutView.dart';
 import '../Pages/Settings/SettingsView.dart';
 import '../Resources/Config.dart';
-import '../Utils/SettingsUtil.dart';
-import '../Utils/VersionUtil.dart';
+// import '../Utils/SettingsUtil.dart';
+// import '../Utils/VersionUtil.dart';
 import '../generated/l10n.dart';
 
 class MDrawer extends StatelessWidget {

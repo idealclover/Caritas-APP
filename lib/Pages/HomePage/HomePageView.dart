@@ -3,7 +3,6 @@ import 'package:foundation/Pages/Article/ArticleView.dart';
 import 'package:get/get.dart';
 
 import '../../Components/Drawer.dart';
-import '../../Models/Db/DbHelper.dart';
 import '../../Models/HomeCategoryModel.dart';
 import 'HomeCategoryProvider.dart';
 import '../../Utils/InitUtil.dart';
@@ -60,8 +59,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                   for (var item in category.articles)
                                     ListTile(
                                       title: Text(item.title),
-                                      subtitle: Text(item.question),
-                                      trailing: Text(item.lastUpdate),
+                                      subtitle: Text(item.question,
+                                          overflow: TextOverflow.ellipsis),
+                                      // trailing: Text(item.lastUpdate),
                                       onTap: () {
                                         Get.to(() => ArticleView(item));
                                       },

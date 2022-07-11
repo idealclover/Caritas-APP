@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="top.idealclover.foundation">
    <application
-        android:label="Caritas APP"
+        android:label="Caritas"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

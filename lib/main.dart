@@ -3,7 +3,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'generated/l10n.dart';
 
-import './Models/Db/DbHelper.dart';
 import './Pages/HomePage/HomePageView.dart';
 import './Pages/Settings/SettingsProvider.dart';
 import './Resources/Constant.dart';

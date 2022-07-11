@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:hive/hive.dart';
 
 // assuming that your file is called filename.dart. This will give an error at
@@ -64,15 +63,15 @@ class Article extends HiveObject {
       this.categories = const [],
       required this.lastUpdate});
 
-// IntColumn get id => integer().autoIncrement()();
-// TextColumn get title => text()();
-// TextColumn get path => text().nullable()();
-// TextColumn get question => text()();
-// TextColumn get zhihuLink => text()();
-// TextColumn get author => text()();
-// TextColumn get tags => text().nullable()();
-// TextColumn get links => text().nullable()();
-// TextColumn get lastUpdate => text()();
-// TextColumn get content => text()();
+  Article.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        title = json['title'],
+        question = json['question'],
+        content = json['content'],
+        zhihuLink = json['zhihuLink'] ?? '',
+        author = json['author'],
+        tags = List<String>.from(json['tags']),
+        links = List<String>.from(json['links']),
+        categories = List<String>.from(json['categories'] ?? const []),
+        lastUpdate = json['lastUpdate'];
 }
-
