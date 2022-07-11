@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foundation/Pages/Article/ArticleView.dart';
 import 'package:get/get.dart';
 
+import '../../Components/ArticleList.dart';
 import '../../Components/Drawer.dart';
 import '../../Models/HomeCategoryModel.dart';
 import 'HomeCategoryProvider.dart';
@@ -52,21 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         for (var category in snapshot.data!)
                           SingleChildScrollView(
-                            child: Column(
-                                children: ListTile.divideTiles(
-                                    context: context,
-                                    tiles: [
-                                  for (var item in category.articles)
-                                    ListTile(
-                                      title: Text(item.title),
-                                      subtitle: Text(item.question,
-                                          overflow: TextOverflow.ellipsis),
-                                      // trailing: Text(item.lastUpdate),
-                                      onTap: () {
-                                        Get.to(() => ArticleView(item));
-                                      },
-                                    )
-                                ]).toList()),
+                            child: ArticleList(category.articles),
                           )
                         // Tab(text: item.title),
                       ],

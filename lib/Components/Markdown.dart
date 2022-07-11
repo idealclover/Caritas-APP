@@ -8,7 +8,7 @@ class MMarkdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Markdown(
+    return MarkdownBody(
       selectable: true,
       data: data,
       styleSheet: MarkdownStyleSheet(
