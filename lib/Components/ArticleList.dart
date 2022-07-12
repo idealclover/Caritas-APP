@@ -1,29 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
+import 'ArticleListItem.dart';
 import '../Models/Db/DbHelper.dart';
-import '../Pages/Article/ArticleView.dart';
 
 class ArticleList extends StatelessWidget {
   final List<Article> articleList;
+  final bool showFavIcon;
 
-  const ArticleList(this.articleList, {Key? key}) : super(key: key);
+  const ArticleList(this.articleList, {Key? key, this.showFavIcon = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
         children: ListTile.divideTiles(context: context, tiles: [
       for (var item in articleList)
-        ListTile(
-          title: Text(item.title),
-          subtitle: Text(item.question, overflow: TextOverflow.ellipsis),
-          // trailing: IconButton(
-          //     onPressed: () {}, icon: const Icon(Icons.favorite_border)),
-          // trailing: Text(item.lastUpdate),
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => ArticleView(item)));
-          },
+        ArticleListItemView(
+          item,
+          showFavIcon: showFavIcon,
         )
     ]).toList()
           ..add(const Divider(height: 1)));

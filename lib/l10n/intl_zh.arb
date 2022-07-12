@@ -5,7 +5,9 @@
   "ok": "确认",
   "cancel": "取消",
 
-  "home_title": "首页",
+  "home_title": "文集",
+
+  "fav_title": "收藏",
 
   "settings_title": "设置",
   "change_theme_mode_title": "浅色/深色模式切换",

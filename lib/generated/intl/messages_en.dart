@@ -46,9 +46,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "donate_title": MessageLookupByLibrary.simpleMessage("Donate"),
         "easter_egg":
             MessageLookupByLibrary.simpleMessage("This is easter egg."),
+        "fav_title": MessageLookupByLibrary.simpleMessage("收藏"),
         "github_open_source":
             MessageLookupByLibrary.simpleMessage("GitHub OpenSource"),
-        "home_title": MessageLookupByLibrary.simpleMessage("首页"),
+        "home_title": MessageLookupByLibrary.simpleMessage("文集"),
         "introduction": MessageLookupByLibrary.simpleMessage(
             "Blog:：https://idealclover.top\nEmail：idealclover@163.com"),
         "now_version": m0,

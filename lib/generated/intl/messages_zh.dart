@@ -41,8 +41,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "donate_subtitle": MessageLookupByLibrary.simpleMessage("给傻翠买支棒棒糖吧！"),
         "donate_title": MessageLookupByLibrary.simpleMessage("投喂"),
         "easter_egg": MessageLookupByLibrary.simpleMessage("这里是彩蛋"),
+        "fav_title": MessageLookupByLibrary.simpleMessage("收藏"),
         "github_open_source": MessageLookupByLibrary.simpleMessage("GitHub 开源"),
-        "home_title": MessageLookupByLibrary.simpleMessage("首页"),
+        "home_title": MessageLookupByLibrary.simpleMessage("文集"),
         "introduction": MessageLookupByLibrary.simpleMessage(
             "博客：https://idealclover.top\nEmail：idealclover@163.com"),
         "now_version": m0,

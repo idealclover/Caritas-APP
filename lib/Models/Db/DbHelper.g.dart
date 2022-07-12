@@ -51,7 +51,7 @@ class ArticleAdapter extends TypeAdapter<Article> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Article(
-      name: fields[0] as String,
+      id: fields[0] as String,
       title: fields[1] as String,
       question: fields[2] as String,
       content: fields[3] as String,
@@ -69,7 +69,7 @@ class ArticleAdapter extends TypeAdapter<Article> {
     writer
       ..writeByte(10)
       ..writeByte(0)
-      ..write(obj.name)
+      ..write(obj.id)
       ..writeByte(1)
       ..write(obj.title)
       ..writeByte(2)

@@ -9,7 +9,7 @@ class ArticlePresenter {
 
     for (String link in article.links) {
       List<Article> a =
-          aBox.values.where((article) => article.name == link).toList().cast();
+          aBox.values.where((article) => article.id == link).toList().cast();
       // print(a);
       if (a.isNotEmpty) {
         rst.add(a.first);

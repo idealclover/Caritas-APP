@@ -22,7 +22,7 @@ class Category extends HiveObject {
 @HiveType(typeId: 1)
 class Article extends HiveObject {
   @HiveField(0)
-  String name;
+  String id;
 
   @HiveField(1)
   String title;
@@ -52,7 +52,7 @@ class Article extends HiveObject {
   String lastUpdate;
 
   Article(
-      {required this.name,
+      {required this.id,
       required this.title,
       required this.question,
       required this.content,
@@ -64,7 +64,7 @@ class Article extends HiveObject {
       required this.lastUpdate});
 
   Article.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
+      : id = json['id'],
         title = json['title'],
         question = json['question'],
         content = json['content'],

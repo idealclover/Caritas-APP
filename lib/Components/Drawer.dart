@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// import '../Pages/About/AboutView.dart';
+import '../Pages/Favorite/FavoriteView.dart';
 import '../Pages/Settings/SettingsView.dart';
 import '../Resources/Config.dart';
-// import '../Utils/SettingsUtil.dart';
-// import '../Utils/VersionUtil.dart';
 import '../generated/l10n.dart';
 
 class MDrawer extends StatelessWidget {
@@ -29,8 +27,13 @@ class MDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text(S.of(context).home_title),
-            trailing: const Icon(Icons.home),
+            trailing: const Icon(Icons.menu_book),
             onTap: () => Get.back(),
+          ),
+          ListTile(
+            title: Text(S.of(context).fav_title),
+            trailing: const Icon(Icons.favorite),
+            onTap: () => Get.to(() => const FavoriteView()),
           ),
           ListTile(
             title: Text(S.of(context).settings_title),

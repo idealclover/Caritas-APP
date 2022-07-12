@@ -80,11 +80,21 @@ class S {
     );
   }
 
-  /// `首页`
+  /// `文集`
   String get home_title {
     return Intl.message(
-      '首页',
+      '文集',
       name: 'home_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `收藏`
+  String get fav_title {
+    return Intl.message(
+      '收藏',
+      name: 'fav_title',
       desc: '',
       args: [],
     );

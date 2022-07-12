@@ -5,7 +5,9 @@
   "ok": "OK",
   "cancel": "Cancel",
 
-  "home_title": "首页",
+  "home_title": "文集",
+
+  "fav_title": "收藏",
 
   "settings_title": "Settings",
   "change_theme_mode_title": "Mode Change",

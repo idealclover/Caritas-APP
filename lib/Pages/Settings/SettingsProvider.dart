@@ -14,6 +14,7 @@ class SettingsProvider {
   static const _key_themeCustomColor = "themeCustomColor";
   static const _key_lastCheckUpdateTime = "lastCheckUpdateTime";
   static const _key_cooldownTime = "cooldownTime";
+  static const _key_favorites = "favorites";
 
   final _defaultSettings = {
     /// default privacy version when not installed
@@ -22,7 +23,8 @@ class SettingsProvider {
     _key_themeMode: 0,
     _key_themeCustomColor: '',
     _key_lastCheckUpdateTime: 0,
-    _key_cooldownTime: 600
+    _key_cooldownTime: 600,
+    _key_favorites: <String>[],
   };
 
   /// Get settings from local storage
@@ -82,6 +84,7 @@ class SettingsProvider {
   void setThemeCustomColor(String value) {
     Map settings = _loadSettingsFromBox();
     settings[_key_themeCustomColor] = value;
+
     /// 自定义颜色时颜色主题为-1
     settings[_key_themeIndex] = -1;
     print(settings);
@@ -108,6 +111,24 @@ class SettingsProvider {
   void setCooldownTime(int value) {
     Map settings = _loadSettingsFromBox();
     settings[_key_cooldownTime] = value;
+    print(settings);
+    _saveSettingsToBox(settings);
+  }
+
+  List<String> getFavorites() {
+    return List<String>.from(_loadSettingsFromBox()[_key_favorites] ??
+        _defaultSettings[_key_favorites] as List);
+  }
+
+  void setFavorites(String favId) {
+    List<String> favList = getFavorites();
+    if (favList.contains(favId)) {
+      favList.remove(favId);
+    } else {
+      favList.add(favId);
+    }
+    Map settings = _loadSettingsFromBox();
+    settings[_key_favorites] = favList;
     print(settings);
     _saveSettingsToBox(settings);
   }
