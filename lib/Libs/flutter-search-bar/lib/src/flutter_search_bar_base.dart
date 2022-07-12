@@ -103,7 +103,8 @@ class SearchBar {
   ///
   /// This adds a route that listens for onRemove (and stops the search when that happens), and then calls [setState] to rebuild and start the search.
   void beginSearch(context) {
-    ModalRoute.of(context)!.addLocalHistoryEntry(LocalHistoryEntry(onRemove: () {
+    ModalRoute.of(context)!
+        .addLocalHistoryEntry(LocalHistoryEntry(onRemove: () {
       setState(() {
         isSearching.value = false;
       });
@@ -130,7 +131,6 @@ class SearchBar {
   AppBar buildSearchBar(BuildContext context) {
     ThemeData theme = Theme.of(context);
     Color? buttonColor = inBar ? null : theme.iconTheme.color;
-
     return AppBar(
       leading: IconButton(
           icon: const BackButtonIcon(),
@@ -146,11 +146,12 @@ class SearchBar {
         textDirection: Directionality.of(context),
         child: TextField(
           key: Key('SearchBarTextField'),
+          style: TextStyle(color: Colors.white),
           keyboardType: keyboardType,
           decoration: InputDecoration(
               hintText: hintText,
               hintStyle: inBar
-                  ? null
+                  ? TextStyle(color: Colors.white)
                   : TextStyle(
                       color: theme.textTheme.headline4!.color,
                     ),
@@ -179,7 +180,7 @@ class SearchBar {
               IconButton(
                   icon: Icon(Icons.clear, semanticLabel: "Clear"),
                   color: inBar ? null : buttonColor,
-                  disabledColor: inBar ? null : theme.disabledColor,
+                  disabledColor: inBar ? Colors.white : theme.disabledColor,
                   onPressed: !_clearActive
                       ? null
                       : () {
@@ -195,7 +196,11 @@ class SearchBar {
   /// Put this inside your [buildDefaultAppBar] method!
   IconButton getSearchAction(BuildContext context) {
     return IconButton(
-        icon: Icon(Icons.search, semanticLabel: "Search"),
+        icon: Icon(
+          Icons.search,
+          semanticLabel: "Search",
+          color: Colors.white,
+        ),
         onPressed: () {
           beginSearch(context);
         });

@@ -16,6 +16,7 @@ class ArticleView extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(article.title),
+
         ),
         body: SingleChildScrollView(
           child: Column(

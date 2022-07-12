@@ -17,6 +17,8 @@ class ArticleList extends StatelessWidget {
         ListTile(
           title: Text(item.title),
           subtitle: Text(item.question, overflow: TextOverflow.ellipsis),
+          // trailing: IconButton(
+          //     onPressed: () {}, icon: const Icon(Icons.favorite_border)),
           // trailing: Text(item.lastUpdate),
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(

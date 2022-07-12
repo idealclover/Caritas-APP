@@ -30,19 +30,20 @@ class ThemeChanger extends StatelessWidget {
                       UmengUtil.onEvent("theme_change", {"type": i});
                       SettingsProvider().setThemeIndex(i);
                     })))
-              ..add(Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                child: InkWell(
-                    child: Text(S.of(context).theme_mode_customize),
-                    onTap: () {
-                      showDialog<String>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return const ThemeCustomDialog();
-                        },
-                      );
-                    }),
-              ))));
+            // ..add(Padding(
+            //   padding:
+            //       const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+            //   child: InkWell(
+            //       child: Text(S.of(context).theme_mode_customize),
+            //       onTap: () {
+            //         showDialog<String>(
+            //           context: context,
+            //           builder: (BuildContext context) {
+            //             return const ThemeCustomDialog();
+            //           },
+            //         );
+            //       }),
+            // ))
+            ));
   }
 }
