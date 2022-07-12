@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../Pages/Article/ArticleView.dart';
 import '../Pages/Settings/SettingsProvider.dart';

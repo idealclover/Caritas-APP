@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="top.idealclover.foundation">
+    package="top.idealclover.caritas">
    <application
         android:label="Caritas"
         android:name="${applicationName}"

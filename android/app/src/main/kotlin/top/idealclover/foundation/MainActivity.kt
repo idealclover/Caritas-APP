@@ -1,4 +1,4 @@
-package top.idealclover.foundation
+package top.idealclover.caritas
 
 import io.flutter.embedding.android.FlutterActivity
 

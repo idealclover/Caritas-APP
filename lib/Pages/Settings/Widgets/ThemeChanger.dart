@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../generated/l10n.dart';
 
 import '../SettingsProvider.dart';
 import '../../../Resources/Themes.dart';
 import '../../../Utils/UmengUtil.dart';
-import './ThemeCustomDialog.dart';
 
 class ThemeChanger extends StatelessWidget {
   const ThemeChanger({Key? key}) : super(key: key);

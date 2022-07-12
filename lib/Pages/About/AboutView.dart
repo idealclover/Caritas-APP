@@ -1,7 +1,7 @@
-import 'package:foundation/Utils/URLUtil.dart';
 import '../../Resources/Config.dart';
 import '../../Utils/PrivacyUtil.dart';
 import '../../Utils/UpdateUtil.dart';
+import '../../Utils/URLUtil.dart';
 import '../../generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';

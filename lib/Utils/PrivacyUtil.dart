@@ -6,7 +6,7 @@ import '../generated/l10n.dart';
 import 'package:get/get.dart' hide Response;
 
 import 'package:flutter_html/flutter_html.dart';
-import 'package:foundation/Pages/Settings/SettingsProvider.dart';
+import '../Pages/Settings/SettingsProvider.dart';
 import '../Components/Dialog.dart';
 import '../Components/TransBgTextButton.dart';
 import '../Resources/Config.dart';

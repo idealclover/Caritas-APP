@@ -5,7 +5,6 @@ import '../../Components/ArticleList.dart';
 import '../../Components/Toast.dart';
 import '../../Components/Markdown.dart';
 import '../../Models/Db/DbHelper.dart';
-import '../../generated/l10n.dart';
 
 class ArticleView extends StatefulWidget {
   final Article article;
@@ -57,7 +56,8 @@ class _ArticleViewState extends State<ArticleView> {
             children: [
               Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: MMarkdown(widget.article.content)),
+                  child: MMarkdown(
+                      '# ${widget.article.title}\n${widget.article.content}')),
               FutureBuilder<List<Article>>(
                   future: ap.getArticleList(widget.article),
                   builder: (BuildContext context,

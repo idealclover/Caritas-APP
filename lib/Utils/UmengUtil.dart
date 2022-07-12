@@ -1,4 +1,3 @@
-import 'package:foundation/Resources/Config.dart';
 import 'package:umeng_common_sdk/umeng_common_sdk.dart';
 import 'package:get/get.dart';
 

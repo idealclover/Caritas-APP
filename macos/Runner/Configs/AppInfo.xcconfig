@@ -11,4 +11,4 @@ PRODUCT_NAME = Caritas APP;
 PRODUCT_BUNDLE_IDENTIFIER = top.idealclover.caritas;
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 top.idealclover.foundation. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2022 top.idealclover.caritas. All rights reserved.

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
-import 'package:foundation/Pages/Article/ArticleView.dart';
-import 'package:get/get.dart';
 
 import '../../Components/ArticleList.dart';
 import '../../Components/Drawer.dart';
