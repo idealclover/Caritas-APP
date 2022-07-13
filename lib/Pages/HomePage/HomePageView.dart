@@ -25,9 +25,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-        bottom: TabBar(tabs: [
-          for (var category in data) Tab(text: category.title),
-        ]),
+        bottom: TabBar(
+          tabs: [
+            for (var category in data) Tab(text: category.title),
+          ],
+          isScrollable: true,
+        ),
         title: Text(widget.title),
         actions: [searchBar.getSearchAction(context)]);
   }
@@ -49,7 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
         buildDefaultAppBar: buildAppBar,
         closeOnSubmit: false,
         onChanged: searchChanged,
-
         hintText: "在文集中搜索...");
     searchArticleList = data.first.articles;
 
@@ -76,11 +78,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 appBar: searchBar.build(context),
                 drawer: const MDrawer(),
                 body: value
-                /// 搜索场景下展示样式
+
+                    /// 搜索场景下展示样式
                     ? SingleChildScrollView(
                         child: ArticleList(searchArticleList),
                       )
-                /// 非搜索下展示样式
+
+                    /// 非搜索下展示样式
                     : TabBarView(
                         children: [
                           for (var category in data)

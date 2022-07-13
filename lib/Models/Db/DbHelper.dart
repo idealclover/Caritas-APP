@@ -73,5 +73,5 @@ class Article extends HiveObject {
         tags = List<String>.from(json['tags']),
         links = List<String>.from(json['links']),
         categories = List<String>.from(json['categories'] ?? const []),
-        lastUpdate = json['lastUpdate'];
+        lastUpdate = json['lastupdate'] ?? '';
 }
