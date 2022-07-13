@@ -29,7 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "about_title": MessageLookupByLibrary.simpleMessage("About"),
         "already_newest_version_toast":
             MessageLookupByLibrary.simpleMessage("Already newest version~"),
-        "app_name": MessageLookupByLibrary.simpleMessage("Foundation"),
+        "app_name": MessageLookupByLibrary.simpleMessage("Caritas"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "change_theme_mode_subtitle":
             MessageLookupByLibrary.simpleMessage("Follow system theme?"),

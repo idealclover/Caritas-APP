@@ -8,8 +8,11 @@ import '../../Models/Db/DbHelper.dart';
 class ArticleListItemView extends StatefulWidget {
   final Article article;
   final bool showFavIcon;
+  final Function? getPre;
+  final Function? getNext;
 
-  const ArticleListItemView(this.article, {Key? key, this.showFavIcon = true})
+  const ArticleListItemView(this.article,
+      {Key? key, this.showFavIcon = true, this.getPre, this.getNext})
       : super(key: key);
 
   @override
@@ -36,7 +39,7 @@ class _ArticleListItemViewState extends State<ArticleListItemView> {
               icon: Icon(
                 isFavorite ? Icons.favorite : Icons.favorite_border,
                 semanticLabel: "is favorited",
-                color: isFavorite ? Colors.red : Colors.white,
+                color: isFavorite ? Colors.red : null,
               ),
               onPressed: () {
                 setState(() {
@@ -52,7 +55,11 @@ class _ArticleListItemViewState extends State<ArticleListItemView> {
           : null,
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => ArticleView(widget.article)));
+            builder: (BuildContext context) => ArticleView(
+                  widget.article,
+                  getPre: widget.getPre,
+                  getNext: widget.getNext,
+                )));
       },
     );
   }
