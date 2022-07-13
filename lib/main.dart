@@ -13,6 +13,7 @@ import './Utils/ThemeUtil.dart';
 void main() async {
   // var database = MyDatabase();
   await InitUtil.initBeforeStart();
+  await Future.delayed(const Duration(milliseconds: 200));
   runApp(const MyApp());
 }
 
