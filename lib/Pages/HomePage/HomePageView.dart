@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 
+import '../../Components/Toast.dart';
+import '../../generated/l10n.dart';
+import 'HomeCategoryProvider.dart';
 import '../../Components/ArticleList.dart';
 import '../../Components/Drawer.dart';
 import '../../Models/Db/DbHelper.dart';
 import '../../Models/HomeCategoryModel.dart';
-import 'HomeCategoryProvider.dart';
 import '../../Utils/InitUtil.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -22,6 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late HomeCategoryProvider hp;
   late List<HomeCategory> data;
   late List<Article> searchArticleList;
+  late bool hideRead;
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
@@ -32,7 +35,23 @@ class _MyHomePageState extends State<MyHomePage> {
           isScrollable: true,
         ),
         title: Text(widget.title),
-        actions: [searchBar.getSearchAction(context)]);
+        actions: [
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  hideRead = !hideRead;
+                });
+                if(hideRead) {
+                  Toast.showToast(S.of(context).read_hide_toast, context);
+                } else {
+                  Toast.showToast(S.of(context).read_show_toast, context);
+                }
+              },
+              icon: hideRead
+                  ? const Icon(Icons.visibility_off)
+                  : const Icon(Icons.visibility)),
+          searchBar.getSearchAction(context)
+        ]);
   }
 
   searchChanged(String value) {
@@ -54,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onChanged: searchChanged,
         hintText: "在文集中搜索...");
     searchArticleList = data.first.articles;
+    hideRead = false;
 
     super.initState();
 
@@ -89,7 +109,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           for (var category in data)
                             SingleChildScrollView(
-                              child: ArticleList(category.articles),
+                              child: ArticleList(
+                                category.articles,
+                                hideRead: hideRead,
+                                notifyState: () => setState(() => {}),
+                              ),
                             )
                           // Tab(text: item.title),
                         ],

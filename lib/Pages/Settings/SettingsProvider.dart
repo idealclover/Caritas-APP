@@ -15,6 +15,8 @@ class SettingsProvider {
   static const _key_lastCheckUpdateTime = "lastCheckUpdateTime";
   static const _key_cooldownTime = "cooldownTime";
   static const _key_favorites = "favorites";
+  static const _key_histories = "histories";
+  static const _key_shareData = "shareData";
 
   final _defaultSettings = {
     /// default privacy version when not installed
@@ -25,6 +27,8 @@ class SettingsProvider {
     _key_lastCheckUpdateTime: 0,
     _key_cooldownTime: 600,
     _key_favorites: <String>[],
+    _key_histories: <String>[],
+    _key_shareData: true
   };
 
   /// Get settings from local storage
@@ -44,7 +48,7 @@ class SettingsProvider {
   void setPrivacyVersion(int value) {
     Map settings = _loadSettingsFromBox();
     settings[_key_privacyVersion] = value;
-    print(settings);
+    // print(settings);
     _saveSettingsToBox(settings);
   }
 
@@ -58,7 +62,7 @@ class SettingsProvider {
     Get.changeTheme(Themes.themeList[value]['light']!);
     Map settings = _loadSettingsFromBox();
     settings[_key_themeIndex] = value;
-    print(settings);
+    // print(settings);
     _saveSettingsToBox(settings);
   }
 
@@ -72,7 +76,7 @@ class SettingsProvider {
     Get.changeThemeMode(Constant.themeModeList[value]);
     Map settings = _loadSettingsFromBox();
     settings[_key_themeMode] = value;
-    print(settings);
+    // print(settings);
     _saveSettingsToBox(settings);
   }
 
@@ -87,7 +91,7 @@ class SettingsProvider {
 
     /// 自定义颜色时颜色主题为-1
     settings[_key_themeIndex] = -1;
-    print(settings);
+    // print(settings);
     _saveSettingsToBox(settings);
   }
 
@@ -99,7 +103,7 @@ class SettingsProvider {
   void setLastCheckUpdateTime(int value) {
     Map settings = _loadSettingsFromBox();
     settings[_key_lastCheckUpdateTime] = value;
-    print(settings);
+    // print(settings);
     _saveSettingsToBox(settings);
   }
 
@@ -111,7 +115,7 @@ class SettingsProvider {
   void setCooldownTime(int value) {
     Map settings = _loadSettingsFromBox();
     settings[_key_cooldownTime] = value;
-    print(settings);
+    // print(settings);
     _saveSettingsToBox(settings);
   }
 
@@ -125,11 +129,44 @@ class SettingsProvider {
     if (favList.contains(favId)) {
       favList.remove(favId);
     } else {
-      favList.add(favId);
+      favList.insert(0, favId);
+      // favList.add(favId);
     }
     Map settings = _loadSettingsFromBox();
     settings[_key_favorites] = favList;
-    print(settings);
+    // print(settings);
+    _saveSettingsToBox(settings);
+  }
+
+  List<String> getHistories() {
+    return List<String>.from(_loadSettingsFromBox()[_key_histories] ??
+        _defaultSettings[_key_histories] as List);
+  }
+
+  void setHistories(String hisId) {
+    List<String> hisList = getHistories();
+    if (hisList.contains(hisId)) {
+      hisList.remove(hisId);
+    }
+    // // print(hisList);
+    hisList.insert(0, hisId);
+    // hisList.add(hisId);
+    // // print(hisList);
+    Map settings = _loadSettingsFromBox();
+    settings[_key_histories] = hisList;
+    // print(settings);
+    _saveSettingsToBox(settings);
+  }
+
+  bool getShareData() {
+    return _loadSettingsFromBox()[_key_shareData] ??
+        _defaultSettings[_key_shareData];
+  }
+
+  void setShareData(bool value) {
+    Map settings = _loadSettingsFromBox();
+    settings[_key_shareData] = value;
+    // print(settings);
     _saveSettingsToBox(settings);
   }
 }

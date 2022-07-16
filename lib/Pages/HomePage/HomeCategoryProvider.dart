@@ -11,7 +11,7 @@ class HomeCategoryProvider {
     // print(values);
     List<HomeCategory> result = [];
     Box aBox = Hive.box("articles");
-    print(aBox.values);
+    // print(aBox.values);
     for (Category category in values) {
       result.add(HomeCategory(
           category.title,
@@ -20,7 +20,7 @@ class HomeCategoryProvider {
               .toList()
               .cast()));
     }
-    print(result);
+    // print(result);
     return result;
   }
 

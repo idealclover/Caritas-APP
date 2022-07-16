@@ -5,9 +5,21 @@
   "ok": "OK",
   "cancel": "Cancel",
 
-  "home_title": "文集",
+  "home_title": "Articles",
+  "read_hide_toast": "Read articles hid.",
+  "read_show_toast": "Read articles showed.",
 
-  "fav_title": "收藏",
+  "open_in_browser_button": "Open in browser.",
+  "pre_article": "Previous",
+  "next_article": "Next",
+  "related_article": "Related",
+
+  "fav_title": "Favorites",
+  "fav_button": "is favorite",
+  "fav_add_toast": "Added to favorites.",
+  "fav_del_toast": "Removed from favorites.",
+
+  "his_title": "Histories",
 
   "settings_title": "Settings",
   "change_theme_mode_title": "Mode Change",
@@ -16,11 +28,13 @@
   "theme_mode_always_light": "Always Light",
   "theme_mode_always_dark": "Always Dark",
   "theme_mode_customize": "Customize",
+  "share_data_title": "Share Usage Data",
+  "share_data_subtitle": "Help us improve our products.",
   "share_title": "Share",
   "share_subtitle": "Share this app to more friends!",
   "share_message": "This is share message.",
   "report_title": "Report",
-  "report_subtitle": "Any bugs? Talk to us on Tencent QQ!\nTap to open QQ，long press to copy number.",
+  "report_subtitle": "Tap to open QQ，long press to copy number.",
   "report_copy_message": "QQ number copied!",
   "donate_title": "Donate",
   "donate_subtitle": "Buy me a cup of coffee!",

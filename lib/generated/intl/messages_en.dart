@@ -46,24 +46,43 @@ class MessageLookup extends MessageLookupByLibrary {
         "donate_title": MessageLookupByLibrary.simpleMessage("Donate"),
         "easter_egg":
             MessageLookupByLibrary.simpleMessage("This is easter egg."),
-        "fav_title": MessageLookupByLibrary.simpleMessage("收藏"),
+        "fav_add_toast":
+            MessageLookupByLibrary.simpleMessage("Added to favorites."),
+        "fav_button": MessageLookupByLibrary.simpleMessage("is favorite"),
+        "fav_del_toast":
+            MessageLookupByLibrary.simpleMessage("Removed from favorites."),
+        "fav_title": MessageLookupByLibrary.simpleMessage("Favorites"),
         "github_open_source":
             MessageLookupByLibrary.simpleMessage("GitHub OpenSource"),
-        "home_title": MessageLookupByLibrary.simpleMessage("文集"),
+        "his_title": MessageLookupByLibrary.simpleMessage("Histories"),
+        "home_title": MessageLookupByLibrary.simpleMessage("Articles"),
         "introduction": MessageLookupByLibrary.simpleMessage(
             "Blog:：https://idealclover.top\nEmail：idealclover@163.com"),
+        "next_article": MessageLookupByLibrary.simpleMessage("Next"),
         "now_version": m0,
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "open_in_browser_button":
+            MessageLookupByLibrary.simpleMessage("Open in browser."),
         "open_source_library_content": MessageLookupByLibrary.simpleMessage(
             "fluttertoast: ^8.0.9\nflutter_native_splash: ^2.2.3+1\nget: ^4.6.5\nget_storage: ^2.0.3\npackage_info_plus: ^1.4.2\nshare_plus: ^4.0.10\nurl_launcher: ^6.1.4"),
         "open_source_library_title":
             MessageLookupByLibrary.simpleMessage("OpenSource Libraries"),
+        "pre_article": MessageLookupByLibrary.simpleMessage("Previous"),
+        "read_hide_toast":
+            MessageLookupByLibrary.simpleMessage("Read articles hid."),
+        "read_show_toast":
+            MessageLookupByLibrary.simpleMessage("Read articles showed."),
+        "related_article": MessageLookupByLibrary.simpleMessage("Related"),
         "report_copy_message":
             MessageLookupByLibrary.simpleMessage("QQ number copied!"),
         "report_subtitle": MessageLookupByLibrary.simpleMessage(
-            "Any bugs? Talk to us on Tencent QQ!\nTap to open QQ，long press to copy number."),
+            "Tap to open QQ，long press to copy number."),
         "report_title": MessageLookupByLibrary.simpleMessage("Report"),
         "settings_title": MessageLookupByLibrary.simpleMessage("Settings"),
+        "share_data_subtitle": MessageLookupByLibrary.simpleMessage(
+            "Help us improve our products."),
+        "share_data_title":
+            MessageLookupByLibrary.simpleMessage("Share Usage Data"),
         "share_message":
             MessageLookupByLibrary.simpleMessage("This is share message."),
         "share_subtitle": MessageLookupByLibrary.simpleMessage(

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../Utils/URLUtil.dart';
+import '../../Utils/UmengUtil.dart';
+import '../../generated/l10n.dart';
 import 'ArticlePresenter.dart';
 import '../Settings/SettingsProvider.dart';
 import '../../Components/ArticleList.dart';
 import '../../Components/Toast.dart';
 import '../../Components/Markdown.dart';
 import '../../Models/Db/DbHelper.dart';
+import '../../Utils/URLUtil.dart';
 
 class ArticleView extends StatefulWidget {
   final Article article;
@@ -26,18 +28,14 @@ class _ArticleViewState extends State<ArticleView> {
 
   @override
   void initState() {
-    List<String> favList = SettingsProvider().getFavorites();
-    isFavorite = favList.contains(widget.article.title);
     article = widget.article;
     super.initState();
   }
 
   /// 打开上一篇/下一篇通过直接刷新当前页面的形式，而不是新建页面
   /// 原因是担心顺序浏览的时候同时开启的页面过多，不好进行回退
-  Widget getArticleWidget(String title, List<Article>? articleList) {
-    if (articleList == null || articleList.isEmpty) {
-      return Container();
-    }
+  Widget getArticleWidget(String title, Article? targetArticle) {
+    if (targetArticle == null) return Container();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -45,11 +43,13 @@ class _ArticleViewState extends State<ArticleView> {
         ListTile(title: Text(title)),
         const Divider(height: 1),
         ListTile(
-            title: Text(articleList.first.title),
-            subtitle: Text(articleList.first.question,
-                overflow: TextOverflow.ellipsis),
+            title: Text(targetArticle.title),
+            subtitle:
+                Text(targetArticle.question, overflow: TextOverflow.ellipsis),
             onTap: (() {
-              setState(() => {article = articleList.first});
+              setState(() => {article = targetArticle});
+              // ArticlePresenter ap = ArticlePresenter();
+              // ap.setAsRead(targetArticle);
               sc.animateTo(0,
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.ease);
@@ -60,23 +60,27 @@ class _ArticleViewState extends State<ArticleView> {
     );
   }
 
-  List<Article>? getPreArticle() {
+  Article? getPreArticle() {
     if (widget.getPre == null || widget.getPre!(article) == null) {
       return null;
     }
-    return [widget.getPre!(article)];
+    return widget.getPre!(article);
   }
 
-  List<Article>? getNextArticle() {
+  Article? getNextArticle() {
     if (widget.getNext == null || widget.getNext!(article) == null) {
       return null;
     }
-    return [widget.getNext!(article)];
+    return widget.getNext!(article);
   }
 
   @override
   Widget build(BuildContext context) {
+    List<String> favList = SettingsProvider().getFavorites();
+    isFavorite = favList.contains(article.id);
     ArticlePresenter ap = ArticlePresenter();
+    ap.setAsRead(article);
+    UmengUtil.onEvent("open_article", {"id": article.id});
     return Scaffold(
         appBar: AppBar(
           title: Text(article.title),
@@ -84,7 +88,7 @@ class _ArticleViewState extends State<ArticleView> {
             IconButton(
                 icon: Icon(
                   isFavorite ? Icons.favorite : Icons.favorite_border,
-                  semanticLabel: "is favorited",
+                  semanticLabel: S.of(context).fav_button,
                   color: isFavorite ? Colors.red : Colors.white,
                 ),
                 onPressed: () {
@@ -92,17 +96,17 @@ class _ArticleViewState extends State<ArticleView> {
                     isFavorite = !isFavorite;
                     SettingsProvider().setFavorites(article.id);
                     if (isFavorite) {
-                      Toast.showToast('已收藏', context);
+                      Toast.showToast(S.of(context).fav_add_toast, context);
                     } else {
-                      Toast.showToast('已取消收藏', context);
+                      Toast.showToast(S.of(context).fav_del_toast, context);
                     }
                   });
                 }),
             article.zhihuLink != ''
                 ? IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.explore,
-                      semanticLabel: "open in browser",
+                      semanticLabel: S.of(context).open_in_browser_button,
                     ),
                     onPressed: () async {
                       await URLUtil.openUrl(article.zhihuLink, context);
@@ -113,13 +117,15 @@ class _ArticleViewState extends State<ArticleView> {
         body: SingleChildScrollView(
           controller: sc,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                   padding: const EdgeInsets.all(16.0),
                   // child: MMarkdown('# ${article.title}\n${article.content}')),
                   child: MMarkdown(article.content)),
-              getArticleWidget('上一篇', getPreArticle()),
-              getArticleWidget('下一篇', getNextArticle()),
+              getArticleWidget(S.of(context).pre_article, getPreArticle()),
+              getArticleWidget(S.of(context).next_article, getNextArticle()),
               FutureBuilder<List<Article>>(
                   future: ap.getArticleList(article),
                   builder: (BuildContext context,
@@ -129,7 +135,8 @@ class _ArticleViewState extends State<ArticleView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Padding(padding: EdgeInsets.all(5.0)),
-                              const ListTile(title: Text('相关阅读')),
+                              ListTile(
+                                  title: Text(S.of(context).related_article)),
                               const Divider(height: 1),
                               ArticleList(snapshot.data!),
                               const Padding(padding: EdgeInsets.all(5.0)),

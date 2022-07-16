@@ -80,21 +80,121 @@ class S {
     );
   }
 
-  /// `文集`
+  /// `Articles`
   String get home_title {
     return Intl.message(
-      '文集',
+      'Articles',
       name: 'home_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `收藏`
+  /// `Read articles hid.`
+  String get read_hide_toast {
+    return Intl.message(
+      'Read articles hid.',
+      name: 'read_hide_toast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Read articles showed.`
+  String get read_show_toast {
+    return Intl.message(
+      'Read articles showed.',
+      name: 'read_show_toast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open in browser.`
+  String get open_in_browser_button {
+    return Intl.message(
+      'Open in browser.',
+      name: 'open_in_browser_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Previous`
+  String get pre_article {
+    return Intl.message(
+      'Previous',
+      name: 'pre_article',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next_article {
+    return Intl.message(
+      'Next',
+      name: 'next_article',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Related`
+  String get related_article {
+    return Intl.message(
+      'Related',
+      name: 'related_article',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorites`
   String get fav_title {
     return Intl.message(
-      '收藏',
+      'Favorites',
       name: 'fav_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `is favorite`
+  String get fav_button {
+    return Intl.message(
+      'is favorite',
+      name: 'fav_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Added to favorites.`
+  String get fav_add_toast {
+    return Intl.message(
+      'Added to favorites.',
+      name: 'fav_add_toast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Removed from favorites.`
+  String get fav_del_toast {
+    return Intl.message(
+      'Removed from favorites.',
+      name: 'fav_del_toast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Histories`
+  String get his_title {
+    return Intl.message(
+      'Histories',
+      name: 'his_title',
       desc: '',
       args: [],
     );
@@ -170,6 +270,26 @@ class S {
     );
   }
 
+  /// `Share Usage Data`
+  String get share_data_title {
+    return Intl.message(
+      'Share Usage Data',
+      name: 'share_data_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Help us improve our products.`
+  String get share_data_subtitle {
+    return Intl.message(
+      'Help us improve our products.',
+      name: 'share_data_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Share`
   String get share_title {
     return Intl.message(
@@ -210,10 +330,10 @@ class S {
     );
   }
 
-  /// `Any bugs? Talk to us on Tencent QQ!\nTap to open QQ，long press to copy number.`
+  /// `Tap to open QQ，long press to copy number.`
   String get report_subtitle {
     return Intl.message(
-      'Any bugs? Talk to us on Tencent QQ!\nTap to open QQ，long press to copy number.',
+      'Tap to open QQ，long press to copy number.',
       name: 'report_subtitle',
       desc: '',
       args: [],

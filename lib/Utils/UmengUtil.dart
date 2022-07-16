@@ -1,3 +1,4 @@
+import '../Pages/Settings/SettingsProvider.dart';
 import 'package:umeng_common_sdk/umeng_common_sdk.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +16,12 @@ class UmengUtil {
 
   static onEvent(String event, Map<String, dynamic> properties) {
     if (!_isMobile) return;
+    UmengCommonSdk.onEvent(event, properties);
+  }
+
+  static onArticleEvent(String event, Map<String, dynamic> properties) {
+    if (!_isMobile) return;
+    if (!SettingsProvider().getShareData()) return;
     UmengCommonSdk.onEvent(event, properties);
   }
 }

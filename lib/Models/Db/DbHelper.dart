@@ -68,7 +68,7 @@ class Article extends HiveObject {
         title = json['title'],
         question = json['question'],
         content = json['content'],
-        zhihuLink = json['zhihuLink'] ?? '',
+        zhihuLink = json['zhihulink'] ?? '',
         author = json['author'],
         tags = List<String>.from(json['tags']),
         links = List<String>.from(json['links']),

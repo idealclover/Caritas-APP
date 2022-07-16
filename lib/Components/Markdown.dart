@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
+import '../Utils/URLUtil.dart';
+
 class MMarkdown extends StatelessWidget {
   final String data;
 
@@ -46,7 +48,8 @@ class MMarkdown extends StatelessWidget {
             decoration: TextDecoration.underline),
       ),
       onTapLink: (text, href, title) {
-        // launch(href!);
+        if(href == null || href == '') return;
+        URLUtil.openUrl(href, context);
       },
     );
   }

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../../generated/l10n.dart';
 import 'package:get/get.dart';
 
+import 'SettingsProvider.dart';
 import './Widgets/ThemeChanger.dart';
 import '../About/AboutView.dart';
-import 'SettingsProvider.dart';
 import '../../Utils/SettingsUtil.dart';
 import '../../Utils/VersionUtil.dart';
 
@@ -17,11 +17,13 @@ class SettingsView extends StatefulWidget {
 
 class _SettingsViewState extends State<SettingsView> {
   late int themeMode;
+  late bool shareData;
 
   @override
   void initState() {
     super.initState();
     themeMode = _getThemeIndex();
+    shareData = SettingsProvider().getShareData();
   }
 
   @override
@@ -66,6 +68,21 @@ class _SettingsViewState extends State<SettingsView> {
                     });
                   })),
           Get.isDarkMode ? Container() : const ThemeChanger(),
+          ListTile(
+            title: Text(S.of(context).share_data_title),
+            subtitle: Text(S.of(context).share_data_subtitle),
+            trailing: Switch(
+              value: shareData,
+              activeColor: Theme.of(context).primaryColor,
+              onChanged: (bool value) {
+                SettingsProvider().setShareData(value);
+                setState(() {
+                  shareData = value;
+                });
+              },
+            ),
+            // onTap: () async => await SettingsUtil.shareUtil(context),
+          ),
           ListTile(
             title: Text(S.of(context).share_title),
             subtitle: Text(S.of(context).share_subtitle),

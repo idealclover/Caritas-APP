@@ -34,18 +34,25 @@ class UpdateUtil {
     } else {
       return;
     }
-    print(url);
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    Response response = await dio.get(url);
-    if (response.statusCode == HttpStatus.ok) {
-      if (response.data['coolDownTime'] != null) {
-        SettingsProvider().setCooldownTime(coolDownTime);
-      }
-      if (response.data['version'] > int.parse(packageInfo.buildNumber)) {
-        await showUpdateDialog(response.data, context);
-      } else if (isForce) {
-        Toast.showToast(S.of(context).already_newest_version_toast, context);
-      }
+    // print(url);
+    PackageInfo packageInfo;
+    Map data;
+    try {
+      packageInfo = await PackageInfo.fromPlatform();
+      Response response = await dio.get(url);
+      if (response.statusCode != HttpStatus.ok) throw (Error());
+      data = response.data;
+    } catch (e) {
+      // print(e);
+      return;
+    }
+    if (data['coolDownTime'] != null) {
+      SettingsProvider().setCooldownTime(coolDownTime);
+    }
+    if (data['version'] > int.parse(packageInfo.buildNumber)) {
+      await showUpdateDialog(data, context);
+    } else if (isForce) {
+      Toast.showToast(S.of(context).already_newest_version_toast, context);
     }
   }
 

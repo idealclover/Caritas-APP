@@ -6,8 +6,20 @@
   "cancel": "取消",
 
   "home_title": "文集",
+  "read_hide_toast": "已读文章藏起来啦～",
+  "read_show_toast": "已读文章又显示啦～",
+
+  "open_in_browser_button": "浏览器内打开",
+  "pre_article": "上一篇",
+  "next_article": "下一篇",
+  "related_article": "相关阅读",
 
   "fav_title": "收藏",
+  "fav_button": "是否收藏",
+  "fav_add_toast": "已收藏",
+  "fav_del_toast": "已取消收藏",
+
+  "his_title": "历史",
 
   "settings_title": "设置",
   "change_theme_mode_title": "浅色/深色模式切换",
@@ -16,11 +28,13 @@
   "theme_mode_always_light": "浅色模式",
   "theme_mode_always_dark": "深色模式",
   "theme_mode_customize": "自定义",
+  "share_data_title": "共享阅读数据",
+  "share_data_subtitle": "帮助我们提升产品体验",
   "share_title": "分享",
   "share_subtitle": "把应用分享给更多小伙伴吧！",
   "share_message": "这是分享用的宣传文字",
   "report_title": "反馈",
-  "report_subtitle": "有什么bug或建议请告诉我们吧！\n轻触打开QQ，长按复制号码",
+  "report_subtitle": "轻触打开QQ反馈，长按复制号码",
   "report_copy_message": "已复制QQ号到剪贴板",
   "donate_title": "投喂",
   "donate_subtitle": "给傻翠买支棒棒糖吧！",

@@ -12,10 +12,12 @@ class FavoriteView extends StatelessWidget {
   List<Article> getFavArticleList() {
     List<String> favList = SettingsProvider().getFavorites();
     Box aBox = Hive.box("articles");
-    return aBox.values
+    List<Article> result = aBox.values
         .where((article) => (favList.contains(article.id)))
         .toList()
         .cast();
+    result.sort((a, b) => favList.indexOf(a.id) - favList.indexOf(b.id));
+    return result;
   }
 
   @override
@@ -26,9 +28,12 @@ class FavoriteView extends StatelessWidget {
         appBar: AppBar(
           title: Text(S.of(context).fav_title),
         ),
-        body: ArticleList(
-          articleList,
-          showFavIcon: false,
+        body: SingleChildScrollView(
+          child: ArticleList(
+            articleList,
+            showFavIcon: false,
+            greyRead: false,
+          ),
         ));
   }
 }

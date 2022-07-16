@@ -28,7 +28,7 @@ class InitUtil {
     bool exists = await Hive.boxExists('articles');
     var cBox = await Hive.openBox('categories');
     var aBox = await Hive.openBox('articles');
-    print(exists);
+    // print(exists);
     if (exists) return;
 
     final String response = await rootBundle.loadString('res/data.json');
