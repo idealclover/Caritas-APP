@@ -138,6 +138,13 @@ class SettingsProvider {
     _saveSettingsToBox(settings);
   }
 
+  replaceFavorites(List<String> favList) async {
+    Map settings = _loadSettingsFromBox();
+    settings[_key_favorites] = favList;
+    // print(settings);
+    await _saveSettingsToBox(settings);
+  }
+
   List<String> getHistories() {
     return List<String>.from(_loadSettingsFromBox()[_key_histories] ??
         _defaultSettings[_key_histories] as List);
@@ -156,6 +163,13 @@ class SettingsProvider {
     settings[_key_histories] = hisList;
     // print(settings);
     _saveSettingsToBox(settings);
+  }
+
+  replaceHistories(List<String> hisList) async {
+    Map settings = _loadSettingsFromBox();
+    settings[_key_histories] = hisList;
+    // print(settings);
+    await _saveSettingsToBox(settings);
   }
 
   bool getShareData() {

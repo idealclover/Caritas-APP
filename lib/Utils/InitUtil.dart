@@ -1,7 +1,11 @@
+import 'dart:io';
 import 'dart:convert';
+import 'dart:collection';
+import 'package:caritas/Pages/Settings/SettingsProvider.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:cloud_kit/cloud_kit.dart';
 
 import '../Models/Db/DbHelper.dart';
 import '../Utils/PrivacyUtil.dart';
@@ -15,6 +19,9 @@ class InitUtil {
     Hive.registerAdapter(CategoryAdapter());
     await Hive.initFlutter();
     await initBox();
+    if (Platform.isIOS) {
+      await iCloudSync();
+    }
     UmengUtil.init();
   }
 
@@ -24,7 +31,6 @@ class InitUtil {
   }
 
   static initBox() async {
-
     bool exists = await Hive.boxExists('articles');
     var cBox = await Hive.openBox('categories');
     var aBox = await Hive.openBox('articles');
@@ -43,5 +49,68 @@ class InitUtil {
       Article article = Article.fromJson(data.cast());
       aBox.add(article);
     }
+  }
+
+  static iCloudSync() async {
+    /// 接住一切异常，不能让 icloud 同步影响 APP 正常启动
+    try {
+      const _key_histories = "histories";
+
+      // final iCloudStorage =
+      //     await ICloudStorage.getInstance('iCloud.top.idealclover.caritas');
+      CloudKit cloudKit = CloudKit('iCloud.top.idealclover.caritas');
+
+      String? cloudHistoryStr = await cloudKit.get(_key_histories);
+      print(cloudHistoryStr);
+      List<String> localHistory = SettingsProvider().getHistories();
+      List<String> resultHistory = localHistory;
+
+      /// 先获取到整合后的列表
+      if (cloudHistoryStr != null) {
+        List<String> cloudHistory =
+            List<String>.from(json.decode(cloudHistoryStr));
+        List<String> combine = cloudHistory + localHistory;
+        resultHistory = LinkedHashSet<String>.from(combine).toList();
+      }
+      String resultHistoryStr = json.encode(resultHistory);
+      print(resultHistoryStr);
+
+      /// 再将整合后的结果保存在本地与iCloud
+      await SettingsProvider().replaceHistories(resultHistory);
+      bool isHisSuccess = await cloudKit.save(_key_histories, resultHistoryStr);
+      if (isHisSuccess) {
+        print('History sync to icloud');
+      } else {
+        print('History fail sync to icloud');
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    /// favorites 这种情况 还不能光靠合并来解决 得想想其他办法
+    // const _key_favorites = "favorites";
+    // String? cloudFavoriteStr = await cloudKit.get(_key_favorites);
+    // print(cloudFavoriteStr);
+    // List<String> localFavorite = SettingsProvider().getFavorites();
+    // List<String> resultFavorite = localFavorite;
+    //
+    // /// 先获取到整合后的列表
+    // if (cloudFavoriteStr != null) {
+    //   List<String> cloudFavorite =
+    //       List<String>.from(json.decode(cloudFavoriteStr));
+    //   List<String> combine = cloudFavorite + localFavorite;
+    //   resultFavorite = LinkedHashSet<String>.from(combine).toList();
+    // }
+    // String resultFavoriteStr = json.encode(resultFavorite);
+    // print(resultFavoriteStr);
+    //
+    // /// 再将整合后的结果保存在本地与iCloud
+    // await SettingsProvider().replaceFavorites(resultFavorite);
+    // bool isFavSuccess = await cloudKit.save(_key_favorites, resultFavoriteStr);
+    // if (isFavSuccess) {
+    //   print('Favorite sync to icloud');
+    // } else {
+    //   print('Favorite fail sync to icloud');
+    // }
   }
 }

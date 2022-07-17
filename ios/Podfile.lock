@@ -1,4 +1,6 @@
 PODS:
+  - cloud_kit (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_native_splash (0.0.1):
     - Flutter
@@ -23,6 +25,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - cloud_kit (from `.symlinks/plugins/cloud_kit/ios`)
   - Flutter (from `Flutter`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
@@ -39,6 +42,8 @@ SPEC REPOS:
     - UMDevice
 
 EXTERNAL SOURCES:
+  cloud_kit:
+    :path: ".symlinks/plugins/cloud_kit/ios"
   Flutter:
     :path: Flutter
   flutter_native_splash:
@@ -57,6 +62,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  cloud_kit: 09580108aedda41b646dd12c1610f8b45d08e3ee
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   fluttertoast: 16fbe6039d06a763f3533670197d01fc73459037

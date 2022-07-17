@@ -9,7 +9,6 @@ import './Resources/Constant.dart';
 import './Utils/InitUtil.dart';
 import './Utils/ThemeUtil.dart';
 
-
 void main() async {
   // var database = MyDatabase();
   await InitUtil.initBeforeStart();
@@ -17,7 +16,7 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget{
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.

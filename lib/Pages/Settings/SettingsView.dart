@@ -73,7 +73,9 @@ class _SettingsViewState extends State<SettingsView> {
             subtitle: Text(S.of(context).share_data_subtitle),
             trailing: Switch(
               value: shareData,
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: Get.isDarkMode
+                  ? Colors.white
+                  : Theme.of(context).primaryColor,
               onChanged: (bool value) {
                 SettingsProvider().setShareData(value);
                 setState(() {

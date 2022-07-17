@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 
@@ -19,12 +20,20 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   late SearchBar searchBar;
   late HomeCategoryProvider hp;
   late List<HomeCategory> data;
   late List<Article> searchArticleList;
   late bool hideRead;
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.inactive) {
+      InitUtil.iCloudSync();
+    }
+  }
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
@@ -41,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 setState(() {
                   hideRead = !hideRead;
                 });
-                if(hideRead) {
+                if (hideRead) {
                   Toast.showToast(S.of(context).read_hide_toast, context);
                 } else {
                   Toast.showToast(S.of(context).read_show_toast, context);
@@ -77,10 +86,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
     super.initState();
 
+    // iOS 需要监听 APP 是否暂停，来进行 icloud 同步
+    if (Platform.isIOS) {
+      WidgetsBinding.instance.addObserver(this);
+    }
+
     /// This is needed for index StatefulWidget
     Future.delayed(Duration.zero, () {
       InitUtil.initAfterStart(context);
     });
+  }
+
+  @override
+  void dispose() {
+    // iOS 需要监听 APP 是否暂停，来进行 icloud 同步
+    if (Platform.isIOS) {
+      WidgetsBinding.instance.removeObserver(this);
+    }
+    super.dispose();
   }
 
   @override
