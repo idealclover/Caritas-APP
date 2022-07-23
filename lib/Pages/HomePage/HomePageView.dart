@@ -20,20 +20,12 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
+class _MyHomePageState extends State<MyHomePage> {
   late SearchBar searchBar;
   late HomeCategoryProvider hp;
   late List<HomeCategory> data;
   late List<Article> searchArticleList;
   late bool hideRead;
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-    if (state == AppLifecycleState.inactive) {
-      InitUtil.iCloudSync(true);
-    }
-  }
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
@@ -86,24 +78,10 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
 
     super.initState();
 
-    // iOS 需要监听 APP 是否暂停，来进行 icloud 同步
-    if (Platform.isIOS) {
-      WidgetsBinding.instance.addObserver(this);
-    }
-
     /// This is needed for index StatefulWidget
     Future.delayed(Duration.zero, () {
       InitUtil.initAfterStart(context);
     });
-  }
-
-  @override
-  void dispose() {
-    // iOS 需要监听 APP 是否暂停，来进行 icloud 同步
-    if (Platform.isIOS) {
-      WidgetsBinding.instance.removeObserver(this);
-    }
-    super.dispose();
   }
 
   @override

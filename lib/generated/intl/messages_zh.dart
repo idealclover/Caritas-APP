@@ -79,6 +79,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "share_message": MessageLookupByLibrary.simpleMessage("这是分享用的宣传文字"),
         "share_subtitle": MessageLookupByLibrary.simpleMessage("把应用分享给更多小伙伴吧！"),
         "share_title": MessageLookupByLibrary.simpleMessage("分享"),
+        "sync_icloud_subtitle":
+            MessageLookupByLibrary.simpleMessage("同步阅读记录到 iCloud （测试中，不稳定）"),
+        "sync_icloud_title":
+            MessageLookupByLibrary.simpleMessage("同步到 iCloud (beta)"),
         "theme_mode_always_dark": MessageLookupByLibrary.simpleMessage("深色模式"),
         "theme_mode_always_light": MessageLookupByLibrary.simpleMessage("浅色模式"),
         "theme_mode_customize": MessageLookupByLibrary.simpleMessage("自定义"),

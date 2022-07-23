@@ -21,9 +21,6 @@ class InitUtil {
     Hive.registerAdapter(CategoryAdapter());
     await Hive.initFlutter();
     await initBox();
-    if (Platform.isIOS) {
-      iCloudSync(false);
-    }
     UmengUtil.init();
   }
 

@@ -24,6 +24,8 @@
   "settings_title": "Settings",
   "update_database_title": "Get database",
   "update_database_subtitle": "Get newest database",
+  "sync_icloud_title": "Sync to iCloud (beta)",
+  "sync_icloud_subtitle": "Sync history to iCloud (testing)",
   "change_theme_mode_title": "Mode Change",
   "change_theme_mode_subtitle": "Follow system theme?",
   "theme_mode_follow_system": "Follow System",

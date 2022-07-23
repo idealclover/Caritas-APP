@@ -24,6 +24,8 @@
   "settings_title": "设置",
   "update_database_title": "更新数据库",
   "update_database_subtitle": "获取最新数据",
+  "sync_icloud_title": "同步到 iCloud (beta)",
+  "sync_icloud_subtitle": "同步阅读记录到 iCloud （测试中，不稳定）",
   "change_theme_mode_title": "浅色/深色模式切换",
   "change_theme_mode_subtitle": "是否跟随系统切换模式",
   "theme_mode_follow_system": "跟随系统",

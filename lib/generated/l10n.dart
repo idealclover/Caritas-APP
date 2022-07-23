@@ -230,6 +230,26 @@ class S {
     );
   }
 
+  /// `Sync to iCloud (beta)`
+  String get sync_icloud_title {
+    return Intl.message(
+      'Sync to iCloud (beta)',
+      name: 'sync_icloud_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sync history to iCloud (testing)`
+  String get sync_icloud_subtitle {
+    return Intl.message(
+      'Sync history to iCloud (testing)',
+      name: 'sync_icloud_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Mode Change`
   String get change_theme_mode_title {
     return Intl.message(

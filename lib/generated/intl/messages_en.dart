@@ -94,6 +94,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "share_subtitle": MessageLookupByLibrary.simpleMessage(
             "Share this app to more friends!"),
         "share_title": MessageLookupByLibrary.simpleMessage("Share"),
+        "sync_icloud_subtitle": MessageLookupByLibrary.simpleMessage(
+            "Sync history to iCloud (testing)"),
+        "sync_icloud_title":
+            MessageLookupByLibrary.simpleMessage("Sync to iCloud (beta)"),
         "theme_mode_always_dark":
             MessageLookupByLibrary.simpleMessage("Always Dark"),
         "theme_mode_always_light":

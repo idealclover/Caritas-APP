@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../generated/l10n.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'package:get/get.dart';
 import 'SettingsProvider.dart';
 import './Widgets/ThemeChanger.dart';
 import '../About/AboutView.dart';
+import '../../Utils/InitUtil.dart';
 import '../../Utils/SettingsUtil.dart';
 import '../../Utils/UpdateUtil.dart';
 import '../../Utils/VersionUtil.dart';
@@ -41,6 +43,12 @@ class _SettingsViewState extends State<SettingsView> {
             subtitle: Text(S.of(context).update_database_subtitle),
             onTap: () async => await UpdateUtil().checkDbUpdate(context, true),
           ),
+              Platform.isIOS ?
+          ListTile(
+            title: Text(S.of(context).sync_icloud_title),
+            subtitle: Text(S.of(context).sync_icloud_subtitle),
+            onTap: () async => await InitUtil.iCloudSync(true),
+          ): Container(),
           ListTile(
               title: Text(S.of(context).change_theme_mode_title),
               subtitle: Text(S.of(context).change_theme_mode_subtitle),

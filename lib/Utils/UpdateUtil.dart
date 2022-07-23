@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:caritas/Pages/HomePage/HomePageView.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
@@ -10,6 +9,7 @@ import '../Models/Db/DbHelper.dart';
 import '../generated/l10n.dart';
 
 import '../Pages/Settings/SettingsProvider.dart';
+import '../Pages/HomePage/HomePageView.dart';
 import '../Components/Dialog.dart';
 import '../Components/DownloadDialog.dart';
 import '../Components/Toast.dart';
