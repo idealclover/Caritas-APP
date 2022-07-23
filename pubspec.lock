@@ -130,9 +130,9 @@ packages:
   cloud_kit:
     dependency: "direct main"
     description:
-      name: cloud_kit
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "lib/Libs/cloud_kit"
+      relative: true
+    source: path
     version: "1.1.0"
   code_builder:
     dependency: transitive

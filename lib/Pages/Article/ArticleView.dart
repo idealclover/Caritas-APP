@@ -80,7 +80,7 @@ class _ArticleViewState extends State<ArticleView> {
     isFavorite = favList.contains(article.id);
     ArticlePresenter ap = ArticlePresenter();
     ap.setAsRead(article);
-    UmengUtil.onEvent("open_article", {"id": article.id});
+    UmengUtil.onEvent("open_article", {"aid": article.id});
     return Scaffold(
         appBar: AppBar(
           title: Text(article.title),

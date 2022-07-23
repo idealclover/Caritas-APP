@@ -1,6 +1,7 @@
 #import "UmengCommonSdkPlugin.h"
 #import <UMCommon/UMConfigure.h>
 #import <UMCommon/MobClick.h>
+//#import <UMCommonLog/UMCommonLogHeaders.h>
 
 @interface UMengflutterpluginForUMCommon : NSObject
 @end
@@ -12,6 +13,8 @@
         NSArray* arguments = (NSArray *)call.arguments;
         NSString* appkey = arguments[1];
         NSString* channel = arguments[2];
+        //[UMCommonLogManager setUpUMCommonLogManager];
+        //[UMConfigure setLogEnabled:YES];
         [UMConfigure initWithAppkey:appkey channel:channel];
         //result(@"success");
     }

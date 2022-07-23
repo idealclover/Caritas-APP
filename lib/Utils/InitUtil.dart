@@ -61,11 +61,11 @@ class InitUtil {
       CloudKit cloudKit = CloudKit('iCloud.top.idealclover.caritas');
 
       String? cloudHistoryStr = await cloudKit.get(_key_histories);
-      // print('cloud history');
-      // print(cloudHistoryStr);
+      print('cloud history');
+      print(cloudHistoryStr);
       List<String> localHistory = SettingsProvider().getHistories();
-      // print('local history');
-      // print(localHistory);
+      print('local history');
+      print(localHistory);
       List<String> resultHistory = localHistory;
 
       /// 先获取到整合后的列表
@@ -81,8 +81,8 @@ class InitUtil {
         resultHistory = LinkedHashSet<String>.from(combine).toList();
       }
       String resultHistoryStr = json.encode(resultHistory);
-      // print('combined history');
-      // print(resultHistoryStr);
+      print('combined history');
+      print(resultHistoryStr);
 
       /// 再将整合后的结果保存在本地与iCloud
       await SettingsProvider().replaceHistories(resultHistory);
