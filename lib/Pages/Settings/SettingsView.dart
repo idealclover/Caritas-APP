@@ -6,6 +6,7 @@ import 'SettingsProvider.dart';
 import './Widgets/ThemeChanger.dart';
 import '../About/AboutView.dart';
 import '../../Utils/SettingsUtil.dart';
+import '../../Utils/UpdateUtil.dart';
 import '../../Utils/VersionUtil.dart';
 
 class SettingsView extends StatefulWidget {
@@ -35,6 +36,11 @@ class _SettingsViewState extends State<SettingsView> {
       body: Center(
         child: Column(
             children: ListTile.divideTiles(context: context, tiles: [
+          ListTile(
+            title: Text(S.of(context).update_database_title),
+            subtitle: Text(S.of(context).update_database_subtitle),
+            onTap: () async => await UpdateUtil().checkDbUpdate(context, true),
+          ),
           ListTile(
               title: Text(S.of(context).change_theme_mode_title),
               subtitle: Text(S.of(context).change_theme_mode_subtitle),

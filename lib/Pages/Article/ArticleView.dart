@@ -122,8 +122,9 @@ class _ArticleViewState extends State<ArticleView> {
             children: [
               Padding(
                   padding: const EdgeInsets.all(16.0),
-                  // child: MMarkdown('# ${article.title}\n${article.content}')),
-                  child: MMarkdown(article.content)),
+                  child: MMarkdown(
+                      '# ${article.title}\n\n> 最后更新时间: ${article.lastUpdate}\n\n${article.content}')),
+              // child: MMarkdown(article.content)),
               getArticleWidget(S.of(context).pre_article, getPreArticle()),
               getArticleWidget(S.of(context).next_article, getNextArticle()),
               FutureBuilder<List<Article>>(

@@ -68,10 +68,12 @@ class Article extends HiveObject {
         title = json['title'],
         question = json['question'],
         content = json['content'],
-        zhihuLink = json['zhihulink'] ?? '',
+        // zhihuLink = json['zhihulink'] ?? '',
+        zhihuLink = json['zhihuLink'] ?? '',
         author = json['author'],
         tags = List<String>.from(json['tags']),
         links = List<String>.from(json['links']),
         categories = List<String>.from(json['categories'] ?? const []),
-        lastUpdate = json['lastupdate'] ?? '';
+        // lastUpdate = json['lastupdate'] ?? '';
+        lastUpdate = json['lastUpdate'] ?? '';
 }

@@ -13,7 +13,10 @@ class SettingsProvider {
   static const _key_themeMode = "themeMode";
   static const _key_themeCustomColor = "themeCustomColor";
   static const _key_lastCheckUpdateTime = "lastCheckUpdateTime";
+  static const _key_dbLastCheckUpdateTime = "dbLastCheckUpdateTime";
   static const _key_cooldownTime = "cooldownTime";
+  static const _key_dbCooldownTime = "dbCooldownTime";
+  static const _key_dbVersion = "dbVersion";
   static const _key_favorites = "favorites";
   static const _key_histories = "histories";
   static const _key_shareData = "shareData";
@@ -25,7 +28,10 @@ class SettingsProvider {
     _key_themeMode: 0,
     _key_themeCustomColor: '',
     _key_lastCheckUpdateTime: 0,
+    _key_dbLastCheckUpdateTime: 0,
     _key_cooldownTime: 600,
+    _key_dbCooldownTime: 600,
+    _key_dbVersion: 0,
     _key_favorites: <String>[],
     _key_histories: <String>[],
     _key_shareData: true
@@ -107,6 +113,18 @@ class SettingsProvider {
     _saveSettingsToBox(settings);
   }
 
+  int getDbLastCheckUpdateTime() {
+    return _loadSettingsFromBox()[_key_dbLastCheckUpdateTime] ??
+        _defaultSettings[_key_dbLastCheckUpdateTime];
+  }
+
+  void setDbLastCheckUpdateTime(int value) {
+    Map settings = _loadSettingsFromBox();
+    settings[_key_dbLastCheckUpdateTime] = value;
+    // print(settings);
+    _saveSettingsToBox(settings);
+  }
+
   int getCooldownTime() {
     return _loadSettingsFromBox()[_key_cooldownTime] ??
         _defaultSettings[_key_cooldownTime];
@@ -115,6 +133,30 @@ class SettingsProvider {
   void setCooldownTime(int value) {
     Map settings = _loadSettingsFromBox();
     settings[_key_cooldownTime] = value;
+    // print(settings);
+    _saveSettingsToBox(settings);
+  }
+
+  int getDbCooldownTime() {
+    return _loadSettingsFromBox()[_key_dbCooldownTime] ??
+        _defaultSettings[_key_dbCooldownTime];
+  }
+
+  void setDbCooldownTime(int value) {
+    Map settings = _loadSettingsFromBox();
+    settings[_key_dbCooldownTime] = value;
+    // print(settings);
+    _saveSettingsToBox(settings);
+  }
+
+  int getDbVersion() {
+    return _loadSettingsFromBox()[_key_dbVersion] ??
+        _defaultSettings[_key_dbVersion];
+  }
+
+  void setDbVersion(int value) {
+    Map settings = _loadSettingsFromBox();
+    settings[_key_dbVersion] = value;
     // print(settings);
     _saveSettingsToBox(settings);
   }
@@ -155,10 +197,9 @@ class SettingsProvider {
     if (hisList.contains(hisId)) {
       hisList.remove(hisId);
     }
-    // // print(hisList);
+    // print(hisList);
     hisList.insert(0, hisId);
-    // hisList.add(hisId);
-    // // print(hisList);
+    // print(hisList);
     Map settings = _loadSettingsFromBox();
     settings[_key_histories] = hisList;
     // print(settings);

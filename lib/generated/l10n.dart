@@ -210,6 +210,26 @@ class S {
     );
   }
 
+  /// `Get database`
+  String get update_database_title {
+    return Intl.message(
+      'Get database',
+      name: 'update_database_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get newest database`
+  String get update_database_subtitle {
+    return Intl.message(
+      'Get newest database',
+      name: 'update_database_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Mode Change`
   String get change_theme_mode_title {
     return Intl.message(
@@ -395,6 +415,36 @@ class S {
     return Intl.message(
       'Check update',
       name: 'check_update_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Database updated!~`
+  String get db_update_success_toast {
+    return Intl.message(
+      'Database updated!~',
+      name: 'db_update_success_toast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Database update fail!`
+  String get db_update_fail_toast {
+    return Intl.message(
+      'Database update fail!',
+      name: 'db_update_fail_toast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Downloading...`
+  String get db_downloading {
+    return Intl.message(
+      'Downloading...',
+      name: 'db_downloading',
       desc: '',
       args: [],
     );

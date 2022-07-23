@@ -22,6 +22,8 @@
   "his_title": "历史",
 
   "settings_title": "设置",
+  "update_database_title": "更新数据库",
+  "update_database_subtitle": "获取最新数据",
   "change_theme_mode_title": "浅色/深色模式切换",
   "change_theme_mode_subtitle": "是否跟随系统切换模式",
   "theme_mode_follow_system": "跟随系统",
@@ -43,6 +45,9 @@
   "version": "v{version}",
   "now_version": "当前版本 v{version}",
   "check_update_button": "检查更新",
+  "db_update_success_toast": "数据更新完成！～",
+  "db_update_fail_toast": "数据更新失败！",
+  "db_downloading": "下载中...",
   "already_newest_version_toast": "已经是最新版本了呦～",
   "check_privacy_button": "隐私政策",
   "github_open_source": "GitHub 开源",

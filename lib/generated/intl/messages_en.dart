@@ -39,6 +39,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "check_update_button":
             MessageLookupByLibrary.simpleMessage("Check update"),
+        "db_downloading":
+            MessageLookupByLibrary.simpleMessage("Downloading..."),
+        "db_update_fail_toast":
+            MessageLookupByLibrary.simpleMessage("Database update fail!"),
+        "db_update_success_toast":
+            MessageLookupByLibrary.simpleMessage("Database updated!~"),
         "developer":
             MessageLookupByLibrary.simpleMessage("Developer: idealclover"),
         "donate_subtitle":
@@ -96,6 +102,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Customize"),
         "theme_mode_follow_system":
             MessageLookupByLibrary.simpleMessage("Follow System"),
+        "update_database_subtitle":
+            MessageLookupByLibrary.simpleMessage("Get newest database"),
+        "update_database_title":
+            MessageLookupByLibrary.simpleMessage("Get database"),
         "version": m1
       };
 }

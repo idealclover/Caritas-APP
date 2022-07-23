@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     if (state == AppLifecycleState.inactive) {
-      InitUtil.iCloudSync();
+      InitUtil.iCloudSync(true);
     }
   }
 

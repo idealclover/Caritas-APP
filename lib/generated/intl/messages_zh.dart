@@ -37,6 +37,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("浅色/深色模式切换"),
         "check_privacy_button": MessageLookupByLibrary.simpleMessage("隐私政策"),
         "check_update_button": MessageLookupByLibrary.simpleMessage("检查更新"),
+        "db_downloading": MessageLookupByLibrary.simpleMessage("下载中..."),
+        "db_update_fail_toast": MessageLookupByLibrary.simpleMessage("数据更新失败！"),
+        "db_update_success_toast":
+            MessageLookupByLibrary.simpleMessage("数据更新完成！～"),
         "developer": MessageLookupByLibrary.simpleMessage("开发者 idealclover"),
         "donate_subtitle": MessageLookupByLibrary.simpleMessage("给傻翠买支棒棒糖吧！"),
         "donate_title": MessageLookupByLibrary.simpleMessage("投喂"),
@@ -80,6 +84,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme_mode_customize": MessageLookupByLibrary.simpleMessage("自定义"),
         "theme_mode_follow_system":
             MessageLookupByLibrary.simpleMessage("跟随系统"),
+        "update_database_subtitle":
+            MessageLookupByLibrary.simpleMessage("获取最新数据"),
+        "update_database_title": MessageLookupByLibrary.simpleMessage("更新数据库"),
         "version": m1
       };
 }

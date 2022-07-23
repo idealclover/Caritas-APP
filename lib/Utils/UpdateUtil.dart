@@ -1,13 +1,17 @@
 import 'dart:io';
+import 'package:caritas/Pages/HomePage/HomePageView.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart' hide Response;
+import 'package:hive/hive.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import '../Models/Db/DbHelper.dart';
 import '../generated/l10n.dart';
 
 import '../Pages/Settings/SettingsProvider.dart';
 import '../Components/Dialog.dart';
+import '../Components/DownloadDialog.dart';
 import '../Components/Toast.dart';
 import '../Components/TransBgTextButton.dart';
 import '../Resources/Config.dart';
@@ -56,7 +60,7 @@ class UpdateUtil {
     }
   }
 
-  showUpdateDialog(Map info, BuildContext context) async {
+  showUpdateDialog(Map info, BuildContext context, {callback}) async {
     // UmengCommonSdk.onEvent("update_dialog", {"action": "show"});
     List<Widget> widgets;
     if (info['isForce']) {
@@ -68,7 +72,11 @@ class UpdateUtil {
             onPressed: () async {
               // UmengCommonSdk.onEvent(
               //     "update_dialog", {"action": "forceAccept"});
-              if (info['url'] != '') await launchUrlString(info['url']);
+              if (callback != null) {
+                callback(info['url']);
+              } else {
+                if (info['url'] != '') await launchUrlString(info['url']);
+              }
             },
             child: Text(info['confirm_text'])),
       ];
@@ -88,7 +96,11 @@ class UpdateUtil {
                 : Colors.white,
             onPressed: () async {
               // UmengCommonSdk.onEvent("update_dialog", {"action": "accept"});
-              if (info['url'] != '') await launchUrlString(info['url']);
+              if (callback != null) {
+                callback(info['url']);
+              } else {
+                if (info['url'] != '') await launchUrlString(info['url']);
+              }
             },
             child: Text(info['confirm_text'])),
       ];
@@ -101,5 +113,90 @@ class UpdateUtil {
               Text(info['content']),
               overrideActions: widgets,
             ));
+  }
+
+  checkDbUpdate(BuildContext context, bool isForce) async {
+    // TODO: need to be improved
+
+    int lastCheckUpdateTime = SettingsProvider().getDbLastCheckUpdateTime();
+    int coolDownTime = SettingsProvider().getDbCooldownTime();
+
+    DateTime now = DateTime.now();
+    DateTime last = DateTime.fromMillisecondsSinceEpoch(lastCheckUpdateTime);
+    var difference = now.difference(last);
+//    print(difference.inSeconds);
+//    print(now.millisecondsSinceEpoch);
+    SettingsProvider().setLastCheckUpdateTime(now.millisecondsSinceEpoch);
+    if (!isForce && difference.inSeconds < coolDownTime) return;
+
+    Dio dio = Dio();
+    String url;
+    url = '${Config.apiBase}/database.json';
+    // print(url);
+
+    int localDbVersion = SettingsProvider().getDbVersion();
+
+    Map data;
+    try {
+      Response response = await dio.get(url);
+      if (response.statusCode != HttpStatus.ok) throw (Error());
+      data = response.data;
+    } catch (e) {
+      // print(e);
+      return;
+    }
+    if (data['coolDownTime'] != null) {
+      SettingsProvider().setDbCooldownTime(coolDownTime);
+    }
+    if (data['version'] > localDbVersion) {
+      await showUpdateDialog(data, context, callback: (url) async {
+        Navigator.of(context).pop();
+        DownloadDialog downloadDialog = DownloadDialog();
+        showDialog(
+            context: context,
+            builder: (context) {
+              return downloadDialog;
+            });
+        try {
+          Response response = await dio.get(
+            url,
+            onReceiveProgress: showDownloadProgress,
+          );
+          // print(response.data);
+
+          var cBox = await Hive.openBox('categories');
+          var aBox = await Hive.openBox('articles');
+          // print(response.data["categories"][0]);
+          final totalData = response.data;
+          // print(totalData);
+
+          await cBox.clear();
+          await aBox.clear();
+          for (Map data in totalData['categories']) {
+            Category category = Category(title: data['title']);
+            cBox.add(category);
+          }
+          for (Map data in totalData['articles']) {
+            Article article = Article.fromJson(data.cast());
+            aBox.add(article);
+          }
+          SettingsProvider().setDbVersion(totalData['version']);
+          Navigator.of(context).pop();
+          Toast.showToast(S.of(context).db_update_success_toast, context);
+          Get.offAll(() => const MyHomePage(title: 'Caritas'));
+        } catch (e) {
+          Navigator.of(context).pop();
+          Toast.showToast(S.of(context).db_update_fail_toast, context);
+        }
+      });
+    } else if (isForce) {
+      Toast.showToast(S.of(context).already_newest_version_toast, context);
+    }
+  }
+
+  void showDownloadProgress(received, total) {
+    if (total != -1) {
+      print((received / total * 100).toStringAsFixed(0) + "%");
+    }
   }
 }

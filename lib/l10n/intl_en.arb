@@ -22,6 +22,8 @@
   "his_title": "Histories",
 
   "settings_title": "Settings",
+  "update_database_title": "Get database",
+  "update_database_subtitle": "Get newest database",
   "change_theme_mode_title": "Mode Change",
   "change_theme_mode_subtitle": "Follow system theme?",
   "theme_mode_follow_system": "Follow System",
@@ -42,6 +44,9 @@
   "about_title": "About",
   "version": "v{version}",
   "check_update_button": "Check update",
+  "db_update_success_toast": "Database updated!~",
+  "db_update_fail_toast": "Database update fail!",
+  "db_downloading": "Downloading...",
   "already_newest_version_toast": "Already newest version~",
   "check_privacy_button": "Privacy Policy",
   "now_version": "Now version v{version}",

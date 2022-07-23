@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'dart:collection';
 import 'package:caritas/Pages/Settings/SettingsProvider.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:cloud_kit/cloud_kit.dart';
 
+import '../Components/Toast.dart';
 import '../Models/Db/DbHelper.dart';
 import '../Utils/PrivacyUtil.dart';
 import '../Utils/UmengUtil.dart';
@@ -20,7 +22,7 @@ class InitUtil {
     await Hive.initFlutter();
     await initBox();
     if (Platform.isIOS) {
-      await iCloudSync();
+      iCloudSync(false);
     }
     UmengUtil.init();
   }
@@ -28,6 +30,7 @@ class InitUtil {
   static initAfterStart(context) async {
     await PrivacyUtil().checkPrivacy(context, false);
     await UpdateUtil().checkUpdate(context, false);
+    await UpdateUtil().checkDbUpdate(context, false);
   }
 
   static initBox() async {
@@ -51,7 +54,7 @@ class InitUtil {
     }
   }
 
-  static iCloudSync() async {
+  static iCloudSync(bool localFirst) async {
     /// 接住一切异常，不能让 icloud 同步影响 APP 正常启动
     try {
       const _key_histories = "histories";
@@ -61,28 +64,48 @@ class InitUtil {
       CloudKit cloudKit = CloudKit('iCloud.top.idealclover.caritas');
 
       String? cloudHistoryStr = await cloudKit.get(_key_histories);
-      print(cloudHistoryStr);
+      // print('cloud history');
+      // print(cloudHistoryStr);
       List<String> localHistory = SettingsProvider().getHistories();
+      // print('local history');
+      // print(localHistory);
       List<String> resultHistory = localHistory;
 
       /// 先获取到整合后的列表
       if (cloudHistoryStr != null) {
         List<String> cloudHistory =
-            List<String>.from(json.decode(cloudHistoryStr));
-        List<String> combine = cloudHistory + localHistory;
+        List<String>.from(json.decode(cloudHistoryStr));
+        List<String> combine;
+        if (localFirst) {
+          combine = localHistory + cloudHistory;
+        } else {
+          combine = cloudHistory + localHistory;
+        }
         resultHistory = LinkedHashSet<String>.from(combine).toList();
       }
       String resultHistoryStr = json.encode(resultHistory);
-      print(resultHistoryStr);
+      // print('combined history');
+      // print(resultHistoryStr);
 
       /// 再将整合后的结果保存在本地与iCloud
       await SettingsProvider().replaceHistories(resultHistory);
-      bool isHisSuccess = await cloudKit.save(_key_histories, resultHistoryStr);
-      if (isHisSuccess) {
-        print('History sync to icloud');
-      } else {
-        print('History fail sync to icloud');
-      }
+      cloudKit.save(_key_histories, resultHistoryStr).then((value) {
+        if (value) {
+          Fluttertoast.showToast(msg: '同步 iCloud 成功');
+          print('History sync to icloud');
+        } else {
+          Fluttertoast.showToast(msg: '同步 iCloud 失败');
+          print('History fail sync to icloud');
+        }
+      }).onError((error, stackTrace) {
+        print(error);
+      });
+      // bool isHisSuccess = await cloudKit.save(_key_histories, resultHistoryStr);
+      // if (isHisSuccess) {
+      //   print('History sync to icloud');
+      // } else {
+      //   print('History fail sync to icloud');
+      // }
     } catch (e) {
       print(e);
     }
