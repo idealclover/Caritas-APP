@@ -13,7 +13,7 @@ class URLUtil {
     LaunchMode mode = LaunchMode.externalApplication;
     if (Platform.isIOS) {
       appUrlScheme ??= _getZhihuScheme(url);
-      mode = LaunchMode.inAppWebView;
+      mode = LaunchMode.platformDefault;
     }
 
     /// 无 scheme 情况

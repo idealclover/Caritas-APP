@@ -2,6 +2,7 @@ import os
 import re
 import json
 from datetime import datetime
+from urllib.parse import unquote
 
 DIR = r"/Users/idealclover/GitHub/Sth-Matters/"
 PATH = r"Anonymity/"
@@ -97,7 +98,11 @@ def getArticle(content, tag):
     # remove zhihu auto link
     article["content"] = re.sub("\[(.*?)\]\(https://www\.zhihu\.com/search\?q=.*?\)", "\g<1>", article["content"])
     # remove zhihu redirect link
-    article["content"] = re.sub("https?://link\.zhihu\.com/\?target=http(s?)%3A//", "http\g<1>://", article["content"]).strip()
+    article["content"] = re.sub(
+        "\(https?://link\.zhihu\.com/\?target=http(s?)%3A//(.*?)\)",
+        lambda x: "(http" + x.group(1) + "://" + unquote(x.group(2), encoding="utf-8") + ")",
+        article["content"],
+    ).strip()
     return article
 
 
