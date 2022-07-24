@@ -48,6 +48,7 @@ data = {
         {"title": categories["10 - “就你机灵”系列"]},
         {"title": categories["12 - 大过滤器"]},
     ],
+    "tags": [],
     "articles": [],
 }
 
@@ -86,7 +87,10 @@ def getArticle(content, tag):
     article["links"] = links
 
     # tags
-    tags = re.findall(r"#(.*?)(?: |\n)", article["tags"])
+    tags = re.findall(r"#(.*?)(?= |\n|#)", article["tags"])
+    # for t in tags:
+    #     if {"title": t} not in data["tags"]:
+    #         data["tags"].append({"title": t})
     tags.append(tag)
     article["tags"] = tags
 
