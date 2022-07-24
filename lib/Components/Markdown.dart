@@ -42,7 +42,9 @@ class MMarkdown extends StatelessWidget {
         h2: const TextStyle(fontSize: 20, height: 1.8),
         h4: const TextStyle(fontSize: 20, height: 1.8),
         p: const TextStyle(fontSize: 16, height: 1.8),
+        h1Padding: EdgeInsets.zero,
         pPadding: const EdgeInsets.fromLTRB(1.0, 5.0, 1.0, 5.0),
+        code: const TextStyle(fontSize: 14),
         a: const TextStyle(
             color: Color.fromARGB(255, 26, 109, 177),
             decoration: TextDecoration.underline),

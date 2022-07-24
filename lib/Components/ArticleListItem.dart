@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../Pages/Article/ArticleView.dart';
 import '../Pages/Settings/SettingsProvider.dart';
-import '../../Components/Toast.dart';
+
+// import 'Toast.dart';
+import 'SnackBar.dart';
 import '../../Models/Db/DbHelper.dart';
 import '../generated/l10n.dart';
-
 
 class ArticleListItemView extends StatefulWidget {
   final Article article;
@@ -74,9 +75,11 @@ class _ArticleListItemViewState extends State<ArticleListItemView> {
                   isFavorite = !isFavorite;
                   SettingsProvider().setFavorites(widget.article.id);
                   if (isFavorite) {
-                    Toast.showToast(S.of(context).fav_add_toast, context);
+                    MSnackBar.showSnackBar(S.of(context).fav_add_toast, "");
+                    // Toast.showToast(S.of(context).fav_add_toast, context);
                   } else {
-                    Toast.showToast(S.of(context).fav_del_toast, context);
+                    MSnackBar.showSnackBar(S.of(context).fav_del_toast, "");
+                    // Toast.showToast(S.of(context).fav_del_toast, context);
                   }
                 });
               })
@@ -88,7 +91,7 @@ class _ArticleListItemViewState extends State<ArticleListItemView> {
                   getPre: widget.getPre,
                   getNext: widget.getNext,
                 )));
-        if(widget.notifyState != null) widget.notifyState!();
+        if (widget.notifyState != null) widget.notifyState!();
         // setState(() => {});
       },
     );

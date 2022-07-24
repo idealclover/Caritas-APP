@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:universal_io/io.dart';
 import 'package:flutter/material.dart';
 import '../../generated/l10n.dart';
 import 'package:get/get.dart';
@@ -43,12 +43,13 @@ class _SettingsViewState extends State<SettingsView> {
             subtitle: Text(S.of(context).update_database_subtitle),
             onTap: () async => await UpdateUtil().checkDbUpdate(context, true),
           ),
-              Platform.isIOS ?
-          ListTile(
-            title: Text(S.of(context).sync_icloud_title),
-            subtitle: Text(S.of(context).sync_icloud_subtitle),
-            onTap: () async => await InitUtil.iCloudSync(true),
-          ): Container(),
+          Platform.isIOS
+              ? ListTile(
+                  title: Text(S.of(context).sync_icloud_title),
+                  subtitle: Text(S.of(context).sync_icloud_subtitle),
+                  onTap: () async => await InitUtil.iCloudSync(true),
+                )
+              : Container(),
           ListTile(
               title: Text(S.of(context).change_theme_mode_title),
               subtitle: Text(S.of(context).change_theme_mode_subtitle),
@@ -82,23 +83,25 @@ class _SettingsViewState extends State<SettingsView> {
                     });
                   })),
           Get.isDarkMode ? Container() : const ThemeChanger(),
-          ListTile(
-            title: Text(S.of(context).share_data_title),
-            subtitle: Text(S.of(context).share_data_subtitle),
-            trailing: Switch(
-              value: shareData,
-              activeColor: Get.isDarkMode
-                  ? Colors.white
-                  : Theme.of(context).primaryColor,
-              onChanged: (bool value) {
-                SettingsProvider().setShareData(value);
-                setState(() {
-                  shareData = value;
-                });
-              },
-            ),
-            // onTap: () async => await SettingsUtil.shareUtil(context),
-          ),
+          (Platform.isIOS || Platform.isAndroid)
+              ? ListTile(
+                  title: Text(S.of(context).share_data_title),
+                  subtitle: Text(S.of(context).share_data_subtitle),
+                  trailing: Switch(
+                    value: shareData,
+                    activeColor: Get.isDarkMode
+                        ? Colors.white
+                        : Theme.of(context).primaryColor,
+                    onChanged: (bool value) {
+                      SettingsProvider().setShareData(value);
+                      setState(() {
+                        shareData = value;
+                      });
+                    },
+                  ),
+                  // onTap: () async => await SettingsUtil.shareUtil(context),
+                )
+              : Container(),
           ListTile(
             title: Text(S.of(context).share_title),
             subtitle: Text(S.of(context).share_subtitle),

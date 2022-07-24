@@ -1,14 +1,13 @@
-import 'dart:io';
 import 'dart:convert';
 import 'dart:collection';
+import 'package:get/get.dart';
 import 'package:caritas/Pages/Settings/SettingsProvider.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:cloud_kit/cloud_kit.dart';
 
-import '../Components/Toast.dart';
 import '../Models/Db/DbHelper.dart';
 import '../Utils/PrivacyUtil.dart';
 import '../Utils/UmengUtil.dart';
@@ -88,10 +87,12 @@ class InitUtil {
       await SettingsProvider().replaceHistories(resultHistory);
       cloudKit.save(_key_histories, resultHistoryStr).then((value) {
         if (value) {
-          Fluttertoast.showToast(msg: '同步 iCloud 成功');
+          // Fluttertoast.showToast(msg: '同步 iCloud 成功');
+          Get.snackbar('同步 iCloud 成功', "");
           print('History sync to icloud');
         } else {
-          Fluttertoast.showToast(msg: '同步 iCloud 失败');
+          // Fluttertoast.showToast(msg: '同步 iCloud 失败');
+          Get.snackbar('同步 iCloud 失败', "");
           print('History fail sync to icloud');
         }
       }).onError((error, stackTrace) {

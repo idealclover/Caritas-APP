@@ -762,7 +762,7 @@ packages:
     source: path
     version: "1.2.4"
   universal_io:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: universal_io
       url: "https://pub.dartlang.org"

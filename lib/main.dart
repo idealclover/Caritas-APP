@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Base APP',
+      title: 'Caritas',
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         S.delegate,

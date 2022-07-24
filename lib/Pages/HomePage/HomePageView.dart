@@ -2,7 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 
-import '../../Components/Toast.dart';
+// import '../../Components/Toast.dart';
+import '../../Components/SnackBar.dart';
 import '../../generated/l10n.dart';
 import 'HomeCategoryProvider.dart';
 import '../../Components/ArticleList.dart';
@@ -43,9 +44,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   hideRead = !hideRead;
                 });
                 if (hideRead) {
-                  Toast.showToast(S.of(context).read_hide_toast, context);
+                  MSnackBar.showSnackBar(S.of(context).read_hide_toast, "");
+                  // Toast.showToast(S.of(context).read_hide_toast, context);
                 } else {
-                  Toast.showToast(S.of(context).read_show_toast, context);
+                  MSnackBar.showSnackBar(S.of(context).read_show_toast, "");
+                  // Toast.showToast(S.of(context).read_show_toast, context);
                 }
               },
               icon: hideRead

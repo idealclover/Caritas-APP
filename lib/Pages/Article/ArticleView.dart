@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../Components/SnackBar.dart';
 import '../../Utils/UmengUtil.dart';
 import '../../generated/l10n.dart';
 import 'ArticlePresenter.dart';
 import '../Settings/SettingsProvider.dart';
 import '../../Components/ArticleList.dart';
-import '../../Components/Toast.dart';
+
+// import '../../Components/Toast.dart';
 import '../../Components/Markdown.dart';
 import '../../Models/Db/DbHelper.dart';
 import '../../Utils/URLUtil.dart';
@@ -96,9 +98,11 @@ class _ArticleViewState extends State<ArticleView> {
                     isFavorite = !isFavorite;
                     SettingsProvider().setFavorites(article.id);
                     if (isFavorite) {
-                      Toast.showToast(S.of(context).fav_add_toast, context);
+                      MSnackBar.showSnackBar(S.of(context).fav_add_toast, "");
+                      // Toast.showToast(S.of(context).fav_add_toast, context);
                     } else {
-                      Toast.showToast(S.of(context).fav_del_toast, context);
+                      MSnackBar.showSnackBar(S.of(context).fav_del_toast, "");
+                      // Toast.showToast(S.of(context).fav_del_toast, context);
                     }
                   });
                 }),
@@ -123,7 +127,8 @@ class _ArticleViewState extends State<ArticleView> {
               Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: MMarkdown(
-                      '# ${article.title}\n\n> 最后更新时间: ${article.lastUpdate}\n\n${article.content}')),
+                      '# ${article.title}\n`最近更新: ${article.lastUpdate}`\n\n${article.question == "" ? "" : ">${article.question}\n\n"}${article.content}')),
+              // '# ${article.title}\n${article.zhihuLink == "" ? article.question : "[${article.question}](${article.zhihuLink})"}\n\n> 最后更新: ${article.lastUpdate}\n\n${article.content}')),
               // child: MMarkdown(article.content)),
               getArticleWidget(S.of(context).pre_article, getPreArticle()),
               getArticleWidget(S.of(context).next_article, getNextArticle()),

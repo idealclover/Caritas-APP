@@ -5,7 +5,7 @@ from datetime import datetime
 
 DIR = r"/Users/idealclover/GitHub/Sth-Matters/"
 PATH = r"Anonymity/"
-VERSION = 3
+VERSION = 4
 # TARGET = r"./data.json"
 TARGET = r"../res/data.json"
 IGNORE_FILES = [".DS_Store", "README.md", ".md"]
@@ -95,7 +95,9 @@ def getArticle(content, tag):
     # remove 沙海拾金
     article["content"] = re.sub("> 沙海拾金.*\n*", "", article["content"])
     # remove zhihu auto link
-    article["content"] = re.sub("\[(.*)\]\(https://www\.zhihu\.com/search\?q=.*\)", "\g<1>", article["content"]).strip()
+    article["content"] = re.sub("\[(.*?)\]\(https://www\.zhihu\.com/search\?q=.*?\)", "\g<1>", article["content"])
+    # remove zhihu redirect link
+    article["content"] = re.sub("https?://link\.zhihu\.com/\?target=http(s?)%3A//", "http\g<1>://", article["content"]).strip()
     return article
 
 

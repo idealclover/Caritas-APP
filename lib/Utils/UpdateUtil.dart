@@ -1,10 +1,11 @@
-import 'dart:io';
+import 'package:universal_io/io.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:hive/hive.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import '../Components/SnackBar.dart';
 import '../Models/Db/DbHelper.dart';
 import '../generated/l10n.dart';
 
@@ -12,7 +13,7 @@ import '../Pages/Settings/SettingsProvider.dart';
 import '../Pages/HomePage/HomePageView.dart';
 import '../Components/Dialog.dart';
 import '../Components/DownloadDialog.dart';
-import '../Components/Toast.dart';
+// import '../Components/Toast.dart';
 import '../Components/TransBgTextButton.dart';
 import '../Resources/Config.dart';
 
@@ -56,7 +57,8 @@ class UpdateUtil {
     if (data['version'] > int.parse(packageInfo.buildNumber)) {
       await showUpdateDialog(data, context);
     } else if (isForce) {
-      Toast.showToast(S.of(context).already_newest_version_toast, context);
+      MSnackBar.showSnackBar(S.of(context).already_newest_version_toast, "");
+      // Toast.showToast(S.of(context).already_newest_version_toast, context);
     }
   }
 
@@ -182,21 +184,24 @@ class UpdateUtil {
           }
           SettingsProvider().setDbVersion(totalData['version']);
           Navigator.of(context).pop();
-          Toast.showToast(S.of(context).db_update_success_toast, context);
+          MSnackBar.showSnackBar(S.of(context).db_update_success_toast, "");
+          // Toast.showToast(S.of(context).db_update_success_toast, context);
           Get.offAll(() => const MyHomePage(title: 'Caritas'));
         } catch (e) {
           Navigator.of(context).pop();
-          Toast.showToast(S.of(context).db_update_fail_toast, context);
+          MSnackBar.showSnackBar(S.of(context).db_update_fail_toast, "");
+          // Toast.showToast(S.of(context).db_update_fail_toast, context);
         }
       });
     } else if (isForce) {
-      Toast.showToast(S.of(context).already_newest_version_toast, context);
+      MSnackBar.showSnackBar(S.of(context).already_newest_version_toast, "");
+      // Toast.showToast(S.of(context).already_newest_version_toast, context);
     }
   }
 
   void showDownloadProgress(received, total) {
     if (total != -1) {
-      print((received / total * 100).toStringAsFixed(0) + "%");
+      // print((received / total * 100).toStringAsFixed(0) + "%");
     }
   }
 }
