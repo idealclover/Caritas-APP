@@ -4,13 +4,32 @@ import json
 from datetime import datetime
 from urllib.parse import unquote
 
-DIR = r"/Users/idealclover/GitHub/Sth-Matters/"
-PATH = r"Anonymity/"
-VERSION = 4
-# TARGET = r"./data.json"
+VERSION = 5
 TARGET = r"../res/data.json"
-IGNORE_FILES = [".DS_Store", "README.md", ".md"]
-CONFIG_ORDER = [["致用户", "致读者 - I", "致读者 - II", "致读者 - III", "致读者 - IV", "致读者 - 留言", "致读者 - 鼓励利用我的内容盈利", "致你们"]]
+
+# 常量定义
+
+JOHN_DIR = r"/Users/idealclover/GitHub/Sth-Matters/"
+JOHN_PATHS = [r"Anonymity/"]
+NELL_DIR = r"/Users/idealclover/GitHub/Nell-Nell/"
+NELL_PATHS = ["00 - 致读者", "00 - “是什么”系列", "01 - “怎么办”系列", "02 - “如何看待”系列", "03 - “好好活着”系列", "05 - 书评 & 影评", "待分类"]
+
+# TARGET = r"./data.json"
+IGNORE_FILES = [".DS_Store", "README.md", ".md", "致读者 - 关于收费.JPEG"]
+CONFIG_ORDER = [
+    [
+        "致用户 @idealclover",
+        "致用户 @Dav",
+        "致读者 @Anonymity",
+        "致读者 @NellNell",
+        "致读者 - II @Anonymity",
+        "致读者 - III @Anonymity",
+        "致读者 - IV @Anonymity",
+        "致读者 - 留言 @Anonymity",
+        "致读者 - 关于盈利 @Anonymity",
+        "致你们 @Anonymity",
+    ]
+]
 
 categories = {
     "00 - 致读者": "致读者",
@@ -27,7 +46,15 @@ categories = {
     "11 - 新冠": "新冠",
     "12 - 大过滤器": "大过滤器",
     "13 - 百年未有之变局": "时政",
+    "00 - “是什么”系列": "是什么",
+    "01 - “怎么办”系列": "怎么办",
+    "02 - “如何看待”系列": "如何看",
+    "03 - “好好活着”系列": "好好活",
+    "05 - 书评 & 影评": "书评影评",
+    "待分类": "待分类",
 }
+
+# static 变量定义
 
 data = {
     "version": VERSION,
@@ -47,14 +74,29 @@ data = {
         {"title": categories["11 - 新冠"]},
         {"title": categories["10 - “就你机灵”系列"]},
         {"title": categories["12 - 大过滤器"]},
+        {"title": categories["00 - “是什么”系列"]},
+        {"title": categories["01 - “怎么办”系列"]},
+        {"title": categories["02 - “如何看待”系列"]},
+        {"title": categories["03 - “好好活着”系列"]},
+        {"title": categories["05 - 书评 & 影评"]},
+        {"title": categories["待分类"]},
     ],
     "tags": [],
     "articles": [],
 }
 
+columns = ["title", "question", "zhihuLink", "author", "lastUpdate", "links", "tags"]
+rst = {"total": 0, "match": 0}
+for c in columns:
+    rst[c] = 0
 
-def getArticle(content, tag):
-    reg = r"^ *(?: *#(?: *)(.*))?\n* *(\*.*\*|\[.*\])?(\(http.*\))?\n*(?: *> Author: *(.*) *)?\n*(?:> Last update: \*(.*)\* *)?\n*(?:(?:> Links:|> Link:s) *(\[\[.*\]\])? *)?\n*(?:> Tags: *(#.*)? *)?(?: |\n)*"
+
+def getArticle(file_name, content, tag):
+    article = {"id": ""}
+    for c in columns:
+        article[c] = ""
+
+    reg = r"^ *(?: *#(?: *)(.*))?\n* *(\*.*\*|\[.*\])?(\(http.*\))?\n*(?: *> Author: *(.*) *)?\n*(?:(?:> )?Last update: \*(.*)\* *)?\n*(?:(?:> )?(?:Links:|Link:s) *(\[\[.*\]\])? *)?\n*(?:(?:> )?Tags: *(#.*)? *)?(?: |\n)*"
     m = re.match(reg, content)
 
     if m.group(0) is not None:
@@ -82,9 +124,10 @@ def getArticle(content, tag):
         article["lastUpdate"] = "01/01/1970"
 
     # links
-    links = re.findall(r"\[\[(.*?)\]\]", article["links"])
-    # print(links)
+    # links = re.findall(r"\[\[(.*?)\]\]", article["links"])
+    links = list(map(lambda x: re.sub(r"Anonymity\/.*?\/", "", x), re.findall(r"\[\[(.*?)\]\]", article["links"])))
     article["links"] = links
+    # print(links)
 
     # tags
     tags = re.findall(r"#(.*?)(?= |\n|#)", article["tags"])
@@ -110,65 +153,74 @@ def getArticle(content, tag):
     return article
 
 
-columns = ["title", "question", "zhihuLink", "author", "lastUpdate", "links", "tags"]
-rst = {"total": 0, "match": 0}
-for c in columns:
-    rst[c] = 0
+def getArticleList(DIR, PATHS, REPLACE_PATH):
 
-fileList = os.listdir(DIR)
-for file_name in fileList:
-    if ".md" not in file_name or file_name in IGNORE_FILES:
-        continue
-
-    rst["total"] += 1
-    article = {"id": ""}
-    for c in columns:
-        article[c] = ""
-
-    with open(os.path.join(DIR, file_name), "r", encoding="utf-8") as f:
-        content = f.read()
-
-    tag = "最近更新"
-    article = getArticle(content, tag)
-
-    data["articles"].append(article)
-
-p = os.walk(DIR + PATH)
-for path, dir_list, file_list in p:
-    for file_name in file_list:
-        if file_name in IGNORE_FILES:
+    fileList = os.listdir(DIR)
+    for file_name in fileList:
+        if ".md" not in file_name or file_name in IGNORE_FILES:
             continue
 
         rst["total"] += 1
-        article = {"id": ""}
-        for c in columns:
-            article[c] = ""
 
-        with open(os.path.join(path, file_name), "r", encoding="utf-8") as f:
+        with open(os.path.join(DIR, file_name), "r", encoding="utf-8") as f:
             content = f.read()
 
-        tag = categories[path.replace(DIR + PATH, "").replace("/自然科学", "").replace("/应用科学", "")]
-        article = getArticle(content, tag)
+        tag = "最近更新"
+        article = getArticle(file_name, content, tag)
 
         data["articles"].append(article)
 
+    for PATH in PATHS:
+        p = os.walk(DIR + PATH)
+        for path, dir_list, file_list in p:
+            for file_name in file_list:
+                if file_name in IGNORE_FILES:
+                    continue
+
+                rst["total"] += 1
+                article = {"id": ""}
+                for c in columns:
+                    article[c] = ""
+
+                with open(os.path.join(path, file_name), "r", encoding="utf-8") as f:
+                    content = f.read()
+
+                # print(path)
+                if REPLACE_PATH:
+                    tag = categories[path.replace(DIR + PATH, "").replace("/自然科学", "").replace("/应用科学", "")]
+                else:
+                    tag = categories[path.replace(DIR, "")]
+                article = getArticle(file_name, content, tag)
+
+                data["articles"].append(article)
+
         # print(file_name)
         # print(os.path.join(path, file_name))
-print(json.dumps(rst, indent=2))
 
 
-# sorted by update time
-data["articles"] = sorted(
-    data["articles"], key=lambda k: datetime.strptime(k["lastUpdate"], "%d/%m/%Y").date(), reverse=True
-)
+def main():
 
-for order in CONFIG_ORDER:
-    for itemName in reversed(order):
-        # print([i for i, obj in enumerate(data["articles"]) if obj['id']==itemName][0])
-        data["articles"].insert(
-            0, data["articles"].pop([i for i, obj in enumerate(data["articles"]) if obj["id"] == itemName][0])
-        )
+    getArticleList(JOHN_DIR, JOHN_PATHS, True)
+    getArticleList(NELL_DIR, NELL_PATHS, False)
+
+    print(json.dumps(rst, indent=2))
+
+    # sorted by update time
+    data["articles"] = sorted(
+        data["articles"], key=lambda k: datetime.strptime(k["lastUpdate"], "%d/%m/%Y").date(), reverse=True
+    )
+
+    for order in CONFIG_ORDER:
+        for itemName in reversed(order):
+            # print([i for i, obj in enumerate(data["articles"]) if obj['id']==itemName][0])
+            data["articles"].insert(
+                0, data["articles"].pop([i for i, obj in enumerate(data["articles"]) if obj["id"] == itemName][0])
+            )
+
+    with open(TARGET, "w", encoding="utf-8") as f:
+        # json.dump(data, f, ensure_ascii=False, indent=2)
+        json.dump(data, f, ensure_ascii=False)
 
 
-with open(TARGET, "w", encoding="utf-8") as f:
-    json.dump(data, f, ensure_ascii=False, indent=2)
+if __name__ == "__main__":
+    main()

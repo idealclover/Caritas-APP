@@ -20,9 +20,12 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(version) => "Now version v${version}";
+  static String m0(link) =>
+      "> Scan QR Code to import.\n> Or visit [link](${link}) to download histories.\n> Expired 1 week later.\n> Supported by file.io";
 
-  static String m1(version) => "v${version}";
+  static String m1(version) => "Now version v${version}";
+
+  static String m2(version) => "v${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -52,6 +55,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "donate_title": MessageLookupByLibrary.simpleMessage("Donate"),
         "easter_egg":
             MessageLookupByLibrary.simpleMessage("This is easter egg."),
+        "export_content": m0,
+        "export_title": MessageLookupByLibrary.simpleMessage("Export"),
+        "export_to_file_subtitle": MessageLookupByLibrary.simpleMessage(
+            "Export history to file/qrcode."),
+        "export_to_file_title":
+            MessageLookupByLibrary.simpleMessage("Export history"),
         "fav_add_toast":
             MessageLookupByLibrary.simpleMessage("Added to favorites."),
         "fav_button": MessageLookupByLibrary.simpleMessage("is favorite"),
@@ -62,10 +71,24 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("GitHub OpenSource"),
         "his_title": MessageLookupByLibrary.simpleMessage("Histories"),
         "home_title": MessageLookupByLibrary.simpleMessage("Articles"),
+        "import_from_file_subtitle":
+            MessageLookupByLibrary.simpleMessage("Import history from file."),
+        "import_from_file_title":
+            MessageLookupByLibrary.simpleMessage("Import from file"),
+        "import_from_qrcode_subtitle":
+            MessageLookupByLibrary.simpleMessage("Import history from QRCode."),
+        "import_from_qrcode_title":
+            MessageLookupByLibrary.simpleMessage("Import from QRCode"),
+        "import_qr_title":
+            MessageLookupByLibrary.simpleMessage("QR Code Import"),
+        "import_success_toast":
+            MessageLookupByLibrary.simpleMessage("Data imported successfully."),
         "introduction": MessageLookupByLibrary.simpleMessage(
             "Blog:：https://idealclover.top\nEmail：idealclover@163.com"),
+        "network_error_toast":
+            MessageLookupByLibrary.simpleMessage("Network error."),
         "next_article": MessageLookupByLibrary.simpleMessage("Next"),
-        "now_version": m0,
+        "now_version": m1,
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "open_in_browser_button":
             MessageLookupByLibrary.simpleMessage("Open in browser."),
@@ -74,6 +97,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "open_source_library_title":
             MessageLookupByLibrary.simpleMessage("OpenSource Libraries"),
         "pre_article": MessageLookupByLibrary.simpleMessage("Previous"),
+        "qrcode_url_error_toast": MessageLookupByLibrary.simpleMessage(
+            "QR code is invalid, maybe expired."),
         "read_hide_toast":
             MessageLookupByLibrary.simpleMessage("Read articles hid."),
         "read_show_toast":
@@ -94,10 +119,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "share_subtitle": MessageLookupByLibrary.simpleMessage(
             "Share this app to more friends!"),
         "share_title": MessageLookupByLibrary.simpleMessage("Share"),
+        "sync_button_subtitle": MessageLookupByLibrary.simpleMessage(
+            "Import/export reading and favorite articles."),
+        "sync_button_title": MessageLookupByLibrary.simpleMessage("Data Sync"),
+        "sync_from_icloud_subtitle": MessageLookupByLibrary.simpleMessage(
+            "Import history from iCloud (testing)."),
+        "sync_from_icloud_title":
+            MessageLookupByLibrary.simpleMessage("Import from iCloud (beta)"),
         "sync_icloud_subtitle": MessageLookupByLibrary.simpleMessage(
             "Sync history to iCloud (testing)"),
         "sync_icloud_title":
             MessageLookupByLibrary.simpleMessage("Sync to iCloud (beta)"),
+        "sync_title": MessageLookupByLibrary.simpleMessage("Data Sync"),
         "theme_mode_always_dark":
             MessageLookupByLibrary.simpleMessage("Always Dark"),
         "theme_mode_always_light":
@@ -110,6 +143,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Get newest database"),
         "update_database_title":
             MessageLookupByLibrary.simpleMessage("Get database"),
-        "version": m1
+        "version": m2
       };
 }

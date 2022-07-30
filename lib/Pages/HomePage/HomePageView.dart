@@ -1,8 +1,6 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 
-// import '../../Components/Toast.dart';
 import '../../Components/SnackBar.dart';
 import '../../generated/l10n.dart';
 import 'HomeCategoryProvider.dart';

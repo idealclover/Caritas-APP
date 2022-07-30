@@ -230,21 +230,21 @@ class S {
     );
   }
 
-  /// `Sync to iCloud (beta)`
-  String get sync_icloud_title {
+  /// `Data Sync`
+  String get sync_button_title {
     return Intl.message(
-      'Sync to iCloud (beta)',
-      name: 'sync_icloud_title',
+      'Data Sync',
+      name: 'sync_button_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `Sync history to iCloud (testing)`
-  String get sync_icloud_subtitle {
+  /// `Import/export reading and favorite articles.`
+  String get sync_button_subtitle {
     return Intl.message(
-      'Sync history to iCloud (testing)',
-      name: 'sync_icloud_subtitle',
+      'Import/export reading and favorite articles.',
+      name: 'sync_button_subtitle',
       desc: '',
       args: [],
     );
@@ -405,6 +405,176 @@ class S {
     return Intl.message(
       'Buy me a cup of coffee!',
       name: 'donate_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data Sync`
+  String get sync_title {
+    return Intl.message(
+      'Data Sync',
+      name: 'sync_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sync to iCloud (beta)`
+  String get sync_icloud_title {
+    return Intl.message(
+      'Sync to iCloud (beta)',
+      name: 'sync_icloud_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sync history to iCloud (testing)`
+  String get sync_icloud_subtitle {
+    return Intl.message(
+      'Sync history to iCloud (testing)',
+      name: 'sync_icloud_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import from iCloud (beta)`
+  String get sync_from_icloud_title {
+    return Intl.message(
+      'Import from iCloud (beta)',
+      name: 'sync_from_icloud_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import history from iCloud (testing).`
+  String get sync_from_icloud_subtitle {
+    return Intl.message(
+      'Import history from iCloud (testing).',
+      name: 'sync_from_icloud_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Export history`
+  String get export_to_file_title {
+    return Intl.message(
+      'Export history',
+      name: 'export_to_file_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Export history to file/qrcode.`
+  String get export_to_file_subtitle {
+    return Intl.message(
+      'Export history to file/qrcode.',
+      name: 'export_to_file_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import from file`
+  String get import_from_file_title {
+    return Intl.message(
+      'Import from file',
+      name: 'import_from_file_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import history from file.`
+  String get import_from_file_subtitle {
+    return Intl.message(
+      'Import history from file.',
+      name: 'import_from_file_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import from QRCode`
+  String get import_from_qrcode_title {
+    return Intl.message(
+      'Import from QRCode',
+      name: 'import_from_qrcode_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import history from QRCode.`
+  String get import_from_qrcode_subtitle {
+    return Intl.message(
+      'Import history from QRCode.',
+      name: 'import_from_qrcode_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Export`
+  String get export_title {
+    return Intl.message(
+      'Export',
+      name: 'export_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `> Scan QR Code to import.\n> Or visit [link]({link}) to download histories.\n> Expired 1 week later.\n> Supported by file.io`
+  String export_content(Object link) {
+    return Intl.message(
+      '> Scan QR Code to import.\n> Or visit [link]($link) to download histories.\n> Expired 1 week later.\n> Supported by file.io',
+      name: 'export_content',
+      desc: '',
+      args: [link],
+    );
+  }
+
+  /// `Network error.`
+  String get network_error_toast {
+    return Intl.message(
+      'Network error.',
+      name: 'network_error_toast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `QR Code Import`
+  String get import_qr_title {
+    return Intl.message(
+      'QR Code Import',
+      name: 'import_qr_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `QR code is invalid, maybe expired.`
+  String get qrcode_url_error_toast {
+    return Intl.message(
+      'QR code is invalid, maybe expired.',
+      name: 'qrcode_url_error_toast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data imported successfully.`
+  String get import_success_toast {
+    return Intl.message(
+      'Data imported successfully.',
+      name: 'import_success_toast',
       desc: '',
       args: [],
     );

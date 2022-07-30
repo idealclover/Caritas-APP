@@ -127,7 +127,7 @@ class _ArticleViewState extends State<ArticleView> {
               Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: MMarkdown(
-                      '# ${article.title}\n`最近更新: ${article.lastUpdate}`\n\n${article.question == "" ? "" : ">${article.question}\n\n"}${article.content}')),
+                      '# ${article.title}\n    作者: ${article.author}\n    最近更新: ${article.lastUpdate}\n\n${article.question == "" ? "" : ">${article.question}\n\n"}${article.content}')),
               // '# ${article.title}\n${article.zhihuLink == "" ? article.question : "[${article.question}](${article.zhihuLink})"}\n\n> 最后更新: ${article.lastUpdate}\n\n${article.content}')),
               // child: MMarkdown(article.content)),
               getArticleWidget(S.of(context).pre_article, getPreArticle()),

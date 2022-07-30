@@ -20,9 +20,12 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'zh';
 
-  static String m0(version) => "当前版本 v${version}";
+  static String m0(link) =>
+      "> 扫描二维码导入记录\n> 或通过访问 [链接](${link}) 下载记录\n> 有效期一周，扫描一次后过期\n> 使用公共服务file.io";
 
-  static String m1(version) => "v${version}";
+  static String m1(version) => "当前版本 v${version}";
+
+  static String m2(version) => "v${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -45,6 +48,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "donate_subtitle": MessageLookupByLibrary.simpleMessage("给傻翠买支棒棒糖吧！"),
         "donate_title": MessageLookupByLibrary.simpleMessage("投喂"),
         "easter_egg": MessageLookupByLibrary.simpleMessage("这里是彩蛋"),
+        "export_content": m0,
+        "export_title": MessageLookupByLibrary.simpleMessage("导出"),
+        "export_to_file_subtitle":
+            MessageLookupByLibrary.simpleMessage("导出阅读与收藏记录到文件"),
+        "export_to_file_title":
+            MessageLookupByLibrary.simpleMessage("导出记录到文件/二维码"),
         "fav_add_toast": MessageLookupByLibrary.simpleMessage("已收藏"),
         "fav_button": MessageLookupByLibrary.simpleMessage("是否收藏"),
         "fav_del_toast": MessageLookupByLibrary.simpleMessage("已取消收藏"),
@@ -52,10 +61,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "github_open_source": MessageLookupByLibrary.simpleMessage("GitHub 开源"),
         "his_title": MessageLookupByLibrary.simpleMessage("历史"),
         "home_title": MessageLookupByLibrary.simpleMessage("文集"),
+        "import_from_file_subtitle":
+            MessageLookupByLibrary.simpleMessage("从文件中导入阅读与收藏记录"),
+        "import_from_file_title":
+            MessageLookupByLibrary.simpleMessage("从文件导入记录"),
+        "import_from_qrcode_subtitle":
+            MessageLookupByLibrary.simpleMessage("通过二维码扫描导入阅读与收藏记录"),
+        "import_from_qrcode_title":
+            MessageLookupByLibrary.simpleMessage("从二维码导入记录"),
+        "import_qr_title": MessageLookupByLibrary.simpleMessage("二维码导入"),
+        "import_success_toast": MessageLookupByLibrary.simpleMessage("数据导入成功"),
         "introduction": MessageLookupByLibrary.simpleMessage(
             "博客：https://idealclover.top\nEmail：idealclover@163.com"),
+        "network_error_toast": MessageLookupByLibrary.simpleMessage("网络错误，请重试"),
         "next_article": MessageLookupByLibrary.simpleMessage("下一篇"),
-        "now_version": m0,
+        "now_version": m1,
         "ok": MessageLookupByLibrary.simpleMessage("确认"),
         "open_in_browser_button":
             MessageLookupByLibrary.simpleMessage("浏览器内打开"),
@@ -64,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "open_source_library_title":
             MessageLookupByLibrary.simpleMessage("所使用到的开源库"),
         "pre_article": MessageLookupByLibrary.simpleMessage("上一篇"),
+        "qrcode_url_error_toast":
+            MessageLookupByLibrary.simpleMessage("二维码无效，可能为链接过期"),
         "read_hide_toast": MessageLookupByLibrary.simpleMessage("已读文章藏起来啦～"),
         "read_show_toast": MessageLookupByLibrary.simpleMessage("已读文章又显示啦～"),
         "related_article": MessageLookupByLibrary.simpleMessage("相关阅读"),
@@ -79,10 +101,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "share_message": MessageLookupByLibrary.simpleMessage("这是分享用的宣传文字"),
         "share_subtitle": MessageLookupByLibrary.simpleMessage("把应用分享给更多小伙伴吧！"),
         "share_title": MessageLookupByLibrary.simpleMessage("分享"),
+        "sync_button_subtitle":
+            MessageLookupByLibrary.simpleMessage("导入/导出阅读与收藏数据"),
+        "sync_button_title": MessageLookupByLibrary.simpleMessage("数据同步"),
+        "sync_from_icloud_subtitle":
+            MessageLookupByLibrary.simpleMessage("从 iCloud 同步阅读记录（测试中，不稳定）"),
+        "sync_from_icloud_title":
+            MessageLookupByLibrary.simpleMessage("从 iCloud 同步(beta)"),
         "sync_icloud_subtitle":
             MessageLookupByLibrary.simpleMessage("同步阅读记录到 iCloud （测试中，不稳定）"),
         "sync_icloud_title":
             MessageLookupByLibrary.simpleMessage("同步到 iCloud (beta)"),
+        "sync_title": MessageLookupByLibrary.simpleMessage("数据同步"),
         "theme_mode_always_dark": MessageLookupByLibrary.simpleMessage("深色模式"),
         "theme_mode_always_light": MessageLookupByLibrary.simpleMessage("浅色模式"),
         "theme_mode_customize": MessageLookupByLibrary.simpleMessage("自定义"),
@@ -91,6 +121,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "update_database_subtitle":
             MessageLookupByLibrary.simpleMessage("获取最新数据"),
         "update_database_title": MessageLookupByLibrary.simpleMessage("更新数据库"),
-        "version": m1
+        "version": m2
       };
 }

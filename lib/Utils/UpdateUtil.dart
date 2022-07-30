@@ -156,6 +156,7 @@ class UpdateUtil {
         DownloadDialog downloadDialog = DownloadDialog();
         showDialog(
             context: context,
+            barrierDismissible: false,
             builder: (context) {
               return downloadDialog;
             });
