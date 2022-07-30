@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:caritas/Pages/Settings/SettingsProvider.dart';
+import 'package:caritas/Utils/SettingsUtil.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get_storage/get_storage.dart';
@@ -47,6 +49,7 @@ class InitUtil {
       Article article = Article.fromJson(data.cast());
       aBox.add(article);
     }
+    SettingsProvider().setDbVersion(totalData["version"]);
   }
 
   static iCloudSync(bool localFirst) async {
