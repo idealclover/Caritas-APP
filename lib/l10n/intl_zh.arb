@@ -36,7 +36,7 @@
   "share_data_subtitle": "帮助我们提升产品体验",
   "share_title": "分享",
   "share_subtitle": "把应用分享给更多小伙伴吧！",
-  "share_message": "这是分享用的宣传文字",
+  "share_message": "Caritas APP 一个关于「爱」的 APP https://github.com/idealclover/Caritas-APP",
   "report_title": "反馈",
   "report_subtitle": "轻触打开QQ反馈，长按复制号码",
   "report_copy_message": "已复制QQ号到剪贴板",
@@ -76,6 +76,6 @@
   "developer": "开发者 idealclover",
   "introduction": "博客：https://idealclover.top\nEmail：idealclover@163.com",
   "open_source_library_title": "所使用到的开源库",
-  "open_source_library_content": "fluttertoast: ^8.0.9\nflutter_native_splash: ^2.2.3+1\nget: ^4.6.5\nget_storage: ^2.0.3\npackage_info_plus: ^1.4.2\nshare_plus: ^4.0.10\nurl_launcher: ^6.1.4",
-  "easter_egg": "这里是彩蛋"
+  "open_source_library_content": "cloud_kit: ^1.1.0 (modified)\ndio: ^4.0.6\nfile_picker: ^5.0.0\nflutter_markdown: ^0.6.10+2\nfluttertoast: ^8.0.9\nflutter_html: ^3.0.0-alpha.5\nflutter_native_splash: ^2.2.3+1\nflutter_search_bar: ^3.0.0 (modified)\nget: ^4.6.5\nget_storage: ^2.0.3\nhive: ^2.2.3\nhive_flutter: ^1.1.0\npackage_info_plus: ^1.4.2\nqr_code_scanner: ^1.0.0\nqr_flutter: ^4.0.0\nshare_plus: ^4.0.10\numeng_common_sdk: ^1.2.4 (modified)\nuniversal_io: ^2.0.4\nurl_launcher: ^6.1.4",
+  "easter_egg": "感谢 @大卫 提供的 1.0 版本、图标等关键信息\n感谢 @nell nell @g9qad 的内容授权\n感谢 @阿寜寜 @流水浮灯 提供的笔记文件\n感谢每一位读到这里的人\n以此APP送给每一位努力活下去的朋友\n\n\n"
 }

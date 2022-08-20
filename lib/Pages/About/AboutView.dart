@@ -37,7 +37,7 @@ class _AboutViewState extends State<AboutView> {
               padding: const EdgeInsets.all(10.0),
               alignment: Alignment.center,
               width: 150,
-              child: Image.asset("res/icon.jpg"),
+              child: Image.asset("res/icon.png"),
             ),
             Text(S.of(context).app_name),
             FutureBuilder<String>(

@@ -4,7 +4,7 @@ import json
 from datetime import datetime
 from urllib.parse import unquote
 
-VERSION = 5
+VERSION = 8
 TARGET = r"../res/data.json"
 
 # 常量定义
@@ -187,7 +187,7 @@ def getArticleList(DIR, PATHS, REPLACE_PATH):
 
                 # print(path)
                 if REPLACE_PATH:
-                    tag = categories[path.replace(DIR + PATH, "").replace("/自然科学", "").replace("/应用科学", "")]
+                    tag = categories.get(path.replace(DIR + PATH, "").replace("/自然科学", "").replace("/应用科学", ""), "")
                 else:
                     tag = categories[path.replace(DIR, "")]
                 article = getArticle(file_name, content, tag)

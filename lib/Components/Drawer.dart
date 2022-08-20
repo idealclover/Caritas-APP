@@ -1,3 +1,4 @@
+import 'package:caritas/Utils/URLUtil.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,12 +23,14 @@ class MDrawer extends StatelessWidget {
           UserAccountsDrawerHeader(
             accountName: const Text(Config.drawerTitle,
                 style: TextStyle(fontWeight: FontWeight.bold)),
-            accountEmail: const Text(Config.drawerLink),
-            currentAccountPicture: const CircleAvatar(
-              backgroundImage: AssetImage("res/icon.jpg"),
+            accountEmail: InkWell(
+              child: const Text(Config.drawerLink),
+              onTap: () => URLUtil.openUrl(Config.blogUrl, context),
             ),
-            decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor),
+            currentAccountPicture: const CircleAvatar(
+              backgroundImage: AssetImage("res/icon.png"),
+            ),
+            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
           ),
           ListTile(
             title: Text(S.of(context).home_title),
@@ -60,11 +63,11 @@ class MDrawer extends StatelessWidget {
           //     onTap: () async => await SettingsUtil.qqTapUtil(context),
           //     onLongPress: () async =>
           //         await SettingsUtil.qqLongPressUtil(context)),
-          ListTile(
-            title: Text(S.of(context).donate_title),
-            trailing: const Icon(Icons.attach_money),
-            onTap: () async => await SettingsUtil.donateUtil(context),
-          ),
+          // ListTile(
+          //   title: Text(S.of(context).donate_title),
+          //   trailing: const Icon(Icons.attach_money),
+          //   onTap: () async => await SettingsUtil.donateUtil(context),
+          // ),
           ListTile(
             title: Text(S.of(context).about_title),
             trailing: FutureBuilder<String>(

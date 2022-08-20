@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
         closeOnSubmit: false,
         onChanged: searchChanged,
         hintText: "在文集中搜索...");
-    searchArticleList = data.first.articles;
+    searchArticleList = data.isEmpty ? [] : data.first.articles;
     hideRead = false;
 
     super.initState();

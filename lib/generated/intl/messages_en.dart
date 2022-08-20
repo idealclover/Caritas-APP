@@ -53,8 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donate_subtitle":
             MessageLookupByLibrary.simpleMessage("Buy me a cup of coffee!"),
         "donate_title": MessageLookupByLibrary.simpleMessage("Donate"),
-        "easter_egg":
-            MessageLookupByLibrary.simpleMessage("This is easter egg."),
+        "easter_egg": MessageLookupByLibrary.simpleMessage(
+            "感谢 @大卫 提供的 1.0 版本、图标等关键信息\n感谢 @nell nell @g9qad 的内容授权\n感谢 @阿寜寜 @流水浮灯 提供的笔记文件\n感谢每一位读到这里的人\n以此APP送给每一位努力活下去的朋友\n\n\n"),
         "export_content": m0,
         "export_title": MessageLookupByLibrary.simpleMessage("Export"),
         "export_to_file_subtitle": MessageLookupByLibrary.simpleMessage(
@@ -93,7 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "open_in_browser_button":
             MessageLookupByLibrary.simpleMessage("Open in browser."),
         "open_source_library_content": MessageLookupByLibrary.simpleMessage(
-            "fluttertoast: ^8.0.9\nflutter_native_splash: ^2.2.3+1\nget: ^4.6.5\nget_storage: ^2.0.3\npackage_info_plus: ^1.4.2\nshare_plus: ^4.0.10\nurl_launcher: ^6.1.4"),
+            "cloud_kit: ^1.1.0 (modefied)\ndio: ^4.0.6\nfile_picker: ^5.0.0\nflutter_markdown: ^0.6.10+2\nfluttertoast: ^8.0.9\nflutter_html: ^3.0.0-alpha.5\nflutter_native_splash: ^2.2.3+1\nflutter_search_bar: ^3.0.0 (modefied)\nget: ^4.6.5\nget_storage: ^2.0.3\nhive: ^2.2.3\nhive_flutter: ^1.1.0\npackage_info_plus: ^1.4.2\nqr_code_scanner: ^1.0.0\nqr_flutter: ^4.0.0\nshare_plus: ^4.0.10\numeng_common_sdk: ^1.2.4 (modefied)\nuniversal_io: ^2.0.4\nurl_launcher: ^6.1.4"),
         "open_source_library_title":
             MessageLookupByLibrary.simpleMessage("OpenSource Libraries"),
         "pre_article": MessageLookupByLibrary.simpleMessage("Previous"),
@@ -114,8 +114,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Help us improve our products."),
         "share_data_title":
             MessageLookupByLibrary.simpleMessage("Share Usage Data"),
-        "share_message":
-            MessageLookupByLibrary.simpleMessage("This is share message."),
+        "share_message": MessageLookupByLibrary.simpleMessage(
+            "Caritas APP - an APP about Love. https://github.com/idealclover/Caritas-APP"),
         "share_subtitle": MessageLookupByLibrary.simpleMessage(
             "Share this app to more friends!"),
         "share_title": MessageLookupByLibrary.simpleMessage("Share"),

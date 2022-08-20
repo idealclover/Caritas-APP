@@ -47,7 +47,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "developer": MessageLookupByLibrary.simpleMessage("开发者 idealclover"),
         "donate_subtitle": MessageLookupByLibrary.simpleMessage("给傻翠买支棒棒糖吧！"),
         "donate_title": MessageLookupByLibrary.simpleMessage("投喂"),
-        "easter_egg": MessageLookupByLibrary.simpleMessage("这里是彩蛋"),
+        "easter_egg": MessageLookupByLibrary.simpleMessage(
+            "感谢 @大卫 提供的 1.0 版本、图标等关键信息\n感谢 @nell nell @g9qad 的内容授权\n感谢 @阿寜寜 @流水浮灯 提供的笔记文件\n感谢每一位读到这里的人\n以此APP送给每一位努力活下去的朋友\n\n\n"),
         "export_content": m0,
         "export_title": MessageLookupByLibrary.simpleMessage("导出"),
         "export_to_file_subtitle":
@@ -80,7 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "open_in_browser_button":
             MessageLookupByLibrary.simpleMessage("浏览器内打开"),
         "open_source_library_content": MessageLookupByLibrary.simpleMessage(
-            "fluttertoast: ^8.0.9\nflutter_native_splash: ^2.2.3+1\nget: ^4.6.5\nget_storage: ^2.0.3\npackage_info_plus: ^1.4.2\nshare_plus: ^4.0.10\nurl_launcher: ^6.1.4"),
+            "cloud_kit: ^1.1.0 (modified)\ndio: ^4.0.6\nfile_picker: ^5.0.0\nflutter_markdown: ^0.6.10+2\nfluttertoast: ^8.0.9\nflutter_html: ^3.0.0-alpha.5\nflutter_native_splash: ^2.2.3+1\nflutter_search_bar: ^3.0.0 (modified)\nget: ^4.6.5\nget_storage: ^2.0.3\nhive: ^2.2.3\nhive_flutter: ^1.1.0\npackage_info_plus: ^1.4.2\nqr_code_scanner: ^1.0.0\nqr_flutter: ^4.0.0\nshare_plus: ^4.0.10\numeng_common_sdk: ^1.2.4 (modified)\nuniversal_io: ^2.0.4\nurl_launcher: ^6.1.4"),
         "open_source_library_title":
             MessageLookupByLibrary.simpleMessage("所使用到的开源库"),
         "pre_article": MessageLookupByLibrary.simpleMessage("上一篇"),
@@ -98,7 +99,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "share_data_subtitle":
             MessageLookupByLibrary.simpleMessage("帮助我们提升产品体验"),
         "share_data_title": MessageLookupByLibrary.simpleMessage("共享阅读数据"),
-        "share_message": MessageLookupByLibrary.simpleMessage("这是分享用的宣传文字"),
+        "share_message": MessageLookupByLibrary.simpleMessage(
+            "Caritas APP 一个关于「爱」的 APP https://github.com/idealclover/Caritas-APP"),
         "share_subtitle": MessageLookupByLibrary.simpleMessage("把应用分享给更多小伙伴吧！"),
         "share_title": MessageLookupByLibrary.simpleMessage("分享"),
         "sync_button_subtitle":
