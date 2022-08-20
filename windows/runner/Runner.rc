@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "top.idealclover.caritas" "\0"
-            VALUE "FileDescription", "foundation" "\0"
+            VALUE "FileDescription", "caritas" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "foundation" "\0"
+            VALUE "InternalName", "caritas" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 top.idealclover.caritas. All rights reserved." "\0"
-            VALUE "OriginalFilename", "foundation.exe" "\0"
-            VALUE "ProductName", "foundation" "\0"
+            VALUE "OriginalFilename", "caritas.exe" "\0"
+            VALUE "ProductName", "caritas" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
