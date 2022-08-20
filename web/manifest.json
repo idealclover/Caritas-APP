@@ -1,6 +1,6 @@
 {
-    "name": "foundation",
-    "short_name": "foundation",
+    "name": "caritas",
+    "short_name": "caritas",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
