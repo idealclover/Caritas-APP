@@ -1,104 +1,104 @@
-<h1 align="center">Flutter Foundation</h1>
+<p align="center">
+<img src="./res/icon.png" alt="Caritas" width="100">
+</p>
+<h1 align="center">Caritas</h1>
 
-> 🧰 My flutter-based app framework.
+> 🔥 于浩歌狂热之际中寒；于天上看见深渊。于一切眼中看见无所有；于无所希望中得救。
 
-## 这是什么
+想写这样的一款 APP，于是就写了。
 
-实现了一些基础功能的 Flutter 应用脚手架。
+> 感谢 @大卫 提供的 1.0 版本、图标等关键信息
+> 感谢 @g9qad @nell nell 的内容授权
+> 感谢 @阿寜寜 @流水浮灯 提供的笔记文件
 
-![](./img/1.png)
+在之前大卫的 [Caritas 1.0](https://zhuanlan.zhihu.com/p/488034619) 版本上进行了整体的重构，希望能将这样一些引人启发的回答，以最纯净的形式带给你。
 
-![](./img/2.png)
+依旧使用 flutter 架构，因此通过一套代码在 ```安卓/iOS/MacOS/Windows/Web``` 各端上都进行了支持，在最后附上了各端的安装方式。
 
-![](./img/3.png)
+# 功能说明
 
-## 为什么有这个项目
+一句话说明：将部分答主（当前 @g9qad 和 @nell nell）的内容做成了单独的 APP，分门别类进行整理，以供离线使用与阅读
 
-从用户视角看问题，对于一个 APP 来说，最重要的往往不是 APP 内的主要功能，而是「意见反馈」「更新」和「数据统计」功能
+![](https://image.idealclover.cn/blog/635/1.png)
 
-1.0 版本做的烂没关系，关键需要有方式能持续改进。
+那，和 1.0 相比，主要更新了哪些内容呢？
 
-对于用户，就是要触达用户，告诉客户「我们在听」与「我们更新了」
+首先由原来仅支持安卓/iOS（企业签名）变为了移动端/电脑端/网页端均支持的形式，可以在不同操作系统的手机/平板/电脑上以统一的体验使用。
 
-否则，要么客户流失率会很高，要么，APP 已经出道 3.0 版本了，一大堆用户还不知道有更新，仍然停留在 0.1 版本 😳
+![](https://image.idealclover.cn/blog/635/2.png)
 
-对于自己，就是要有数据埋点，从客观上看客户在「怎么用」我们的软件
+之后，与 1.0 版本一致，作为一个纯客户端的应用，所有的内容都将存储在本地，不需要联网（没错，好几次出差的飞机上，这个 APP 都陪伴过度过了整个航班）
 
-就需要移动统计的助力，有数据才相当于有地图，仗才能大的漂亮
+但不同的是，这次支持了数据的热更新，这意味着我会随着上游数据的更新（感谢 @阿寜寜 的 [AaNingNing/Sth-Matters](https://github.com/AaNingNing/Sth-Matters) 与 [AaNingNing/Nell-Nell](https://github.com/AaNingNing/Nell-Nell) 两个数据源）随之更新数据，更新后最新的数据依旧会存放在您的本地，不必担心后续变数
 
-另外，面向国内的应用一个绕不过去的问题就是「合规」，需要在 APP 启动时就对相关隐私政策与协议进行展示，可能在小 APP 时不用考虑那么多，但总要迈出做大的一步的。
+![](https://image.idealclover.cn/blog/635/3.png)
 
-还有就是一些基础的国际化功能。
+此外，为了最大程度优化长文字的阅读体验，也进行了一些工作。支持了已读标记、历史记录查看、收藏等功能，支持自定义颜色主题，同时为了更好地在夜晚阅读（社畜不配拥有白天 QAQ）支持了暗色模式，并能随系统自动切换模式或手动调整。
 
-而因为自己总会折腾些小项目，往往这些功能都需要重复使用。于是建造了一个基础的 APP 脚手架，覆盖了通用 APP 最重要的更新/分享/隐私合规/主题切换/移动统计等能力，以后写小 APP 再也不用重复造这些基础功能的轮子～
+![](https://image.idealclover.cn/blog/635/4.png)
 
-由于是基础的脚手架，也就尝试去追求最通用的能力，因此覆盖了 Flutter 支持的全部六端（Android/iOS/Web/Win/Mac/Linux）已支持 Flutter 3.0
+以及考虑到不同设备间的数据同步问题，支持将当前的收藏与历史阅读记录通过文件或二维码的形式进行导入导出；针对 iOS 设备额外支持了通过 iCloud 进行跨设备同步的方式（不过由于技术与苹果同步机制原因，暂未做成自动同步，需要手动出发）
 
-## 为什么是 flutter？
+![](https://image.idealclover.cn/blog/635/5.png)
 
-首先可能我 flutter 项目起的比较多
+最后，全项目代码以 MIT License 开源在 [Github-idealclover/Caritas-APP](https://github.com/idealclover/Caritas-APP) 上，可以进行查看与修改，也欢迎有能力的朋友帮助进行代码优化与功能扩展。
 
-其次，虽然大项目上 flutter 可能会遇到很多的坑，单对于小项目 flutter 确实是很独一无二的支持方案
+如果在使用过程中有任何问题，可以在应用内通过 QQ 与我进行联系，或直接通过知乎私信或进行评论。如果觉得好用，也欢迎您的分享与其他支持！
 
-* 坑相比其他跨平台解决方案（RN、uniapp 等）相对少
-* 能使用的平台原生能力相对多
-* 初期不需要重复开发安卓/iOS 甚至桌面端
-* 一个 Widget 包所有的模式相对易懂灵活
+# 安装说明
 
-对我来说 flutter 可能是冷启动一个小玩意很快速的方式，而我自己的小玩意，说到底就是请求请求网络、展示展示数据，花里胡哨的东西都用不到，所以也就相对舒适
+为了避免使用其他渠道分发带来的不可控性，尽可能使用了自己自费的 CDN 进行分发，速度可能会稍慢点，希望大家理解 hh
 
-不如以这个项目为始，你也来试一试～🎉
+## 移动端 - 安卓
 
-## 主要 feature
+> 由于安卓应用商店众多且审核标准不一致，信息类 APP 也比较难过审，因此直接使用 apk 形式进行应用分发
 
-- [x] 主题切换
-- [x] 主题自定义
-- [x] 深色模式
-- [x] 隐私合规
-- [x] 分享应用
-- [x] 默认国际化
-- [x] 反馈功能
-- [x] 关于页面
-- [x] 更新模块
-- [x] 捐助模块
-- [x] 移动统计
+下载地址：http://cdn.idealclover.cn/Projects/caritas/caritas_android_latest.apk
 
-## 谁在用
+由于现在各安卓厂商的拦截、限制策略，可能会在安装 APP 时引导“去应用商店安装”，忽略即可（估计大家也都已经习惯了吧 = =|||）
 
-全部或部分使用该脚手架的项目：
+另外，之前安装过 Caritas 1.0 版本的朋友，由于包名、签名不一致，因此可能会看到两个版本在手机并存的情况，属正常现象
 
-* [南哪课表 APP](https://nju.app)
-* 小刻食堂 APP（部分采用，升级中）
-* Caritas APP（重构中）
-* ...
+## 移动端 - iOS
 
-如果这个项目对你的 APP 也有帮助，欢迎在 [issue](/issues) 中告诉我！
+> 由于 iOS 正式版被苹果应用商店以 4.2.2 理由拒审，因此暂时使用 testflight 进行发布，限额 1000 先使用先得（应该不会满员吧）
+> 
+> 如果你了解如何进一步修改以过审，也欢迎来联系我，需要你的帮助。
 
-以及由于对 Flutter 架构了解不深，如果有问题与改进 欢迎各种 [issue](/issues) 和 [pull request](/pulls) ～
+使用地址：https://testflight.apple.com/join/XBsy7KXQ
 
-## 如何使用
+之前使用过 testflight 的朋友估计会比较熟悉了，点击链接直接可以参与测试、安装APP；没有用过的朋友可能需要先根据引导下载一个 testflight（苹果官方的测试版本发布工具）
 
-### 基础：Flutter
+## 桌面端 - Windows
 
-This project is a starting point for a Flutter application.
+下载地址：http://cdn.idealclover.cn/Projects/caritas/caritas_windows_latest.exe
 
-A few resources to get you started if this is your first Flutter project:
+下载后按照安装引导步骤安装即可
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 桌面端 - MacOS
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> Testflight 过审中（另外电脑端也不推荐使用 APPStore 安装软件，直接用 dmg 包吧）
 
-### 基础之上的配置
+下载地址：http://cdn.idealclover.cn/Projects/caritas/caritas_macos_latest.dmg
 
-1. 部署 ```api/``` 下的各文件到静态服务器上（用来进行更新、隐私信息查询）
-2. 复制 ```lib/Resources/Config.sample.dart``` 为 ```lib/Resources/Config.dart``` 并填写基础信息
-3. 更改包名（bundleId）和应用名称（appname），推荐使用 [rename](https://pub.dev/packages/rename) 这个插件
+下载打开之后按安装流程将图标拖入 Applications 文件夹即可进行使用
 
-### LICENSE
+## 网页端
 
-[MIT LICENSE](./LICENSE). Have fun coding!
+> 提示：网页端由于需加载文件较大（10+M）且 flutter web 架构本身不够稳定，不推荐进行使用，使用过程中可能会出现更多未知 bug
 
-Long live open source.
+网页链接：https://caritas.idealclover.cn/
+
+直接使用浏览器打开即可
+
+# 写在最后
+
+并不是科班出身，目前做的也不是实际开发工作。写的代码也不过靠着自己的业余兴趣，如果性能上有问题，或者出现了奇奇怪怪的 bug，欢迎随时来找我反馈。
+
+嗯，既然是兴趣，那就要“当女儿一般养起来”的。不会接入广告，也不会有收费，包括苹果开发者账号（688/年）在内也均为自费，你的点赞分享和使用就是我继续维护的最大动力嘿嘿。
+
+以及，“鼓励利用此 APP 的代码盈利”——如果这些代码值得的话。
+
+希望这个 APP 可以帮到你，至少，这些内容曾帮助过我自己，过去、现在、以及可能的未来。
+
+所以我把这火炬，与你分享。
