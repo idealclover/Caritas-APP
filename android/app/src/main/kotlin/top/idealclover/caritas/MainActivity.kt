@@ -13,6 +13,6 @@ class MainActivity: FlutterActivity() {
         UMConfigure.setLogEnabled(true)
 
         //友盟预初始化
-        UMConfigure.preInit(getApplicationContext(), "5f8ef217fac90f1c19a7b0f3", "Umeng")
+        UMConfigure.preInit(getApplicationContext(), "62cebc7788ccdf4b7ecc81f4", "Umeng")
     }
 }

@@ -1,14 +1,13 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import '../../Components/SnackBar.dart';
-import '../../Utils/UmengUtil.dart';
 import '../../generated/l10n.dart';
 import 'ArticlePresenter.dart';
 import '../Settings/SettingsProvider.dart';
 import '../../Components/ArticleList.dart';
-
-// import '../../Components/Toast.dart';
+import '../../Components/SnackBar.dart';
 import '../../Components/Markdown.dart';
 import '../../Models/Db/DbHelper.dart';
+import '../../Utils/UmengUtil.dart';
 import '../../Utils/URLUtil.dart';
 
 class ArticleView extends StatefulWidget {
@@ -26,12 +25,19 @@ class ArticleView extends StatefulWidget {
 class _ArticleViewState extends State<ArticleView> {
   late Article article;
   late bool isFavorite;
-  ScrollController sc = ScrollController();
+  bool isPlaying = false;
+  final player = AudioPlayer();
 
   @override
   void initState() {
     article = widget.article;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    player.stop();
+    super.dispose();
   }
 
   /// 打开上一篇/下一篇通过直接刷新当前页面的形式，而不是新建页面
@@ -48,13 +54,19 @@ class _ArticleViewState extends State<ArticleView> {
             title: Text(targetArticle.title),
             subtitle:
                 Text(targetArticle.question, overflow: TextOverflow.ellipsis),
-            onTap: (() {
+            onTap: (() async {
               setState(() => {article = targetArticle});
               // ArticlePresenter ap = ArticlePresenter();
               // ap.setAsRead(targetArticle);
+              ScrollController? sc = PrimaryScrollController.of(context);
+              if (sc == null) return;
               sc.animateTo(0,
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.ease);
+              await player.stop();
+              setState(() {
+                isPlaying = false;
+              });
             })),
         const Divider(height: 1),
         const Padding(padding: EdgeInsets.all(5.0)),
@@ -87,6 +99,46 @@ class _ArticleViewState extends State<ArticleView> {
         appBar: AppBar(
           title: Text(article.title),
           actions: [
+            isPlaying
+                ? IconButton(
+                    icon: const Icon(Icons.stop_circle_outlined),
+                    onPressed: () async {
+                      await player.stop();
+                      setState(() {
+                        isPlaying = false;
+                      });
+                    })
+                : IconButton(
+                    icon: const Icon(Icons.queue_music),
+                    onPressed: () async {
+                      const baseUrl =
+                          "https://clover-1254951786.cos.ap-shanghai.myqcloud.com/Projects/caritas/audio/";
+                      player.play(UrlSource(Uri.encodeFull(
+                          "$baseUrl${article.categories.isEmpty ? "最近更新" : article.categories[0]}/${article.title}.wav")));
+                      setState(() {
+                        isPlaying = true;
+                      });
+                      // MSnackBar.showSnackBar('无网络或无当前文章声音资源', "");
+
+                      player.onPlayerComplete.listen((event) {
+                        Article? targetArticle = getNextArticle();
+                        if (targetArticle == null) {
+                          return;
+                        }
+                        setState(() => {article = targetArticle});
+                        // ArticlePresenter ap = ArticlePresenter();
+                        // ap.setAsRead(targetArticle);
+                        ScrollController? sc =
+                            PrimaryScrollController.of(context);
+                        if (sc == null) return;
+                        sc.animateTo(0,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.ease);
+                        player.play(UrlSource(Uri.encodeFull(
+                            "$baseUrl${article.categories.isEmpty ? "最近更新" : article.categories[0]}/${article.title}.wav")));
+                      });
+                    },
+                  ),
             IconButton(
                 icon: Icon(
                   isFavorite ? Icons.favorite : Icons.favorite_border,
@@ -119,7 +171,7 @@ class _ArticleViewState extends State<ArticleView> {
           ],
         ),
         body: SingleChildScrollView(
-          controller: sc,
+          primary: true,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,

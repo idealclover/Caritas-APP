@@ -1,7 +1,7 @@
 {
-  "version": 8,
-  "title": "08.20数据库更新",
-  "content": "例行数据库更新",
+  "version": 13,
+  "title": "09.03数据库更新",
+  "content": "例行数据库更新\n修复了部分历史文章中的问题",
   "isForce": false,
   "confirm_text": "立刻更新",
   "cancel_text": "下次再说",

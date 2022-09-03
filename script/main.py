@@ -4,15 +4,17 @@ import json
 from datetime import datetime
 from urllib.parse import unquote
 
-VERSION = 8
+VERSION = 13
 TARGET = r"../res/data.json"
 
 # 常量定义
 
 JOHN_DIR = r"/Users/idealclover/GitHub/Sth-Matters/"
+JOHN_AUDIO_DIR = r"/Users/idealclover/GitHub/Sth-Matters-Audio/"
 JOHN_PATHS = [r"Anonymity/"]
 NELL_DIR = r"/Users/idealclover/GitHub/Nell-Nell/"
-NELL_PATHS = ["00 - 致读者", "00 - “是什么”系列", "01 - “怎么办”系列", "02 - “如何看待”系列", "03 - “好好活着”系列", "05 - 书评 & 影评", "待分类"]
+NELL_AUDIO_DIR = r"/Users/idealclover/GitHub/Nell-Nell-Audio/"
+NELL_PATHS = ["00 - 致读者", "01 - “是什么”系列", "02 - “怎么办”系列", "03 - “如何看待”系列", "04 - “好好活着”系列", "06 - 书评 & 影评", "09 - 简答"]
 
 # TARGET = r"./data.json"
 IGNORE_FILES = [".DS_Store", "README.md", ".md", "致读者 - 关于收费.JPEG"]
@@ -28,6 +30,10 @@ CONFIG_ORDER = [
         "致读者 - 留言 @Anonymity",
         "致读者 - 关于盈利 @Anonymity",
         "致你们 @Anonymity",
+        "致读者 - 卖瓜 @Anonymity",
+        "致读者 - 写作 @NellNell",
+        "致读者 - 潜力 @NellNell",
+        "致读者 - 十年 @NellNell"
     ]
 ]
 
@@ -46,12 +52,12 @@ categories = {
     "11 - 新冠": "新冠",
     "12 - 大过滤器": "大过滤器",
     "13 - 百年未有之变局": "时政",
-    "00 - “是什么”系列": "是什么",
-    "01 - “怎么办”系列": "怎么办",
-    "02 - “如何看待”系列": "如何看",
-    "03 - “好好活着”系列": "好好活",
-    "05 - 书评 & 影评": "书评影评",
-    "待分类": "待分类",
+    "01 - “是什么”系列": "是什么",
+    "02 - “怎么办”系列": "怎么办",
+    "03 - “如何看待”系列": "如何看",
+    "04 - “好好活着”系列": "好好活",
+    "06 - 书评 & 影评": "书评影评",
+    "09 - 简答": "简答",
 }
 
 # static 变量定义
@@ -74,12 +80,12 @@ data = {
         {"title": categories["11 - 新冠"]},
         {"title": categories["10 - “就你机灵”系列"]},
         {"title": categories["12 - 大过滤器"]},
-        {"title": categories["00 - “是什么”系列"]},
-        {"title": categories["01 - “怎么办”系列"]},
-        {"title": categories["02 - “如何看待”系列"]},
-        {"title": categories["03 - “好好活着”系列"]},
-        {"title": categories["05 - 书评 & 影评"]},
-        {"title": categories["待分类"]},
+        {"title": categories["01 - “是什么”系列"]},
+        {"title": categories["02 - “怎么办”系列"]},
+        {"title": categories["03 - “如何看待”系列"]},
+        {"title": categories["04 - “好好活着”系列"]},
+        {"title": categories["06 - 书评 & 影评"]},
+        {"title": categories["09 - 简答"]},
     ],
     "tags": [],
     "articles": [],
@@ -96,7 +102,8 @@ def getArticle(file_name, content, tag):
     for c in columns:
         article[c] = ""
 
-    reg = r"^ *(?: *#(?: *)(.*))?\n* *(\*.*\*|\[.*\])?(\(http.*\))?\n*(?: *> Author: *(.*) *)?\n*(?:(?:> )?Last update: \*(.*)\* *)?\n*(?:(?:> )?(?:Links:|Link:s) *(\[\[.*\]\])? *)?\n*(?:(?:> )?Tags: *(#.*)? *)?(?: |\n)*"
+    # reg = r"^ *(?: *#(?: *)(.*))?\n* *(\*.*\*|\[.*\])?(\(http.*\))? *\n*(?: *> ?Author: *(.*) *)?\n*(?:(?:> )?Last update: \*(.*)\* *)?\n*(?:(?:> )?(?:Links:|Link:s|Link:) *(?:\[.*\]\(.*\))? *(\[\[.*\]\])? *)?\n*(?:(?:> )?(?:Tags:|Tag:) *(#.*)? *)?(?: |\n)*"
+    reg = r"^(?:# (.*))?\n*(\*.*\*|\[.*\])?(\(http.*\))?\n*(?:> Author:(.*))?\n*(?:(?:> )?Last update: \*(.*)\*)?\n*(?:(?:> Link:)(?:\[.*\]\(.*\))? *(\[\[.*\]\])? *)?\n*(?:(?:> Tag:) *(#.*)? *)?(?:\n)*"
     m = re.match(reg, content)
 
     if m.group(0) is not None:
@@ -110,6 +117,7 @@ def getArticle(file_name, content, tag):
 
     # id and title
     if article["title"] == "":
+        print(file_name)
         article["title"] = file_name.replace(".md", "")
     article["id"] = article["title"]
 
@@ -121,6 +129,7 @@ def getArticle(file_name, content, tag):
 
     # lastUpdate
     if article["lastUpdate"] == "":
+        # print(file_name)
         article["lastUpdate"] = "01/01/1970"
 
     # links
@@ -150,10 +159,19 @@ def getArticle(file_name, content, tag):
         lambda x: "(http" + x.group(1) + "://" + unquote(x.group(2), encoding="utf-8") + ")",
         article["content"],
     ).strip()
+
+    # if re.search("\n +", article["content"]) is not None:
+    #     print(file_name)
+    # if article["question"] == "":
+    #     print(file_name)
+    # if "Tags" in article["content"]:
+    #     print(file_name)
+    # if article["author"] == "":
+    #     print(file_name)
     return article
 
 
-def getArticleList(DIR, PATHS, REPLACE_PATH):
+def getArticleList(DIR, PATHS, AUDIO_DIR, REPLACE_PATH):
 
     fileList = os.listdir(DIR)
     for file_name in fileList:
@@ -167,6 +185,9 @@ def getArticleList(DIR, PATHS, REPLACE_PATH):
 
         tag = "最近更新"
         article = getArticle(file_name, content, tag)
+
+        # if os.path.exists((AUDIO_DIR + file_name).replace(".md", ".wav")):
+        #     article["audio"] = True
 
         data["articles"].append(article)
 
@@ -200,8 +221,8 @@ def getArticleList(DIR, PATHS, REPLACE_PATH):
 
 def main():
 
-    getArticleList(JOHN_DIR, JOHN_PATHS, True)
-    getArticleList(NELL_DIR, NELL_PATHS, False)
+    getArticleList(JOHN_DIR, JOHN_PATHS, JOHN_AUDIO_DIR, True)
+    getArticleList(NELL_DIR, NELL_PATHS, NELL_AUDIO_DIR, False)
 
     print(json.dumps(rst, indent=2))
 
@@ -212,7 +233,6 @@ def main():
 
     for order in CONFIG_ORDER:
         for itemName in reversed(order):
-            # print([i for i, obj in enumerate(data["articles"]) if obj['id']==itemName][0])
             data["articles"].insert(
                 0, data["articles"].pop([i for i, obj in enumerate(data["articles"]) if obj["id"] == itemName][0])
             )
