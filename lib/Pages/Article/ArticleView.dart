@@ -1,6 +1,8 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import '../../generated/l10n.dart';
+
+// import 'package:audioplayers/audioplayers.dart';
+import 'package:just_audio/just_audio.dart';
 import 'ArticlePresenter.dart';
 import '../Settings/SettingsProvider.dart';
 import '../../Components/ArticleList.dart';
@@ -95,6 +97,7 @@ class _ArticleViewState extends State<ArticleView> {
     ArticlePresenter ap = ArticlePresenter();
     ap.setAsRead(article);
     UmengUtil.onEvent("open_article", {"aid": article.id});
+
     return Scaffold(
         appBar: AppBar(
           title: Text(article.title),
@@ -112,30 +115,55 @@ class _ArticleViewState extends State<ArticleView> {
                     icon: const Icon(Icons.queue_music),
                     onPressed: () async {
                       const baseUrl =
-                          "https://clover-1254951786.cos.ap-shanghai.myqcloud.com/Projects/caritas/audio/";
-                      player.play(UrlSource(Uri.encodeFull(
-                          "$baseUrl${article.categories.isEmpty ? "最近更新" : article.categories[0]}/${article.title}.wav")));
-                      setState(() {
-                        isPlaying = true;
-                      });
-                      // MSnackBar.showSnackBar('无网络或无当前文章声音资源', "");
+                          "https://cdn.idealclover.cn/Projects/caritas/audio/";
+                      String audioUrl = Uri.encodeFull(
+                          "$baseUrl${article.tags.last}/${article.title}.mp3");
+                      // print(audioUrl);
+                      try {
+                        await player.setUrl(audioUrl);
+                        player.play();
+                        setState(() {
+                          isPlaying = true;
+                        });
+                        UmengUtil.onEvent("play_audio",
+                            {"aid": article.id, "type": "manual"});
+                      } catch (e) {
+                        setState(() {
+                          isPlaying = false;
+                        });
+                        MSnackBar.showSnackBar('无网络或无当前文章声音资源 TvT', "");
+                      }
 
-                      player.onPlayerComplete.listen((event) {
-                        Article? targetArticle = getNextArticle();
-                        if (targetArticle == null) {
-                          return;
+                      player.playerStateStream.listen((playerState) async {
+                        if (playerState.processingState ==
+                            ProcessingState.completed) {
+                          Article? targetArticle = getNextArticle();
+                          if (targetArticle == null) {
+                            return;
+                          }
+                          setState(() => {article = targetArticle});
+                          // ArticlePresenter ap = ArticlePresenter();
+                          // ap.setAsRead(targetArticle);
+                          ScrollController? sc =
+                              PrimaryScrollController.of(context);
+                          if (sc == null) return;
+                          sc.animateTo(0,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.ease);
+                          audioUrl = Uri.encodeFull(
+                              "$baseUrl${article.tags.last}/${targetArticle.title}.mp3");
+                          try {
+                            await player.setUrl(audioUrl);
+                            player.play();
+                            UmengUtil.onEvent("play_audio",
+                                {"aid": article.id, "type": "auto"});
+                          } catch (e) {
+                            setState(() {
+                              isPlaying = false;
+                            });
+                            MSnackBar.showSnackBar('无网络或无当前文章声音资源 TvT', "");
+                          }
                         }
-                        setState(() => {article = targetArticle});
-                        // ArticlePresenter ap = ArticlePresenter();
-                        // ap.setAsRead(targetArticle);
-                        ScrollController? sc =
-                            PrimaryScrollController.of(context);
-                        if (sc == null) return;
-                        sc.animateTo(0,
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.ease);
-                        player.play(UrlSource(Uri.encodeFull(
-                            "$baseUrl${article.categories.isEmpty ? "最近更新" : article.categories[0]}/${article.title}.wav")));
                       });
                     },
                   ),
@@ -179,7 +207,7 @@ class _ArticleViewState extends State<ArticleView> {
               Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: MMarkdown(
-                      '# ${article.title}\n    作者: ${article.author}\n    最近更新: ${article.lastUpdate}\n\n${article.question == "" ? "" : ">${article.question}\n\n"}${article.content}')),
+                      '# ${article.title}\n    作者: ${article.author} 最近更新: ${article.lastUpdate}\n\n${article.question == "" ? "" : ">${article.question}\n\n"}${article.content}')),
               // '# ${article.title}\n${article.zhihuLink == "" ? article.question : "[${article.question}](${article.zhihuLink})"}\n\n> 最后更新: ${article.lastUpdate}\n\n${article.content}')),
               // child: MMarkdown(article.content)),
               getArticleWidget(S.of(context).pre_article, getPreArticle()),

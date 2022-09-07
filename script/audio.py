@@ -55,7 +55,7 @@ for file_name in fileList:
 for PATH in PATHS:
     p = os.walk(SOURCE_DIR + PATH)
     for path, dir_list, file_list in p:
-        if(path != "/Users/idealclover/GitHub/Sth-Matters/Anonymity/01 - 家族答集"):
+        if("/Users/idealclover/GitHub/Sth-Matters/Anonymity/05 - 科学答集" in path):
             continue;
         for file_name in file_list:
             if ".md" not in file_name or file_name in IGNORE_FILES:
