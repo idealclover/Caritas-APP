@@ -4,7 +4,7 @@ import json
 from datetime import datetime
 from urllib.parse import unquote
 
-VERSION = 13
+VERSION = 14
 TARGET = r"../res/data.json"
 
 # 常量定义

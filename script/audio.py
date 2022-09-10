@@ -27,7 +27,7 @@ def synthesize_to_speaker(path, tar_filename, content):
     speech_config.speech_synthesis_language = "zh-CN"
     speech_config.speech_synthesis_voice_name ="zh-CN-XiaoxuanNeural"
     print(TARGET_DIR + path + tar_filename)
-    audio_config = AudioOutputConfig(filename=TARGET_DIR + path + tar_filename)
+    audio_config = AudioOutputConfig(filename=(TARGET_DIR + path + tar_filename).replace("/应用科学", "").replace("/自然科学", ""))
     synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
     synthesizer.speak_text_async(content)
 
@@ -47,7 +47,7 @@ for file_name in fileList:
     path = ""
     tar_filename = file_name.replace(".md", ".wav")
     if os.path.exists(TARGET_DIR + path + tar_filename):
-        print(tar_filename + " exists, skip")
+        # print(tar_filename + " exists, skip")
         continue
     content = get_info("", file_name)
     synthesize_to_speaker("", tar_filename, content)
@@ -55,15 +55,16 @@ for file_name in fileList:
 for PATH in PATHS:
     p = os.walk(SOURCE_DIR + PATH)
     for path, dir_list, file_list in p:
-        if("/Users/idealclover/GitHub/Sth-Matters/Anonymity/05 - 科学答集" in path):
-            continue;
+        # if("/Users/idealclover/GitHub/Sth-Matters/Anonymity/05 - 科学答集" in path):
+        #     continue;
         for file_name in file_list:
             if ".md" not in file_name or file_name in IGNORE_FILES:
                 continue
             tar_filename = file_name.replace(".md", ".wav")
-            if os.path.exists(TARGET_DIR + path.replace(SOURCE_DIR, "").replace(PATH, "") + "/" + tar_filename):
-                print(tar_filename + " exists, skip")
+            if os.path.exists(TARGET_DIR + path.replace(SOURCE_DIR, "").replace(PATH, "").replace("/应用科学", "").replace("/自然科学", "") + "/" + tar_filename):
+                # print(tar_filename + " exists, skip")
                 continue
+            # print(path.replace(SOURCE_DIR, "") + tar_filename + " not exists")
             content = get_info(path.replace(SOURCE_DIR, ""), file_name)
             synthesize_to_speaker(path.replace(SOURCE_DIR, "").replace(PATH, "") + "/", tar_filename, content)
 
