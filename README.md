@@ -5,7 +5,7 @@
 </p>
 <h1 align="center">Caritas</h1>
 <p align="center">
-<a href="https://zhuanlan.zhihu.com/p/556201282">介绍文章</a>
+<a href="https://zhuanlan.zhihu.com/p/556201282">使用说明&下载地址</a>
 </p>
 
 > 🔥 于浩歌狂热之际中寒；于天上看见深渊。于一切眼中看见无所有；于无所希望中得救。
@@ -13,65 +13,21 @@
 
 ## Demo
 
-> 感谢 @大卫 提供的 1.0 版本、图标等关键信息
-> 感谢 @g9qad @nell nell 的内容授权
-> 感谢 @阿寜寜 @流水浮灯 提供的笔记文件
-
-![](https://image.idealclover.cn/blog/635/1.png)
-
-![](https://image.idealclover.cn/blog/635/2.png)
-
-![](https://image.idealclover.cn/blog/635/3.png)
-
-![](https://image.idealclover.cn/blog/635/4.png)
-
-![](https://image.idealclover.cn/blog/635/5.png)
-
-## 下载地址
-
-为了避免使用其他渠道分发带来的不可控性，尽可能使用了自己自费的 CDN 进行分发，速度可能会稍慢点，希望大家理解 hh
-
-### 移动端 - 安卓
-
-> 由于安卓应用商店众多且审核标准不一致，信息类 APP 也比较难过审，因此直接使用 apk 形式进行应用分发
-
-下载地址：http://cdn.idealclover.cn/Projects/caritas/caritas_android_latest.apk
-
-由于现在各安卓厂商的拦截、限制策略，可能会在安装 APP 时引导“去应用商店安装”，忽略即可（估计大家也都已经习惯了吧 = =|||）
-
-另外，之前安装过 Caritas 1.0 版本的朋友，由于包名、签名不一致，因此可能会看到两个版本在手机并存的情况，属正常现象
-
-### 移动端 - iOS
-
-> 由于 iOS 正式版被苹果应用商店以 4.2.2 理由拒审，因此暂时使用 testflight 进行发布，限额 1000 先使用先得（应该不会满员吧）
->
-> 如果你了解如何进一步修改以过审，也欢迎来联系我，需要你的帮助。
-
-使用地址：https://testflight.apple.com/join/XBsy7KXQ
-
-之前使用过 testflight 的朋友估计会比较熟悉了，点击链接直接可以参与测试、安装APP；没有用过的朋友可能需要先根据引导下载一个 testflight（苹果官方的测试版本发布工具）
-
-### 桌面端 - Windows
-
-下载地址：http://cdn.idealclover.cn/Projects/caritas/caritas_windows_latest.exe
-
-下载后按照安装引导步骤安装即可
-
-### 桌面端 - MacOS
-
-> Testflight 过审中（另外电脑端也不推荐使用 APPStore 安装软件，直接用 dmg 包吧）
-
-下载地址：http://cdn.idealclover.cn/Projects/caritas/caritas_macos_latest.dmg
-
-下载打开之后按安装流程将图标拖入 Applications 文件夹即可进行使用
-
-### 网页端
-
-> 提示：网页端由于需加载文件较大（10+M）且 flutter web 架构本身不够稳定，不推荐进行使用，使用过程中可能会出现更多未知 bug
-
-网页链接：https://caritas.idealclover.cn/
-
-直接使用浏览器打开即可
+<p align="center">
+<img src="https://image.idealclover.cn/blog/635/1.png" alt="Caritas" width="400">
+</p>
+<p align="center">
+<img src="https://image.idealclover.cn/blog/635/2.png" alt="Caritas" width="400">
+</p>
+<p align="center">
+<img src="https://image.idealclover.cn/blog/635/3.png" alt="Caritas" width="400">
+</p>
+<p align="center">
+<img src="https://image.idealclover.cn/blog/635/4.png" alt="Caritas" width="400">
+</p>
+<p align="center">
+<img src="https://image.idealclover.cn/blog/635/5.png" alt="Caritas" width="400">
+</p>
 
 ## 开发攻略
 
