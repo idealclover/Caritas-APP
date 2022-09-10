@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../Pages/Settings/SettingsProvider.dart';
@@ -16,6 +17,29 @@ class ArticlePresenter {
         rst.add(a.first);
       }
     }
+    return rst;
+  }
+
+  Future<List<Article>> getRandomArticleList(int num) async {
+    Box aBox = Hive.box("articles");
+    List<String> histories = SettingsProvider().getHistories();
+    List<Article> rst = [];
+
+    List<Article> a = aBox.values
+        .where((article) => !histories.contains(article.id))
+        .toList()
+        .cast();
+    // 如果所有都已读了，则选取全部文章
+    if (a.isEmpty) {
+      a = aBox.values
+          .toList()
+          .cast();
+    }
+    for(int i = 0; i < num; i++) {
+      int rand = Random().nextInt(a.length);
+      rst.add(a[rand]);
+    }
+
     return rst;
   }
 

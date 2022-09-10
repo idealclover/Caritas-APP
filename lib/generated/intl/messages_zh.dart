@@ -40,11 +40,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("浅色/深色模式切换"),
         "check_privacy_button": MessageLookupByLibrary.simpleMessage("隐私政策"),
         "check_update_button": MessageLookupByLibrary.simpleMessage("检查更新"),
+        "copied": MessageLookupByLibrary.simpleMessage("已复制到剪贴板"),
         "db_downloading": MessageLookupByLibrary.simpleMessage("下载中..."),
         "db_update_fail_toast": MessageLookupByLibrary.simpleMessage("数据更新失败！"),
         "db_update_success_toast":
             MessageLookupByLibrary.simpleMessage("数据更新完成！～"),
         "developer": MessageLookupByLibrary.simpleMessage("开发者 idealclover"),
+        "device_push_id": MessageLookupByLibrary.simpleMessage("当前设备推送 id"),
         "donate_subtitle": MessageLookupByLibrary.simpleMessage("给傻翠买支棒棒糖吧！"),
         "donate_title": MessageLookupByLibrary.simpleMessage("投喂"),
         "easter_egg": MessageLookupByLibrary.simpleMessage(
@@ -87,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pre_article": MessageLookupByLibrary.simpleMessage("上一篇"),
         "qrcode_url_error_toast":
             MessageLookupByLibrary.simpleMessage("二维码无效，可能为链接过期"),
+        "random_article": MessageLookupByLibrary.simpleMessage("随机文章"),
+        "random_title": MessageLookupByLibrary.simpleMessage("随机"),
         "read_hide_toast": MessageLookupByLibrary.simpleMessage("已读文章藏起来啦～"),
         "read_show_toast": MessageLookupByLibrary.simpleMessage("已读文章又显示啦～"),
         "related_article": MessageLookupByLibrary.simpleMessage("相关阅读"),

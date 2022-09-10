@@ -1,3 +1,6 @@
+import 'package:flutter/services.dart';
+
+import '../../Components/SnackBar.dart';
 import '../../Resources/Config.dart';
 import '../../Utils/PrivacyUtil.dart';
 import '../../Utils/UpdateUtil.dart';
@@ -5,6 +8,7 @@ import '../../Utils/URLUtil.dart';
 import '../../generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:umeng_push_sdk/umeng_push_sdk.dart';
 import 'Widgets/RainDropWidget.dart';
 
 class AboutView extends StatefulWidget {
@@ -78,6 +82,23 @@ class _AboutViewState extends State<AboutView> {
                 onTap: () => URLUtil.openUrl(Config.blogUrl, context)),
             _generateTitle(S.of(context).open_source_library_title),
             _generateContent(S.of(context).open_source_library_content),
+            FutureBuilder<String?>(
+                future: UmengPushSdk.getRegisteredId(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                  if (!snapshot.hasData || snapshot.data == null) {
+                    return Container();
+                  } else {
+                    return Column(children: [
+                      _generateTitle(S.of(context).device_push_id),
+                      _generateContent(snapshot.data!, onTap: () async {
+                        await Clipboard.setData(
+                            ClipboardData(text: snapshot.data!));
+                        MSnackBar.showSnackBar(S.of(context).copied, "");
+                      })
+                    ]);
+                  }
+                }),
             _generateTitle(S.of(context).easter_egg),
           ]))
         ]));

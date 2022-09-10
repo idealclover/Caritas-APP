@@ -42,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "check_update_button":
             MessageLookupByLibrary.simpleMessage("Check update"),
+        "copied": MessageLookupByLibrary.simpleMessage("Copied to clipboard."),
         "db_downloading":
             MessageLookupByLibrary.simpleMessage("Downloading..."),
         "db_update_fail_toast":
@@ -50,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Database updated!~"),
         "developer":
             MessageLookupByLibrary.simpleMessage("Developer: idealclover"),
+        "device_push_id":
+            MessageLookupByLibrary.simpleMessage("Device push id"),
         "donate_subtitle":
             MessageLookupByLibrary.simpleMessage("Buy me a cup of coffee!"),
         "donate_title": MessageLookupByLibrary.simpleMessage("Donate"),
@@ -99,6 +102,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pre_article": MessageLookupByLibrary.simpleMessage("Previous"),
         "qrcode_url_error_toast": MessageLookupByLibrary.simpleMessage(
             "QR code is invalid, maybe expired."),
+        "random_article": MessageLookupByLibrary.simpleMessage("Random"),
+        "random_title": MessageLookupByLibrary.simpleMessage("Random"),
         "read_hide_toast":
             MessageLookupByLibrary.simpleMessage("Read articles hid."),
         "read_show_toast":

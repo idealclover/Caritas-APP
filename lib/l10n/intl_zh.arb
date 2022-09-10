@@ -6,12 +6,14 @@
   "cancel": "取消",
 
   "home_title": "文集",
+  "random_title": "随机",
   "read_hide_toast": "已读文章藏起来啦～",
   "read_show_toast": "已读文章又显示啦～",
 
   "open_in_browser_button": "浏览器内打开",
   "pre_article": "上一篇",
   "next_article": "下一篇",
+  "random_article": "随机文章",
   "related_article": "相关阅读",
 
   "fav_title": "收藏",
@@ -77,5 +79,7 @@
   "introduction": "博客：https://idealclover.top\nEmail：idealclover@163.com",
   "open_source_library_title": "所使用到的开源库",
   "open_source_library_content": "cloud_kit: ^1.1.0 (modified)\ndio: ^4.0.6\nfile_picker: ^5.0.0\nflutter_markdown: ^0.6.10+2\nfluttertoast: ^8.0.9\nflutter_html: ^3.0.0-alpha.5\nflutter_native_splash: ^2.2.3+1\nflutter_search_bar: ^3.0.0 (modified)\nget: ^4.6.5\nget_storage: ^2.0.3\nhive: ^2.2.3\nhive_flutter: ^1.1.0\npackage_info_plus: ^1.4.2\nqr_code_scanner: ^1.0.0\nqr_flutter: ^4.0.0\nshare_plus: ^4.0.10\numeng_common_sdk: ^1.2.4 (modified)\nuniversal_io: ^2.0.4\nurl_launcher: ^6.1.4",
+  "device_push_id": "当前设备推送 id",
+  "copied": "已复制到剪贴板",
   "easter_egg": "感谢 @大卫 提供的 1.0 版本、图标等关键信息\n感谢 @nell nell @g9qad 的内容授权\n感谢 @阿寜寜 @流水浮灯 提供的笔记文件\n感谢每一位读到这里的人\n以此APP送给每一位努力活下去的朋友\n\n\n"
 }

@@ -1,5 +1,6 @@
 import '../Pages/Settings/SettingsProvider.dart';
 import 'package:umeng_common_sdk/umeng_common_sdk.dart';
+import 'package:umeng_push_sdk/umeng_push_sdk.dart';
 import 'package:get/get.dart';
 
 import '../Resources/Config.dart';
@@ -12,6 +13,7 @@ class UmengUtil {
     UmengCommonSdk.initCommon(
         Config.umengAndroidKey, Config.umengiOSKey, Config.umengChannel);
     UmengCommonSdk.setPageCollectionModeAuto();
+    UmengPushSdk.register();
   }
 
   static onEvent(String event, Map<String, dynamic> properties) {

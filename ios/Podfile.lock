@@ -24,6 +24,7 @@ PODS:
   - share_plus (0.0.1):
     - Flutter
   - Toast (4.0.0)
+  - UMCCommonLog (2.0.2)
   - UMCommon (7.3.6):
     - UMDevice
   - UMDevice (2.2.1)
@@ -31,6 +32,14 @@ PODS:
     - Flutter
     - UMCommon
     - UMDevice
+  - umeng_push_sdk (0.0.1):
+    - Flutter
+    - UMCCommonLog
+    - UMCommon
+    - UMDevice
+    - UMPush
+  - UMPush (4.0.3):
+    - UMCommon
   - url_launcher_ios (0.0.1):
     - Flutter
 
@@ -47,14 +56,17 @@ DEPENDENCIES:
   - qr_code_scanner (from `.symlinks/plugins/qr_code_scanner/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - umeng_common_sdk (from `.symlinks/plugins/umeng_common_sdk/ios`)
+  - umeng_push_sdk (from `.symlinks/plugins/umeng_push_sdk/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
   trunk:
     - MTBBarcodeScanner
     - Toast
+    - UMCCommonLog
     - UMCommon
     - UMDevice
+    - UMPush
 
 EXTERNAL SOURCES:
   audio_session:
@@ -81,6 +93,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/share_plus/ios"
   umeng_common_sdk:
     :path: ".symlinks/plugins/umeng_common_sdk/ios"
+  umeng_push_sdk:
+    :path: ".symlinks/plugins/umeng_push_sdk/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
@@ -98,9 +112,12 @@ SPEC CHECKSUMS:
   qr_code_scanner: bb67d64904c3b9658ada8c402e8b4d406d5d796e
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  UMCCommonLog: bea707e50c85cef4b0eb47cc5c7226bb843245ca
   UMCommon: c61df8457c275afd4f8a2fca10c7446d66220ac0
   UMDevice: 053478c4b4d7292f31f0a275c227d3c4007a5571
   umeng_common_sdk: a8abd7f86dfd013dbbeeae587ee143760c6582f2
+  umeng_push_sdk: ec5a07d1b752e3910bd0679cc9e65c29032319ce
+  UMPush: a517cd5907eb10669ce6cf2e6c0dfe40be84b6b5
   url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
 
 PODFILE CHECKSUM: 0b57e04c60cc7de5409be44be51fc96283b096b3

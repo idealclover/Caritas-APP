@@ -90,6 +90,16 @@ class S {
     );
   }
 
+  /// `Random`
+  String get random_title {
+    return Intl.message(
+      'Random',
+      name: 'random_title',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Read articles hid.`
   String get read_hide_toast {
     return Intl.message(
@@ -135,6 +145,16 @@ class S {
     return Intl.message(
       'Next',
       name: 'next_article',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Random`
+  String get random_article {
+    return Intl.message(
+      'Random',
+      name: 'random_article',
       desc: '',
       args: [],
     );
@@ -715,6 +735,26 @@ class S {
     return Intl.message(
       'cloud_kit: ^1.1.0 (modefied)\ndio: ^4.0.6\nfile_picker: ^5.0.0\nflutter_markdown: ^0.6.10+2\nfluttertoast: ^8.0.9\nflutter_html: ^3.0.0-alpha.5\nflutter_native_splash: ^2.2.3+1\nflutter_search_bar: ^3.0.0 (modefied)\nget: ^4.6.5\nget_storage: ^2.0.3\nhive: ^2.2.3\nhive_flutter: ^1.1.0\npackage_info_plus: ^1.4.2\nqr_code_scanner: ^1.0.0\nqr_flutter: ^4.0.0\nshare_plus: ^4.0.10\numeng_common_sdk: ^1.2.4 (modefied)\nuniversal_io: ^2.0.4\nurl_launcher: ^6.1.4',
       name: 'open_source_library_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Device push id`
+  String get device_push_id {
+    return Intl.message(
+      'Device push id',
+      name: 'device_push_id',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copied to clipboard.`
+  String get copied {
+    return Intl.message(
+      'Copied to clipboard.',
+      name: 'copied',
       desc: '',
       args: [],
     );

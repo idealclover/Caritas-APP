@@ -25,14 +25,20 @@ class ArticleView extends StatefulWidget {
 }
 
 class _ArticleViewState extends State<ArticleView> {
+  /// 解释下为什么要有 actualArticle:
+  /// 这个是随机文章场景引入的 因为随机文章会打乱原来列表中的上下文顺序
+  /// 所以需要有一个实际的文章，表示当前列表里的文章
+  /// 这样即使表层的文章展示成了其他文章，上下文的锚点也能定位到
   late Article article;
+  late Article actualArticle;
+
   late bool isFavorite;
   bool isPlaying = false;
   final player = AudioPlayer();
 
   @override
   void initState() {
-    article = widget.article;
+    actualArticle = article = widget.article;
     super.initState();
   }
 
@@ -57,7 +63,81 @@ class _ArticleViewState extends State<ArticleView> {
             subtitle:
                 Text(targetArticle.question, overflow: TextOverflow.ellipsis),
             onTap: (() async {
-              setState(() => {article = targetArticle});
+              setState(() => {actualArticle = article = targetArticle});
+              // ArticlePresenter ap = ArticlePresenter();
+              // ap.setAsRead(targetArticle);
+              ScrollController? sc = PrimaryScrollController.of(context);
+              if (sc == null) return;
+              sc.animateTo(0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.ease);
+              await player.stop();
+              setState(() {
+                isPlaying = false;
+              });
+            })),
+        const Divider(height: 1),
+        const Padding(padding: EdgeInsets.all(5.0)),
+      ],
+    );
+  }
+
+  /// 打开随机文章通过直接刷新当前页面的形式，而不是新建页面
+  /// 原因是担心顺序浏览的时候同时开启的页面过多，不好进行回退
+  /// 单独写成函数的原因是特殊逻辑比较多
+  Widget getRandomArticleWidget(List<Article> articles) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(padding: EdgeInsets.all(5.0)),
+        ListTile(title: Text(S.of(context).random_article)),
+        const Divider(height: 1),
+
+        /// TODO: 懒了 先这么实现着吧 反正也没两行代码
+        /// 注意：对于随机文章，只变更 article，不变更 actualArticle
+        ListTile(
+            title: Text(articles[0].title),
+            subtitle:
+                Text(articles[0].question, overflow: TextOverflow.ellipsis),
+            onTap: (() async {
+              setState(() => {article = articles[0]});
+              // ArticlePresenter ap = ArticlePresenter();
+              // ap.setAsRead(targetArticle);
+              ScrollController? sc = PrimaryScrollController.of(context);
+              if (sc == null) return;
+              sc.animateTo(0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.ease);
+              await player.stop();
+              setState(() {
+                isPlaying = false;
+              });
+            })),
+        const Divider(height: 1),
+        ListTile(
+            title: Text(articles[1].title),
+            subtitle:
+                Text(articles[1].question, overflow: TextOverflow.ellipsis),
+            onTap: (() async {
+              setState(() => {article = articles[1]});
+              // ArticlePresenter ap = ArticlePresenter();
+              // ap.setAsRead(targetArticle);
+              ScrollController? sc = PrimaryScrollController.of(context);
+              if (sc == null) return;
+              sc.animateTo(0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.ease);
+              await player.stop();
+              setState(() {
+                isPlaying = false;
+              });
+            })),
+        const Divider(height: 1),
+        ListTile(
+            title: Text("随机文章"),
+            subtitle: Text("不打开不知道是什么的随机文章", overflow: TextOverflow.ellipsis),
+            onTap: (() async {
+              setState(() => {article = articles[2]});
               // ArticlePresenter ap = ArticlePresenter();
               // ap.setAsRead(targetArticle);
               ScrollController? sc = PrimaryScrollController.of(context);
@@ -77,17 +157,17 @@ class _ArticleViewState extends State<ArticleView> {
   }
 
   Article? getPreArticle() {
-    if (widget.getPre == null || widget.getPre!(article) == null) {
+    if (widget.getPre == null || widget.getPre!(actualArticle) == null) {
       return null;
     }
-    return widget.getPre!(article);
+    return widget.getPre!(actualArticle);
   }
 
   Article? getNextArticle() {
-    if (widget.getNext == null || widget.getNext!(article) == null) {
+    if (widget.getNext == null || widget.getNext!(actualArticle) == null) {
       return null;
     }
-    return widget.getNext!(article);
+    return widget.getNext!(actualArticle);
   }
 
   @override
@@ -112,7 +192,7 @@ class _ArticleViewState extends State<ArticleView> {
                       });
                     })
                 : IconButton(
-                    icon: const Icon(Icons.queue_music),
+                    icon: const Icon(Icons.headphones),
                     onPressed: () async {
                       const baseUrl =
                           "https://cdn.idealclover.cn/Projects/caritas/audio/";
@@ -198,7 +278,8 @@ class _ArticleViewState extends State<ArticleView> {
                 : Container()
           ],
         ),
-        body: SingleChildScrollView(
+        body: Scrollbar(
+            child: SingleChildScrollView(
           primary: true,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -229,9 +310,18 @@ class _ArticleViewState extends State<ArticleView> {
                             ],
                           )
                         : Container();
-                  })
+                  }),
+              FutureBuilder<List<Article>>(
+                  future: ap.getRandomArticleList(3),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<Article>> snapshot) {
+                    return snapshot.hasData && snapshot.data!.isNotEmpty
+                        ? getRandomArticleWidget(snapshot.data!)
+                        : Container();
+                  }),
+              const Padding(padding: EdgeInsets.all(5.0)),
             ],
           ),
-        ));
+        )));
   }
 }

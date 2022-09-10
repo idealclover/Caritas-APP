@@ -1,8 +1,11 @@
+import 'package:caritas/Pages/Article/ArticlePresenter.dart';
 import 'package:caritas/Utils/URLUtil.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../Models/Db/DbHelper.dart';
 import '../Pages/About/AboutView.dart';
+import '../Pages/Article/ArticleView.dart';
 import '../Pages/Favorite/FavoriteView.dart';
 import '../Pages/History/HistoryView.dart';
 import '../Pages/Settings/SettingsView.dart';
@@ -36,6 +39,15 @@ class MDrawer extends StatelessWidget {
             title: Text(S.of(context).home_title),
             trailing: const Icon(Icons.menu_book),
             onTap: () => Get.back(),
+          ),
+          ListTile(
+            title: Text(S.of(context).random_title),
+            trailing: const Icon(Icons.shuffle),
+            onTap: () async {
+              List<Article> article =
+                  await ArticlePresenter().getRandomArticleList(1);
+              Get.to(() => ArticleView(article[0]));
+            },
           ),
           ListTile(
             title: Text(S.of(context).fav_title),

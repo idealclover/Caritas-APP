@@ -827,10 +827,17 @@ packages:
   umeng_common_sdk:
     dependency: "direct main"
     description:
-      path: "lib/Libs/umeng_common_sdk"
-      relative: true
-    source: path
-    version: "1.2.4"
+      name: umeng_common_sdk
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.3"
+  umeng_push_sdk:
+    dependency: "direct main"
+    description:
+      name: umeng_push_sdk
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   universal_io:
     dependency: "direct main"
     description:
