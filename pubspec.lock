@@ -830,7 +830,7 @@ packages:
       name: umeng_common_sdk
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.3"
+    version: "1.2.4"
   umeng_push_sdk:
     dependency: "direct main"
     description:

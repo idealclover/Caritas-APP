@@ -221,7 +221,10 @@ class _ArticleViewState extends State<ArticleView> {
                           if (targetArticle == null) {
                             return;
                           }
-                          setState(() => {article = targetArticle});
+                          setState(() => {
+                                article = targetArticle,
+                                actualArticle = targetArticle
+                              });
                           // ArticlePresenter ap = ArticlePresenter();
                           // ap.setAsRead(targetArticle);
                           ScrollController? sc =
