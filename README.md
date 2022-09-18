@@ -141,8 +141,8 @@
 ### 计划 Feature
 
 - [ ] 字号修改（P2）
-- [ ] 更新推送通知
-- [ ] 接入azure tts
+- [x] 更新推送通知
+- [x] 接入azure tts
 - [ ] 跨端复制 https://github.com/flutter/flutter/issues/99819
 - [x] 各端初版发布
 - [x] 接入友盟埋点

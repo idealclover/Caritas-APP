@@ -13,4 +13,5 @@ if __name__ == "__main__":
     convert_to_mp3(NELL)
     upload_to_cos(JOHN)
     upload_to_cos(NELL)
+    refresh_cdn()
 
