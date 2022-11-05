@@ -2,9 +2,26 @@
 
 DATABASE_VERSION = 1
 DATABASE_TARGET_PATH = r"../res/data.json"
+DATABASE_CONFIG_PATH = r"../api/database.json"
+
+# 更新信息
+DATABASE_CONFIG_CONTENT = {
+    "version": DATABASE_VERSION,
+    "title": "11.05数据库更新",
+    "content": "例行数据库更新",
+    "isForce": False,
+    "confirm_text": "立刻更新",
+    "cancel_text": "下次再说",
+    "url": "https://image.idealclover.cn/projects/Caritas/data_" + str(DATABASE_VERSION) + ".json",
+    "coolDownTime": 86400,
+}
 
 AZURE_KEY = ""
 AZURE_REGION = ""
+
+UPYUN_SERVICE = ""
+UPYUN_USERNAME = ""
+UPYUN_PASSWORD = ""
 
 secret_id = ""
 secret_key = ""
@@ -52,7 +69,7 @@ CONFIG_ORDER = [
         "致全体女性 @Anonymity",
         "致读者 - 写作 @NellNell",
         "致读者 - 潜力 @NellNell",
-        "致读者 - 十年 @NellNell"
+        "致读者 - 十年 @NellNell",
     ]
 ]
 

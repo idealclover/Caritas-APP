@@ -48,3 +48,4 @@ app.*.map.json
 
 lib/Resources/Config.dart
 script/config.py
+res/data_**.json

@@ -57,16 +57,14 @@ def get_audio(config):
         path = "【本周更新】/"
         tar_filename = file_name.replace(".md", ".wav")
         if os.path.exists(config["AUDIO_TARGET_DIR"] + path + tar_filename):
-            # print(tar_filename + " exists, skip")
+            print(tar_filename + " exists, skip")
             continue
-        content = get_info(path, file_name)
+        content = get_info(config, path, file_name)
         synthesize_to_speaker(config, path, tar_filename, content)
 
     for PATH in config["PATHS"]:
         p = os.walk(config["SOURCE_DIR"] + PATH)
         for path, dir_list, file_list in p:
-            # if("/Users/idealclover/GitHub/Sth-Matters/Anonymity/05 - 科学答集" in path):
-            #     continue;
             if any(pstr in path for pstr in IGNORE_PATHS):
                 continue
             for file_name in file_list:
