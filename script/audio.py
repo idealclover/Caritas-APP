@@ -37,13 +37,22 @@ def synthesize_to_speaker(config, path, tar_filename, content):
         filename=(config["AUDIO_TARGET_DIR"] + path + tar_filename).replace("/应用科学", "").replace("/自然科学", "")
     )
     synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
-    synthesizer.speak_text_async(content)
+    speech_synthesis_result = synthesizer.speak_text_async(content).get()
+    if speech_synthesis_result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
+        print("Speech synthesized for {}".format(tar_filename))
+    elif speech_synthesis_result.reason == speechsdk.ResultReason.Canceled:
+        cancellation_details = speech_synthesis_result.cancellation_details
+        print("Speech synthesis canceled: {}".format(cancellation_details.reason))
+        if cancellation_details.reason == speechsdk.CancellationReason.Error:
+            if cancellation_details.error_details:
+                print("Error details: {}".format(cancellation_details.error_details))
+                print("Did you set the speech resource key and region values?")
 
 
 def get_info(config, path, file_name):
     with open(os.path.join(config["SOURCE_DIR"], path, file_name), "r", encoding="utf-8") as f:
         content = f.read()
-    reg = r"> Author:(.*)\n*(?:(?:> )?Last update: \*(.*)\*)?\n*(?:(?:> Link:)(?:\[.*\]\(.*\))? *(\[\[.*\]\])? *)?\n*(?:(?:> Tag:) *(#.*)? *)?\n*(?:> 沙海拾金.*)?(?:\n)*"
+    reg = reg_audio
     content = re.sub(reg, "", content)
     content = md_to_text(content)
     return content

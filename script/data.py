@@ -9,7 +9,8 @@ data = {
     "version": DATABASE_VERSION,
     "categories": [
         {"title": CATEGORIES["00 - 致读者"]},
-        {"title": "最近更新"},
+        {"title": CATEGORIES["【本周更新】"]},
+        {"title": CATEGORIES["其它/万赞回答"]},
         {"title": CATEGORIES["01 - 家族答集"]},
         {"title": CATEGORIES["02 - 企管答集"]},
         {"title": CATEGORIES["04 - 社科答集"]},
@@ -40,13 +41,19 @@ for c in columns:
     rst[c] = 0
 
 
+def try_parsing_date(text):
+    for fmt in ("%Y-%m-%d", "%d/%m/%Y", "%Y-%m-%d %H:%M"):
+        try:
+            return datetime.strptime(text, fmt)
+        except ValueError:
+            pass
+    raise ValueError("No valid date format found: " + text)
+
 def getArticle(file_name, content, tag):
     article = {"id": ""}
     for c in columns:
         article[c] = ""
 
-    # reg = r"^ *(?: *#(?: *)(.*))?\n* *(\*.*\*|\[.*\])?(\(http.*\))? *\n*(?: *> ?Author: *(.*) *)?\n*(?:(?:> )?Last update: \*(.*)\* *)?\n*(?:(?:> )?(?:Links:|Link:s|Link:) *(?:\[.*\]\(.*\))? *(\[\[.*\]\])? *)?\n*(?:(?:> )?(?:Tags:|Tag:) *(#.*)? *)?(?: |\n)*"
-    reg = r"^(?:# (.*))?\n*(\*.*\*|\[.*\])?(\(http.*\))?\n*(?:> Author:(.*))?\n*(?:(?:> )?Last update: \*(.*)\*)?\n*(?:(?:> Link:)(?:\[.*\]\(.*\))? *(\[\[.*\]\])? *)?\n*(?:(?:> Tag:) *(#.*)? *)?(?:\n)*"
     m = re.match(reg, content)
 
     if m.group(0) is not None:
@@ -72,8 +79,9 @@ def getArticle(file_name, content, tag):
 
     # lastUpdate
     if article["lastUpdate"] == "":
-        # print(file_name)
+        print(file_name)
         article["lastUpdate"] = "01/01/1970"
+    article["lastUpdate"] = try_parsing_date(article["lastUpdate"]).strftime("%Y-%m-%d")
 
     # links
     # links = re.findall(r"\[\[(.*?)\]\]", article["links"])
@@ -82,18 +90,28 @@ def getArticle(file_name, content, tag):
     # print(links)
 
     # tags
-    tags = re.findall(r"#(.*?)(?= |\n|#)", article["tags"])
-    # for t in tags:
-    #     if {"title": t} not in data["tags"]:
-    #         data["tags"].append({"title": t})
+    tags = re.findall(r"#(.*?)(?= |$)", article["tags"])
+    # print(tags)
+    for i, t in enumerate(tags):
+        # print(t)
+        if t == tag:
+            tags.remove(t)
+        if t in CATEGORIES.keys():
+            tags[i] = CATEGORIES[t]
+            # print(tags)
     tags.append(tag)
     article["tags"] = tags
 
     # content
     # article['content'] = content
     article["content"] = re.sub(reg, "", content)
-    # remove 沙海拾金
-    article["content"] = re.sub("> 沙海拾金.*\n*", "", article["content"])
+    # # remove 沙海拾金
+    # article["content"] = re.sub("> 沙海拾金.*\n*", "", article["content"])
+    # # remove 评论区
+    # article["content"] = re.sub("> 评论区.*\n*", "", article["content"])
+    # # remove 泛讨论
+    # article["content"] = re.sub("> 泛讨论.*\n*", "", article["content"])
+
     # remove zhihu auto link
     article["content"] = re.sub("\[(.*?)\]\(https://www\.zhihu\.com/search\?q=.*?\)", "\g<1>", article["content"])
     # remove zhihu redirect link
@@ -105,8 +123,10 @@ def getArticle(file_name, content, tag):
 
     # if re.search("\n +", article["content"]) is not None:
     #     print(file_name)
-    # if article["question"] == "":
+    # if article["title"] == "":
     #     print(file_name)
+    if article["question"] == "":
+        print(file_name)
     # if "Tags" in article["content"]:
     #     print(file_name)
     # if article["author"] == "":
@@ -169,9 +189,8 @@ def get_data():
 
     # sorted by update time
     data["articles"] = sorted(
-        data["articles"], key=lambda k: datetime.strptime(k["lastUpdate"], "%d/%m/%Y").date(), reverse=True
+        data["articles"], key=lambda k: datetime.strptime(k["lastUpdate"], "%Y-%m-%d").date(), reverse=True
     )
-
     for order in CONFIG_ORDER:
         for itemName in reversed(order):
             # print(itemName)
