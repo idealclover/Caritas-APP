@@ -9,6 +9,7 @@ import '../Pages/Article/ArticleView.dart';
 import '../Pages/Favorite/FavoriteView.dart';
 import '../Pages/History/HistoryView.dart';
 import '../Pages/Settings/SettingsView.dart';
+import '../Pages/Stat/StatView.dart';
 import '../Resources/Config.dart';
 import '../Utils/SettingsUtil.dart';
 import '../Utils/VersionUtil.dart';
@@ -68,6 +69,11 @@ class MDrawer extends StatelessWidget {
             title: Text(S.of(context).share_title),
             trailing: const Icon(Icons.share),
             onTap: () async => await SettingsUtil.shareUtil(context),
+          ),
+          ListTile(
+            title: Text(S.of(context).stat_title),
+            trailing: const Icon(Icons.analytics),
+            onTap: () => Get.to(() => const StatView()),
           ),
           // ListTile(
           //     title: Text(S.of(context).report_title),

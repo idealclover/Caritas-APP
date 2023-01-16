@@ -124,6 +124,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "share_subtitle": MessageLookupByLibrary.simpleMessage(
             "Share this app to more friends!"),
         "share_title": MessageLookupByLibrary.simpleMessage("Share"),
+        "stat_articles": MessageLookupByLibrary.simpleMessage("Articles"),
+        "stat_byAuthor": MessageLookupByLibrary.simpleMessage("By Author"),
+        "stat_byCatagory": MessageLookupByLibrary.simpleMessage("By Catagory"),
+        "stat_sumArticles":
+            MessageLookupByLibrary.simpleMessage("Sum Articles"),
+        "stat_sumWords": MessageLookupByLibrary.simpleMessage("Sum Words"),
+        "stat_title": MessageLookupByLibrary.simpleMessage("Statistics"),
+        "stat_words": MessageLookupByLibrary.simpleMessage("Words"),
         "sync_button_subtitle": MessageLookupByLibrary.simpleMessage(
             "Import/export reading and favorite articles."),
         "sync_button_title": MessageLookupByLibrary.simpleMessage("Data Sync"),
