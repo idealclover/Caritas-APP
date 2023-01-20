@@ -9,6 +9,7 @@ import '../../Components/Drawer.dart';
 import '../../Models/Db/DbHelper.dart';
 import '../../Models/HomeCategoryModel.dart';
 import '../../Utils/InitUtil.dart';
+import '../Settings/SettingsProvider.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -40,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 setState(() {
                   hideRead = !hideRead;
+                  SettingsProvider().setHideRead(hideRead);
                 });
                 if (hideRead) {
                   MSnackBar.showSnackBar(S.of(context).read_hide_toast, "");
@@ -75,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onChanged: searchChanged,
         hintText: "在文集中搜索...");
     searchArticleList = data.isEmpty ? [] : data.first.articles;
-    hideRead = false;
+    hideRead = SettingsProvider().getHideRead();
 
     super.initState();
 

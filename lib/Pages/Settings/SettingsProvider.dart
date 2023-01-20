@@ -20,6 +20,7 @@ class SettingsProvider {
   static const _key_favorites = "favorites";
   static const _key_histories = "histories";
   static const _key_shareData = "shareData";
+  static const _key_hideRead = "hideRead";
 
   final _defaultSettings = {
     /// default privacy version when not installed
@@ -34,7 +35,8 @@ class SettingsProvider {
     _key_dbVersion: 0,
     _key_favorites: <String>[],
     _key_histories: <String>[],
-    _key_shareData: true
+    _key_shareData: true,
+    _key_hideRead: false,
   };
 
   /// Get settings from local storage
@@ -222,6 +224,17 @@ class SettingsProvider {
     Map settings = _loadSettingsFromBox();
     settings[_key_shareData] = value;
     // print(settings);
+    _saveSettingsToBox(settings);
+  }
+
+  bool getHideRead() {
+    return _loadSettingsFromBox()[_key_hideRead] ??
+        _defaultSettings[_key_hideRead];
+  }
+
+  void setHideRead(bool value) {
+    Map settings = _loadSettingsFromBox();
+    settings[_key_hideRead] = value;
     _saveSettingsToBox(settings);
   }
 }
