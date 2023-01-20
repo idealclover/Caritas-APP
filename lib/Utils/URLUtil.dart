@@ -1,10 +1,24 @@
+import 'package:caritas/Pages/Article/ArticleView.dart';
+import 'package:caritas/Utils/ArticleUtil.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:universal_io/io.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class URLUtil {
   static openUrl(String url, BuildContext context,
-      {String? appUrlScheme}) async {
+      {String? appUrlScheme, bool openLocalArtical = false}) async {
+    // 如果链接匹配本地文章, 则跳转到本地文章页面, 而不是知乎页面
+    if (openLocalArtical) {
+      var article = ArticleUtil.findArticleByUrl(url);
+      if (article != null) {
+        await Navigator.of(context).push(CupertinoPageRoute(
+            builder: (BuildContext context) => ArticleView(
+                  article,
+                )));
+        return;
+      }
+    }
 
     /// 试了下，安卓并不能成功调起 schema，只能通过在其他应用中打开链接的方式
     /// 因此只有 iOS 进行自动 schema 识别
