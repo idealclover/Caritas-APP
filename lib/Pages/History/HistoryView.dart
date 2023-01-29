@@ -28,11 +28,11 @@ class HistoryView extends StatelessWidget {
         appBar: AppBar(
           title: Text(S.of(context).his_title),
         ),
-        body: SingleChildScrollView(
-            child: ArticleList(
+        body: ArticleList(
           articleList,
           showFavIcon: false,
           greyRead: false,
-        )));
+          useListView: true,
+        ));
   }
 }
