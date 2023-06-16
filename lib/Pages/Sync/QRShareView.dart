@@ -20,7 +20,7 @@ class QRShareView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            QrImage(
+            QrImageView(
               data: url,
               backgroundColor: Colors.white,
               version: QrVersions.auto,

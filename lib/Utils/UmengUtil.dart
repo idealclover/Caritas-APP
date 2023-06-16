@@ -13,7 +13,7 @@ class UmengUtil {
     UmengCommonSdk.initCommon(
         Config.umengAndroidKey, Config.umengiOSKey, Config.umengChannel);
     UmengCommonSdk.setPageCollectionModeAuto();
-    UmengPushSdk.register();
+    UmengPushSdk.register(Config.umengiOSKey, Config.umengChannel);
   }
 
   static onEvent(String event, Map<String, dynamic> properties) {

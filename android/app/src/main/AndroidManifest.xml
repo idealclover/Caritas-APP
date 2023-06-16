@@ -32,15 +32,6 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="62cebc7788ccdf4b7ecc81f4" />
-        <meta-data
-            android:name="UMENG_MESSAGE_SECRET"
-            android:value="ae0d0b4130ba1e0c2337730db6c75131" />
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="Umeng" />
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

@@ -33,7 +33,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     // qr_code_scanner need this
-    compileSdkVersion 32
+    compileSdkVersion 33
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -59,6 +59,28 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        manifestPlaceholders += [
+                UMENG_APPKEY: '62cebc7788ccdf4b7ecc81f4',
+                UMENG_MESSAGE_SECRET: 'ae0d0b4130ba1e0c2337730db6c75131',
+                UMENG_CHANNEL: 'umeng',
+
+                HUAWEI_APP_ID: '',
+
+                HONOR_APP_ID: '',
+
+                XIAOMI_APP_ID: '',
+                XIAOMI_APP_KEY: '',
+
+                OPPO_APP_KEY: '',
+                OPPO_APP_SECRET: '',
+
+                VIVO_APP_ID: '',
+                VIVO_APP_KEY: '',
+
+                MEIZU_APP_ID: '',
+                MEIZU_APP_KEY: '',
+        ]
     }
 
     signingConfigs {
