@@ -107,6 +107,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Caritas APP 一个关于「爱」的 APP https://github.com/idealclover/Caritas-APP"),
         "share_subtitle": MessageLookupByLibrary.simpleMessage("把应用分享给更多小伙伴吧！"),
         "share_title": MessageLookupByLibrary.simpleMessage("分享"),
+        "stat_articles": MessageLookupByLibrary.simpleMessage("文章"),
+        "stat_byAuthor": MessageLookupByLibrary.simpleMessage("按作者"),
+        "stat_byCatagory": MessageLookupByLibrary.simpleMessage("按分类"),
+        "stat_sumArticles": MessageLookupByLibrary.simpleMessage("统计文章数"),
+        "stat_sumWords": MessageLookupByLibrary.simpleMessage("统计字数"),
+        "stat_title": MessageLookupByLibrary.simpleMessage("统计"),
+        "stat_words": MessageLookupByLibrary.simpleMessage("字数"),
         "sync_button_subtitle":
             MessageLookupByLibrary.simpleMessage("导入/导出阅读与收藏数据"),
         "sync_button_title": MessageLookupByLibrary.simpleMessage("数据同步"),

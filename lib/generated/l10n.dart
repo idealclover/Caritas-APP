@@ -769,6 +769,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Statistics`
+  String get stat_title {
+    return Intl.message(
+      'Statistics',
+      name: 'stat_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By Author`
+  String get stat_byAuthor {
+    return Intl.message(
+      'By Author',
+      name: 'stat_byAuthor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By Catagory`
+  String get stat_byCatagory {
+    return Intl.message(
+      'By Catagory',
+      name: 'stat_byCatagory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sum Words`
+  String get stat_sumWords {
+    return Intl.message(
+      'Sum Words',
+      name: 'stat_sumWords',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sum Articles`
+  String get stat_sumArticles {
+    return Intl.message(
+      'Sum Articles',
+      name: 'stat_sumArticles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Words`
+  String get stat_words {
+    return Intl.message(
+      'Words',
+      name: 'stat_words',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Articles`
+  String get stat_articles {
+    return Intl.message(
+      'Articles',
+      name: 'stat_articles',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
