@@ -1,16 +1,16 @@
-import 'package:universal_io/io.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../generated/l10n.dart';
-import 'package:get/get.dart' hide Response;
-
 import 'package:flutter_html/flutter_html.dart';
-import '../Pages/Settings/SettingsProvider.dart';
+import 'package:get/get.dart' hide Response;
+import 'package:universal_io/io.dart';
+
 import '../Components/Dialog.dart';
 import '../Components/TransBgTextButton.dart';
+import '../Pages/Settings/SettingsProvider.dart';
 import '../Resources/Config.dart';
 import '../Utils/UmengUtil.dart';
+import '../generated/l10n.dart';
 
 class PrivacyUtil {
   Future<bool> checkPrivacy(BuildContext context, bool isForce) async {
@@ -100,12 +100,17 @@ class PrivacyUtil {
                       Get.back(result: false);
                     }),
           ];
+    // TODO: Notice: this is trick code and need to be rewrite!
+    // check for this: https://github.com/Sub6Resources/flutter_html/issues/1165
+    RenderObject.debugCheckingIntrinsics = true;
     return await showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) => MDialog(
               info['title'],
-              SingleChildScrollView(child: Html(data: info['content'])),
+              SingleChildScrollView(
+                child: Html(data: info['content']),
+              ),
               overrideActions: widgets,
             ));
   }
