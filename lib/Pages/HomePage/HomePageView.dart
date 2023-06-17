@@ -104,20 +104,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 body: value
 
                     /// 搜索场景下展示样式
-                    ? SingleChildScrollView(
-                        child: ArticleList(searchArticleList),
-                      )
+                    ? ArticleList(searchArticleList, useListView: true)
 
                     /// 非搜索下展示样式
                     : TabBarView(
                         children: [
                           for (var category in data)
-                            SingleChildScrollView(
-                              child: ArticleList(
-                                category.articles,
-                                hideRead: hideRead,
-                                notifyState: () => setState(() => {}),
-                              ),
+                            ArticleList(
+                              category.articles,
+                              hideRead: hideRead,
+                              useListView: true,
+                              notifyState: () => setState(() => {}),
                             )
                           // Tab(text: item.title),
                         ],
