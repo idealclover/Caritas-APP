@@ -2,6 +2,7 @@ import os
 import re
 import json
 from config import *
+from pathlib import Path
 from datetime import datetime
 from urllib.parse import unquote
 
@@ -16,6 +17,7 @@ data = {
         {"title": CATEGORIES["04 - 社科答集"]},
         {"title": CATEGORIES["05 - 科学答集"]},
         {"title": CATEGORIES["06 - 未来科技"]},
+        {"title": CATEGORIES["14 - 人与智能"]},
         {"title": CATEGORIES["07 - 军事技术与艺术"]},
         {"title": CATEGORIES["13 - 百年未有之变局"]},
         {"title": CATEGORIES["03 - 第一性"]},
@@ -35,7 +37,7 @@ data = {
     "articles": [],
 }
 
-columns = ["title", "question", "zhihuLink", "author", "lastUpdate", "links", "tags"]
+columns = ["title", "question", "zhihuLink", "author", "lastUpdate", "links", "categories", "tags"]
 rst = {"total": 0, "match": 0}
 for c in columns:
     rst[c] = 0
@@ -49,12 +51,19 @@ def try_parsing_date(text):
             pass
     raise ValueError("No valid date format found: " + text)
 
+
 def getArticle(file_name, content, tag):
     article = {"id": ""}
     for c in columns:
         article[c] = ""
 
+    # print(reg)
     m = re.match(reg, content)
+
+    if m == None:
+        print("not found: " + file_name)
+        print(reg)
+        return
 
     if m.group(0) is not None:
         rst["match"] += 1
@@ -77,9 +86,12 @@ def getArticle(file_name, content, tag):
     # zhihuLink
     article["zhihuLink"] = article["zhihuLink"].replace("(", "").replace(")", "")
 
+    # author
+    article["author"] = AUTHORS[article["author"]]
+
     # lastUpdate
     if article["lastUpdate"] == "":
-        print(file_name)
+        # print(file_name)
         article["lastUpdate"] = "01/01/1970"
     article["lastUpdate"] = try_parsing_date(article["lastUpdate"]).strftime("%Y-%m-%d")
 
@@ -90,8 +102,11 @@ def getArticle(file_name, content, tag):
     # print(links)
 
     # tags
+    # print(re.findall(r"#(.*?)(?= |$)", article["categories"]))
+    categories = re.findall(r"#(.*?)(?= |$)", article["categories"])
     tags = re.findall(r"#(.*?)(?= |$)", article["tags"])
-    # print(tags)
+    if categories:
+        tags = tags + categories
     for i, t in enumerate(tags):
         # print(t)
         if t == tag:
@@ -99,8 +114,12 @@ def getArticle(file_name, content, tag):
         if t in CATEGORIES.keys():
             tags[i] = CATEGORIES[t]
             # print(tags)
-    tags.append(tag)
+
+    if tag:
+        tags.append(tag)
+    # print(tags)
     article["tags"] = tags
+    article.pop("categories")
 
     # content
     # article['content'] = content
@@ -121,12 +140,14 @@ def getArticle(file_name, content, tag):
         article["content"],
     ).strip()
 
+    # print(article)
+
     # if re.search("\n +", article["content"]) is not None:
     #     print(file_name)
     # if article["title"] == "":
     #     print(file_name)
-    if article["question"] == "":
-        print(file_name)
+    # if article["question"] == "":
+    #     print(file_name)
     # if "Tags" in article["content"]:
     #     print(file_name)
     # if article["author"] == "":
@@ -134,16 +155,15 @@ def getArticle(file_name, content, tag):
     return article
 
 
-def getArticleList(DIR, PATHS):
-
-    fileList = os.listdir(DIR + "【本周更新】")
+def getArticleListRecent(path):
+    fileList = os.listdir(path)
     for file_name in fileList:
         if ".md" not in file_name or file_name in IGNORE_FILES:
             continue
 
         rst["total"] += 1
 
-        with open(os.path.join(DIR + "【本周更新】", file_name), "r", encoding="utf-8") as f:
+        with open(os.path.join(path, file_name), "r", encoding="utf-8") as f:
             content = f.read()
 
         tag = "最近更新"
@@ -154,30 +174,41 @@ def getArticleList(DIR, PATHS):
 
         data["articles"].append(article)
 
-    for PATH in PATHS:
-        p = os.walk(DIR + PATH)
-        for path, dir_list, file_list in p:
-            if any(pstr in path for pstr in IGNORE_PATHS):
+
+def getArticleListDir(path):
+    for item in path.iterdir():
+        if item.is_dir():
+            # print(item.name)
+            if item.name in IGNORE_PATHS:
                 continue
-            for file_name in file_list:
-                if file_name in IGNORE_FILES:
-                    continue
+            # 如果是目录，递归处理
+            getArticleListDir(item)
+        elif item.suffix == ".md":
+            if item.name in IGNORE_FILES:
+                continue
 
-                rst["total"] += 1
-                article = {"id": ""}
-                for c in columns:
-                    article[c] = ""
+            # print(item.name)
+            rst["total"] += 1
+            article = {"id": ""}
+            for c in columns:
+                article[c] = ""
 
-                with open(os.path.join(path, file_name), "r", encoding="utf-8") as f:
-                    content = f.read()
+            with open(item, "r", encoding="utf-8") as f:
+                content = f.read()
 
-                tag = CATEGORIES.get(path.replace(DIR + PATH, "").replace("/自然科学", "").replace("/应用科学", ""), "")
-                article = getArticle(file_name, content, tag)
+            tag = CATEGORIES.get(item.parent.name, "")
+            article = getArticle(item.name, content, tag)
 
-                data["articles"].append(article)
+            data["articles"].append(article)
 
-        # print(file_name)
-        # print(os.path.join(path, file_name))
+
+def getArticleList(DIR, PATHS):
+
+    getArticleListRecent(DIR + "【本周更新】")
+
+    for PATH in PATHS:
+        p = Path(DIR + PATH)
+        getArticleListDir(p)
 
 
 def get_data():

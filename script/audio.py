@@ -1,5 +1,6 @@
 import os, re, time, json
 from config import *
+from pathlib import Path
 
 import azure.cognitiveservices.speech as speechsdk
 from azure.cognitiveservices.speech.audio import AudioOutputConfig
@@ -49,8 +50,8 @@ def synthesize_to_speaker(config, path, tar_filename, content):
                 print("Did you set the speech resource key and region values?")
 
 
-def get_info(config, path, file_name):
-    with open(os.path.join(config["SOURCE_DIR"], path, file_name), "r", encoding="utf-8") as f:
+def get_info(file):
+    with open(file, "r", encoding="utf-8") as f:
         content = f.read()
     reg = reg_audio
     content = re.sub(reg, "", content)
@@ -58,7 +59,26 @@ def get_info(config, path, file_name):
     return content
 
 
-def get_audio(config):
+def get_categories(item):
+    categories = []
+    if(CATEGORIES[item.parent.name]):
+        categories = [item.parent.name]
+    # print(item.parent.name)
+    with open(item, "r") as file:
+        for i, line in enumerate(file, 1):
+            if i == 7:
+                if line.startswith("> Category: "):
+                    # 输出 'category' 后的内容
+                    # 使用 len('category') 来跳过 'category'，使用 strip() 删除行末的换行符
+                    rst = line[len("> Category: ") :].strip()
+                    categories = re.findall(r"#(.*?)(?= |$)", rst)
+                    categories = [CATEGORIES_REVERSE[CATEGORIES[i]] if i in CATEGORIES else i for i in categories]
+                    # print(categories)
+                break
+    return categories
+
+
+def get_audio_recent(config):
     fileList = os.listdir(config["SOURCE_DIR"] + "【本周更新】/")
     for file_name in fileList:
         if ".md" not in file_name or file_name in IGNORE_FILES:
@@ -68,31 +88,43 @@ def get_audio(config):
         if os.path.exists(config["AUDIO_TARGET_DIR"] + path + tar_filename):
             print(tar_filename + " exists, skip")
             continue
-        content = get_info(config, path, file_name)
+        content = get_info(Path(config["SOURCE_DIR"] + path + file_name))
         synthesize_to_speaker(config, path, tar_filename, content)
 
-    for PATH in config["PATHS"]:
-        p = os.walk(config["SOURCE_DIR"] + PATH)
-        for path, dir_list, file_list in p:
-            if any(pstr in path for pstr in IGNORE_PATHS):
+
+def get_audio_dir(path, config):
+    for item in path.iterdir():
+        if item.is_dir():
+            # print(item.name)
+            if item.name in IGNORE_PATHS:
                 continue
-            for file_name in file_list:
-                if ".md" not in file_name or file_name in IGNORE_FILES:
-                    continue
-                tar_filename = file_name.replace(".md", ".wav")
-                if os.path.exists(
-                    config["AUDIO_TARGET_DIR"]
-                    + path.replace(config["SOURCE_DIR"], "").replace(PATH, "").replace("/应用科学", "").replace("/自然科学", "")
-                    + "/"
-                    + tar_filename
-                ):
-                    # print(tar_filename + " exists, skip")
-                    continue
-                # print(path.replace(config["SOURCE_DIR"], "") + tar_filename + " not exists")
-                content = get_info(config, path.replace(config["SOURCE_DIR"], ""), file_name)
-                synthesize_to_speaker(
-                    config, path.replace(config["SOURCE_DIR"], "").replace(PATH, "") + "/", tar_filename, content
-                )
+            # 如果是目录，递归处理
+            get_audio_dir(item, config)
+        elif item.suffix == ".md":
+            if item.name in IGNORE_FILES:
+                continue
+            categories = get_categories(item)
+            # print(categories)
+            if not categories:
+                continue
+            tar_filename = config["AUDIO_TARGET_DIR"] + categories[0] + "/" + item.name.replace(".md", ".wav")
+            if os.path.exists(tar_filename):
+                # print(tar_filename + " exists, skip")
+                continue
+            # print(tar_filename)
+            # # print(path.replace(config["SOURCE_DIR"], "") + tar_filename + " not exists")
+            content = get_info(item)
+            synthesize_to_speaker(
+                config, categories[0] + '/', item.name.replace(".md", ".wav"), content
+            )
+
+
+def get_audio(config):
+    get_audio_recent(config)
+
+    for PATH in config["PATHS"]:
+        p = Path(config["SOURCE_DIR"] + PATH)
+        get_audio_dir(p, config)
 
 
 def convert_to_mp3(config):
