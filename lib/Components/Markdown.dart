@@ -52,7 +52,7 @@ class MMarkdown extends StatelessWidget {
       ),
       onTapLink: (text, href, title) {
         if (href == null || href == '') return;
-        URLUtil.openUrl(href, context);
+        URLUtil.openUrl(href, context, openLocalArtical: true);
       },
     );
   }
