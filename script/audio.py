@@ -164,7 +164,7 @@ def upload_to_cos(config):
             ntime = time.time()
             mtime = os.path.getmtime(path + "/" + file_name)
             rst = ntime - mtime
-            if rst < 60 * 60 * 48:
+            if rst < 60 * 60 * 24:
                 mp3_filename = path + "/" + file_name
                 cos_filename = mp3_filename.replace(config["MP3_TARGET_DIR"], COS_TARGET_DIR)
                 print(cos_filename)
