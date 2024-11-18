@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
+// import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_markdown_selectionarea/flutter_markdown.dart';
 
 import '../Utils/URLUtil.dart';
 
@@ -10,7 +11,8 @@ class MMarkdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MarkdownBody(
+    return SelectionArea(
+        child: MarkdownBody(
       selectable: true,
       data: data,
       styleSheet: MarkdownStyleSheet(
@@ -54,6 +56,6 @@ class MMarkdown extends StatelessWidget {
         if (href == null || href == '') return;
         URLUtil.openUrl(href, context);
       },
-    );
+    ));
   }
 }

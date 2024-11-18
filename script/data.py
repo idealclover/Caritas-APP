@@ -9,23 +9,22 @@ from urllib.parse import unquote
 data = {
     "version": DATABASE_VERSION,
     "categories": [
-        {"title": CATEGORIES["00 - 致读者"]},
+        {"title": CATEGORIES["0-致读者"]},
         {"title": CATEGORIES["【本周更新】"]},
-        {"title": CATEGORIES["其它/万赞回答"]},
-        {"title": CATEGORIES["01 - 家族答集"]},
-        {"title": CATEGORIES["02 - 企管答集"]},
-        {"title": CATEGORIES["04 - 社科答集"]},
-        {"title": CATEGORIES["05 - 科学答集"]},
-        {"title": CATEGORIES["06 - 未来科技"]},
-        {"title": CATEGORIES["14 - 人与智能"]},
-        {"title": CATEGORIES["07 - 军事技术与艺术"]},
-        {"title": CATEGORIES["13 - 百年未有之变局"]},
-        {"title": CATEGORIES["03 - 第一性"]},
-        {"title": CATEGORIES["08 - 文艺答集"]},
-        {"title": CATEGORIES["09 - 神学答集"]},
-        {"title": CATEGORIES["11 - 新冠"]},
-        {"title": CATEGORIES["10 - “就你机灵”系列"]},
-        {"title": CATEGORIES["12 - 大过滤器"]},
+        {"title": CATEGORIES["01-家族答集"]},
+        {"title": CATEGORIES["02-企管答集"]},
+        {"title": CATEGORIES["04-社科答集"]},
+        {"title": CATEGORIES["05-科学答集"]},
+        {"title": CATEGORIES["06-未来科技"]},
+        {"title": CATEGORIES["14-人与智能"]},
+        {"title": CATEGORIES["07-军事技术与艺术"]},
+        {"title": CATEGORIES["13-百年未有之变局"]},
+        {"title": CATEGORIES["03-第一性"]},
+        {"title": CATEGORIES["08-文艺答集"]},
+        {"title": CATEGORIES["09-神学答集"]},
+        {"title": CATEGORIES["11-新冠"]},
+        {"title": CATEGORIES["“就你机灵”系列"]},
+        {"title": CATEGORIES["12-大过滤器"]},
         {"title": CATEGORIES["01 - “是什么”系列"]},
         {"title": CATEGORIES["02 - “怎么办”系列"]},
         {"title": CATEGORIES["03 - “如何看待”系列"]},
@@ -69,6 +68,9 @@ def getArticle(file_name, content, tag):
         rst["match"] += 1
 
     for i, c in enumerate(columns):
+        # if i == 7 and m.group(i + 1) is None:
+        #     print(file_name)
+
         if m.group(i + 1) is None:
             continue
         rst[c] += 1
@@ -148,6 +150,8 @@ def getArticle(file_name, content, tag):
     #     print(file_name)
     # if article["question"] == "":
     #     print(file_name)
+    # if len(article['tags']) == 1:
+    #     print(file_name)
     # if "Tags" in article["content"]:
     #     print(file_name)
     # if article["author"] == "":
@@ -198,7 +202,6 @@ def getArticleListDir(path):
 
             tag = CATEGORIES.get(item.parent.name, "")
             article = getArticle(item.name, content, tag)
-
             data["articles"].append(article)
 
 

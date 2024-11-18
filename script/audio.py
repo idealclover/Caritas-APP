@@ -61,7 +61,7 @@ def get_info(file):
 
 def get_categories(item):
     categories = []
-    if(CATEGORIES[item.parent.name]):
+    if(item.parent.name in CATEGORIES):
         categories = [item.parent.name]
     # print(item.parent.name)
     with open(item, "r") as file:
@@ -139,7 +139,7 @@ def convert_to_mp3(config):
                 + "/"
                 + file_name.replace(".wav", ".mp3")
             )
-            for s, t in CATEGORIES.items():
+            for s, t in CATEGORIES_MP3.items():
                 target = target.replace(s, t)
             if os.path.exists(target):
                 # print(target + " exists, skip")
@@ -164,7 +164,7 @@ def upload_to_cos(config):
             ntime = time.time()
             mtime = os.path.getmtime(path + "/" + file_name)
             rst = ntime - mtime
-            if rst < 60 * 60 * 24:
+            if rst < 60 * 60 * 48:
                 mp3_filename = path + "/" + file_name
                 cos_filename = mp3_filename.replace(config["MP3_TARGET_DIR"], COS_TARGET_DIR)
                 print(cos_filename)

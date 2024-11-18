@@ -44,7 +44,8 @@ dependencies:
   # file picker，用来导入阅读和收藏记录
   file_picker: ^5.1.0
   # markdown 库，用来把 markdown 文本转换成格式输出
-  flutter_markdown: ^0.6.10+2
+#  flutter_markdown: ^0.6.10+2
+  flutter_markdown_selectionarea: ^0.6.17+1
   # 显示 taost
   fluttertoast: ^8.0.9
   # 用来把 html 文本转换成格式输出，针对隐私协议信息
